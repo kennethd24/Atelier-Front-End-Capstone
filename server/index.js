@@ -4,6 +4,8 @@ const cors = require('cors');
 // const router = require('./router.js');
 const path = require('path');
 
+const atelier = require('../helpers/atelier.js');
+
 const app = express();
 const port = 3000;
 
@@ -11,6 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
 app.use(morgan('dev'));
 app.use(cors());
+
+app.get('/product', atelier);
 
 // app.use('/api', router);
 
