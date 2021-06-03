@@ -1,0 +1,38 @@
+{
+  "name": "frontendcapstone",
+  "version": "1.0.0",
+  "description": "fec_acdk",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HR-FEC/Front-End-Capstone.git"
+  },
+  "author": "Kenneth Doan, Darien Chang, Chris Wu, Andrew Munoz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HR-FEC/Front-End-Capstone/issues"
+  },
+  "homepage": "https://github.com/HR-FEC/Front-End-Capstone#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7",
+    "preset-react": "^1.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-items-carousel": "^2.8.0",
+    "react-star-ratings": "^2.3.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  }
+}
