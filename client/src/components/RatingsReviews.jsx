@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -6,15 +7,10 @@ const RatingsReviews = (props) => {
   const { id, name } = currentItem;
   const [reviews, setReviews] = useState({});
 
-  useEffect(() => {
-    getReviews();
-  }, [id]);
-
   const getReviews = () => {
     if (Object.keys(currentItem).length > 0) {
       axios.get(`/api/reviews/${id}`)
         .then((results) => {
-          console.log(results);
           const allReviews = results.data.results;
           setReviews(allReviews);
         })
@@ -24,6 +20,10 @@ const RatingsReviews = (props) => {
     }
   };
 
+  useEffect(() => {
+    getReviews();
+  }, [id]);
+
   return (
     <div id="ratingsReview">
       Ratings & Reviews
@@ -32,13 +32,13 @@ const RatingsReviews = (props) => {
           Ratings (ID is equal to
           {id}
           )
-          {/* <Ratings /> */}
+          {/* <Ratings ratings={ratings}/> */}
         </div>
         <div className="reviewList">
           Review List (Product name is
           {name}
           )
-          {/* < ReviewList /> */}
+          {/* <ReviewList reviews={reviews} /> */}
         </div>
       </div>
     </div>
