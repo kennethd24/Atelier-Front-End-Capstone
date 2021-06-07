@@ -24,11 +24,10 @@ const RatingsReviews = (props) => {
   };
   const getTotalReviews = () => {
     if (Object.keys(currentItem).length > 0) {
-      axios.get(`/api/reviews2/${id}/1000`)
+      axios.get(`/api/reviews2/${id}/100000`)
         .then((results) => {
-          console.log('hi from inside getTotalReviews', results.data)
-          // const allReviews = results.data.results;
-          setTotalReviews(results.data.results.length);
+          const totalReviewsArrLength = results.data.results.length;
+          setTotalReviews(totalReviewsArrLength);
         })
         .catch((err) => {
           console.log(err);
@@ -48,34 +47,49 @@ const RatingsReviews = (props) => {
       </div>
       <div className="ratingsReviewList-container">
         <div className="ratings">
-          Ratings (ID is equal to
+          Ratings
+          <br />
+          (ID is equal to
           &nbsp;
           {id}
           )
           {/* <Ratings ratings={ratings}/> */}
         </div>
         <div className="reviewList">
-          Review List (Product name is
+          Review List
+          <br />
+          (Product name is
           &nbsp;
           {name}
           )
           <br />
-          {totalReviews}
-          {' '}
-          reviews, sorted by
-          &nbsp;
-          <select>
-            <option>Newest</option>
-            <option>Helpful</option>
-            <option>Relevant</option>
-          </select>
-          <div className="reviews-container">
-            {reviews.map((review) => (
-              <ReviewList review={review} key={review.review_id} />
-            ))}
-          </div>
-          <button onClick={() => setCount(count + 2)}>More Reviews</button>
-          <button>Add Review</button>
+          {(totalReviews < 1) ?
+            <button>Submit a new review!</button>
+            : (
+              <span>
+                {totalReviews}
+                {' '}
+                reviews, sorted by
+                &nbsp;
+                <select>
+                  <option>Newest</option>
+                  <option>Helpful</option>
+                  <option>Relevant</option>
+                </select>
+                <div className="reviews-container">
+                  {reviews.map((review) => (
+                    <ReviewList review={review} key={review.review_id} />
+                  ))}
+                </div>
+                <div>
+                  {(count > 1 && count < totalReviews) ?
+                    <button onClick={() => setCount(count + 2)}>More Reviews</button>
+                    :
+                    null}
+                  <button>Add Review</button>
+                </div>
+              </span>
+            )}
         </div>
       </div>
     </div>
