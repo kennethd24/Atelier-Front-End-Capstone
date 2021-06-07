@@ -1,0 +1,30 @@
+
+.overview-container {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  border: 1px solid #2d2d2d;
+}
+
+.top {
+  display: flex;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.gallery-overlay {
+  width: 60%;
+}
+
+.product-info {
+  width: 40%;
+  border-left: 1px solid #2d2d2d;
+}
+
+.star {
+  color: green;
+}
+
+.reviews-link {
+  color: #2d2d2d;
+  margin-left: 10px;
+}
