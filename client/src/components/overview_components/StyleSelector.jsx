@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import StylesRow from './StylesRow';
 
 const StyleSelector = (props) => {
-  const { styles, currentStyle, setCurrentStyle } = props;
+  const {
+    styles,
+    currentStyle,
+    setCurrentStyle,
+  } = props;
 
   const [styleList, setStyleList] = useState([]);
 

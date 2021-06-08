@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Style = (props) => {
-  const { style, currentStyle, setCurrentStyle } = props;
+  const {
+    style,
+    currentStyle,
+    setCurrentStyle,
+  } = props;
 
   const checkmark = <i className="fas fa-check" />;
 

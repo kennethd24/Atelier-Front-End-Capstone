@@ -2,7 +2,11 @@ import React from 'react';
 import Style from './Style';
 
 const StylesRow = (props) => {
-  const { row, currentStyle, setCurrentStyle } = props;
+  const {
+    row,
+    currentStyle,
+    setCurrentStyle,
+  } = props;
 
   return (
     <div className="styles-row">

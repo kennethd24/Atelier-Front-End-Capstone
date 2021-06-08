@@ -14,7 +14,7 @@ const Overview = (props) => {
   const [styles, setStyles] = useState([]);
 
   useEffect(() => {
-    if (styles.length > 0) {
+    if (styles.length > 0 && currentStyle === null) {
       for (let i = 0; i < styles.length; i++) {
         if (styles[i]['default?']) {
           setCurrentStyle(styles[i]);
@@ -23,6 +23,12 @@ const Overview = (props) => {
       }
     }
   }, [styles]);
+
+  useEffect(() => {
+    if (currentStyle !== null) {
+      shiftSelectedStyle();
+    }
+  }, [currentStyle]);
 
   const getStyles = () => {
     if (Object.keys(currentItem).length > 0) {
@@ -34,6 +40,14 @@ const Overview = (props) => {
           console.log(err);
         });
     }
+  };
+
+  const shiftSelectedStyle = () => {
+    const copy = [...styles];
+    const index = copy.findIndex((styleObj) => styleObj.style_id === currentStyle.style_id);
+    copy.splice(index, 1);
+    copy.unshift(currentStyle);
+    setStyles(copy);
   };
 
   return (
