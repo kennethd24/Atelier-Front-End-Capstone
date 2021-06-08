@@ -8,11 +8,13 @@ const ProductInfo = (props) => {
     styles,
     currentStyle,
     setCurrentStyle,
+    rating,
+    reviewsCount,
   } = props;
 
   return (
     <div className="product-info">
-      <Reviews currentProduct={currentProduct} />
+      <Reviews rating={rating} reviewsCount={reviewsCount} />
       <span>{currentProduct.category}</span>
       <span>{currentProduct.name}</span>
       <StyleSelector

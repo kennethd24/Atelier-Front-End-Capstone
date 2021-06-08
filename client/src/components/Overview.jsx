@@ -3,7 +3,7 @@ import axios from 'axios';
 import ProductInfo from './overview_components/ProductInfo';
 
 const Overview = (props) => {
-  const { currentItem } = props;
+  const { currentItem, rating, reviewsCount } = props;
 
   useEffect(() => {
     getStyles();
@@ -61,6 +61,8 @@ const Overview = (props) => {
             styles={styles}
             currentStyle={currentStyle}
             setCurrentStyle={setCurrentStyle}
+            rating={rating}
+            reviewsCount={reviewsCount}
           />
           )}
       </div>

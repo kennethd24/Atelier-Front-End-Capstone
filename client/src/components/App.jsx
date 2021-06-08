@@ -10,12 +10,25 @@ class App extends React.Component {
     super();
 
     this.state = {
-      currentItem: {}
+      currentItem: {},
+      rating: 0,
+      reviewsCount: 0,
     };
   }
 
   componentDidMount() {
     this.getFirstItem();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { currentItem } = this.state;
+    const currentLength = Object.keys(currentItem).length;
+    const prevLength = Object.keys(prevState.currentItem).length;
+
+    if ((prevLength === 0 && currentLength > 0)
+      || (prevState.currentItem.id !== currentItem.id)) {
+      this.getMetadata();
+    }
   }
 
   getFirstItem = () => {
@@ -31,13 +44,44 @@ class App extends React.Component {
       });
   }
 
-  render() {
+  calcAvgRating = (ratingsObj) => {
+    let count = 0;
+    let sumproduct = 0;
+
+    Object.entries(ratingsObj).forEach((keyValPair) => {
+      const key = Number(keyValPair[0]);
+      const val = Number(keyValPair[1]);
+
+      count += val;
+      sumproduct += (key * val);
+    });
+
+    const avgRating = sumproduct / count;
+    const roundedRating = Number((Math.round(avgRating * 4) / 4).toFixed(2));
+
+    this.setState({
+      rating: roundedRating,
+      reviewsCount: count,
+    });
+  };
+
+  getMetadata = () => {
     const { currentItem } = this.state;
+    axios.get(`/api/reviews/meta/${currentItem.id}`)
+      .then((res) => {
+        this.calcAvgRating(res.data.ratings);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  render() {
+    const { currentItem, rating, reviewsCount } = this.state;
 
     return (
-      // <div>Hello World</div>
       <div>
-        <Overview currentItem={currentItem} />
+        <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
         <RelatedItems currentItem={currentItem} />
         <QuestionsAnswers currentItem={currentItem} />
         <RatingsReviews currentItem={currentItem} />
