@@ -5,8 +5,6 @@ router.get('/products', atelier.getProducts);
 
 router.get('/products/:id/styles', atelier.getProductStyles);
 
-router.get('/reviews/:id', atelier.getReviews);
-
 // router.get('/reviews2/:id', atelier.getReviews);
 router.get('/reviews2/:id/:count', atelier.getReviews);
 
