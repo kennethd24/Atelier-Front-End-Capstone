@@ -5,6 +5,13 @@ const Style = (props) => {
 
   const checkmark = <i className="fas fa-check" />;
 
+  let thumbnail;
+  if (style.photos[0].thumbnail_url === null) {
+    thumbnail = <img className="thumbnail-none" src={'no-photo.png'} alt={style.name} />;
+  } else {
+    thumbnail = <img className="thumbnail-img" src={style.photos[0].thumbnail_url} alt={style.name} />;
+  }
+
   const changeStyle = () => {
     if (style.style_id !== currentStyle.style_id) {
       setCurrentStyle(style);
@@ -12,12 +19,12 @@ const Style = (props) => {
   };
 
   return (
-    // <div className="style-card" onClick={changeStyle}>
     <button type="button" className="style-card" onClick={changeStyle}>
-      <img className="style-thumbnail" src={style.photos[0].thumbnail_url} alt={style.name} />
+      <div className="style-thumbnail">
+        {thumbnail}
+      </div>
       {style.style_id === currentStyle.style_id && checkmark}
     </button>
-    // </div>
   );
 };
 
