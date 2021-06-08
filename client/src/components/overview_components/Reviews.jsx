@@ -29,16 +29,16 @@ const Reviews = (props) => {
   };
 
   const getMetadata = () => {
-    if (Object.keys(currentProduct).length > 0) {
-      axios.get(`/api/reviews/meta/${currentProduct.id}`)
-        .then((res) => {
-          console.log(res.data.ratings);
-          calcAvgRating(res.data.ratings);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    // if (Object.keys(currentProduct).length > 0) {
+    axios.get(`/api/reviews/meta/${currentProduct.id}`)
+      .then((res) => {
+        // console.log(res.data.ratings);
+        calcAvgRating(res.data.ratings);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // }
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Reviews = (props) => {
   }, [currentProduct]);
 
   return (
-    <>
+    <div>
       <Rating
         initialRating={rating}
         readonly
@@ -57,7 +57,7 @@ const Reviews = (props) => {
       {reviewsCount > 0 &&
         <a href="#" className="reviews-link">Read all {reviewsCount} reviews</a>
       }
-    </>
+    </div>
   );
 };
 
