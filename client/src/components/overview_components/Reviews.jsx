@@ -23,7 +23,7 @@ const Reviews = (props) => {
     const avgRating = sumproduct / count;
     const roundedRating = Number((Math.round(avgRating * 4) / 4).toFixed(2));
 
-    console.log('roundedrating:', roundedRating);
+    // console.log('roundedrating:', roundedRating);
     setRating(roundedRating);
     setReviewsCount(count);
   };
@@ -42,7 +42,7 @@ const Reviews = (props) => {
   };
 
   useEffect(() => {
-    console.log(currentProduct);
+    // console.log(currentProduct);
     getMetadata();
   }, [currentProduct]);
 
