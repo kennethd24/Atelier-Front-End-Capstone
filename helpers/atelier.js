@@ -1,5 +1,5 @@
 const axios = require('axios');
-const config = require('../config.js');
+const config = require('../config');
 
 const atelier = {
   getProducts: (req, res) => {
@@ -47,6 +47,26 @@ const atelier = {
     const options = {
       method: 'get',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/meta?product_id=${req.params.id}`,
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+
+    axios(options)
+      .then((response) => {
+        console.log(response.data);
+        res.status(200).send(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).send(err);
+      });
+  },
+
+  getProductStyles: (req, res) => {
+    const options = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${req.params.id}/styles`,
       headers: {
         Authorization: `${config.TOKEN}`,
       },
