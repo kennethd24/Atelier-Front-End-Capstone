@@ -43,15 +43,18 @@ const ProductCard = (props) => {
       });
   };
 
-  const getRating = () => {
-
+  const getRating = (ratings) => {
+    // console.log('ratings in getrating', ratings);
+    // cocounter = 0;
+    // var total = 0;
+    console.log(Object.entries(ratings));
   };
 
   const getMetadata = () => {
     if (currentProduct) {
       axios.get(`/api/reviews/meta/${currentProduct.id}`)
         .then((results) => {
-          console.log('results data', results);
+          getRating(results.data.ratings);
         })
         .catch((err) => {
           console.log('err getting metadata', err);
@@ -69,6 +72,7 @@ const ProductCard = (props) => {
 
   useEffect(() => {
     getStyles();
+    getMetadata();
   }, [currentProduct]);
 
   return (
@@ -78,7 +82,7 @@ const ProductCard = (props) => {
       <div>{currentProduct.name}</div>
       {checkSale()}
       <div>{currentProduct.default_price}</div>
-      {getMetadata()}
+      {/* {getMetadata()} */}
       <div>Product Rating</div>
       <button className="compare-button" type="button" onClick={handleCompare}>Compare</button>
     </div>
