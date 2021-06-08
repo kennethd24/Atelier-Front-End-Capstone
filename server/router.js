@@ -10,4 +10,8 @@ router.get('/reviews2/:id/:count', atelier.getReviews);
 
 router.get('/reviews/meta/:id', atelier.getReviewMetadata);
 
+router.get('/related/:id', atelier.getRelatedItems);
+
+router.get('/products/:id', atelier.getOneProduct);
+
 module.exports = router;
