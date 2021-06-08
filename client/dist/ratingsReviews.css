@@ -1,0 +1,30 @@
+.ratingsReview-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #2d2d2d;
+}
+
+.ratingsReviewList-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: 1px solid #2d2d2d;
+}
+
+.ratings {
+  width: 30%;
+  float: left;
+  border: 1px solid #2d2d2d;
+}
+
+.reviewList {
+  width: 70%;
+  float: right;
+  border: 1px solid #2d2d2d;
+}
+.reviews-container {
+  border: 1px solid #2d2d2d;
+  height: 50px;
+  overflow-y: scroll;
+}
