@@ -23,31 +23,31 @@ const Reviews = (props) => {
     const avgRating = sumproduct / count;
     const roundedRating = Number((Math.round(avgRating * 4) / 4).toFixed(2));
 
-    console.log('roundedrating:', roundedRating);
+    // console.log('roundedrating:', roundedRating);
     setRating(roundedRating);
     setReviewsCount(count);
   };
 
   const getMetadata = () => {
-    if (Object.keys(currentProduct).length > 0) {
-      axios.get(`/api/reviews/meta/${currentProduct.id}`)
-        .then((res) => {
-          console.log(res.data.ratings);
-          calcAvgRating(res.data.ratings);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    // if (Object.keys(currentProduct).length > 0) {
+    axios.get(`/api/reviews/meta/${currentProduct.id}`)
+      .then((res) => {
+        // console.log(res.data.ratings);
+        calcAvgRating(res.data.ratings);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // }
   };
 
   useEffect(() => {
-    console.log(currentProduct);
+    // console.log(currentProduct);
     getMetadata();
   }, [currentProduct]);
 
   return (
-    <>
+    <div>
       <Rating
         initialRating={rating}
         readonly
@@ -57,7 +57,7 @@ const Reviews = (props) => {
       {reviewsCount > 0 &&
         <a href="#" className="reviews-link">Read all {reviewsCount} reviews</a>
       }
-    </>
+    </div>
   );
 };
 

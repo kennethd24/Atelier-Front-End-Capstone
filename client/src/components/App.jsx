@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import Overview from './Overview.jsx';
-import QuestionsAnswers from './QuestionsAnswers.jsx';
-import RatingsReviews from './RatingsReviews.jsx';
-import RelatedItems from './RelatedItems.jsx';
+import Overview from './Overview';
+import QuestionsAnswers from './QuestionsAnswers';
+import RatingsReviews from './RatingsReviews';
+import RelatedItems from './RelatedItems';
 
 class App extends React.Component {
   constructor() {
@@ -22,7 +22,7 @@ class App extends React.Component {
     axios.get('/api/products')
       .then((res) => {
         this.setState({
-          currentItem: res.data[1]
+          currentItem: res.data[0],
           // currentItem: res.data[0] changed for better dummy review data
         });
       })

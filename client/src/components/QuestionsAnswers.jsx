@@ -2,11 +2,10 @@ import React from 'react';
 import Search from './QnA_components/Search';
 import QuestionList from './QnA_components/QuestionList';
 
-
 const QuestionsAnswers = (props) => (
   <div>
     <div>
-      <Search/>
+      <Search />
     </div>
     <div>
       <QuestionList />
