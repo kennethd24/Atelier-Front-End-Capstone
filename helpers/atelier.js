@@ -105,25 +105,6 @@ const atelier = {
       });
   },
 
-  getOneStyles: (req, res) => {
-    const { id } = req.params;
-    const options = {
-      method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${id}/styles`,
-      headers: {
-        Authorization: `${config.TOKEN}`,
-      },
-    };
-
-    axios(options)
-      .then((response) => {
-        res.status(200).send(response.data);
-      })
-      .catch((err) => {
-        res.status(400).send(err);
-      });
-  },
-
 };
 
 module.exports = atelier;
