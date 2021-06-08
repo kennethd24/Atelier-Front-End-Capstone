@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import SortBy from './RatingsReviews/SortBy';
-import ReviewList from './RatingsReviews/ReviewList';
+import SortBy from './ratingsReviews_components/SortBy';
+import ReviewList from './ratingsReviews_components/ReviewList';
 
 const RatingsReviews = (props) => {
   const { currentItem } = props;
   const { id, name } = currentItem;
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
-  const [totalReviews, setTotalReviews] = useState(0);
 
   const getCountReviews = () => {
     if (Object.keys(currentItem).length > 0) {
@@ -23,22 +22,9 @@ const RatingsReviews = (props) => {
         });
     }
   };
-  const getTotalReviews = () => {
-    if (Object.keys(currentItem).length > 0) {
-      axios.get(`/api/reviews2/${id}/100000`)
-        .then((results) => {
-          const totalReviewsArrLength = results.data.results.length;
-          setTotalReviews(totalReviewsArrLength);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
 
   useEffect(() => {
     getCountReviews();
-    getTotalReviews();
   }, [id, count]);
 
   return (
@@ -62,12 +48,12 @@ const RatingsReviews = (props) => {
           {name}
           )
           <br />
-          {(totalReviews < 1) ?
+          {(props.reviewsCount < 1) ?
             <button type="submit">Submit a new review!</button>
             : (
               <span>
                 <div className="sortBy-container">
-                  <SortBy totalReviews={totalReviews} />
+                  <SortBy totalReviews={props.reviewsCount} />
                 </div>
                 <div className="reviews-container">
                   {reviews.map((review) => (
@@ -75,7 +61,7 @@ const RatingsReviews = (props) => {
                   ))}
                 </div>
                 <div className="buttons-container">
-                  {(count > 1 && count < totalReviews) ?
+                  {(count > 1 && count < props.reviewsCount) ?
                     <button type="button" onClick={() => setCount(count + 2)}>More Reviews</button>
                     :
                     null}
