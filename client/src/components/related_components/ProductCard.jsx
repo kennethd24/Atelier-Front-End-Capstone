@@ -5,19 +5,18 @@ const ProductCard = (props) => {
   const { currentProduct } = props;
   const [productDefault, setProductDefault] = useState();
   const [onSale, setOnSale] = useState(false);
+  const [salePrice, setSalePrice] = useState(null);
 
   const handleCompare = (e) => {
     e.preventDefault();
-    console.log('compared');
+    // console.log('compared');
   };
 
   const checkSale = () => {
-    // console.log('hello from check sale');
-    // console.log('product default checksale', productDefault);
     if (productDefault) {
       if (productDefault.sale_price) {
         setOnSale(true);
-        // console.log('onSale', onSale);
+        setSalePrice(productDefault.sale_price);
       }
     }
   };
@@ -25,14 +24,11 @@ const ProductCard = (props) => {
   const getStyles = () => {
     axios.get(`/api/products/${currentProduct.id}/styles`)
       .then((results) => {
-        // console.log('results from get styles', results.data);
         const resultsArr = results.data.results;
         let foundDefault = false;
         for (let i = 0; i < resultsArr.length; i++) {
           const currentResult = resultsArr[i];
           if (currentResult['default?']) {
-            // console.log('found a match');
-            // console.log('current result', currentResult);
             foundDefault = true;
             setProductDefault(currentResult);
           }
@@ -41,17 +37,12 @@ const ProductCard = (props) => {
           setProductDefault(resultsArr[0]);
         }
       })
-      // .then(() => {
-      //   // console.log('product default', productDefault);
-      //   checkSale();
-      // })
       .catch((err) => {
         console.log('err in getStyles', err);
       });
   };
 
   const renderPhotos = () => {
-    // console.log('product default', productDefault);
     if (productDefault) {
       return (
         <img src={productDefault.photos[0].thumbnail_url} alt="product" />
@@ -65,7 +56,6 @@ const ProductCard = (props) => {
 
   return (
     <div className="product-card">
-      {/* <img src={productDefault.default.photos[0].thumnail_url}></img> */}
       {renderPhotos()}
       <div>{currentProduct.category}</div>
       <div>{currentProduct.name}</div>
