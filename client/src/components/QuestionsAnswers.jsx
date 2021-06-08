@@ -3,10 +3,10 @@ import React from 'react';
 const QuestionsAnswers = (props) => (
   <div>
     <div>
-      <Search/>
+      {/* <Search/> */}
     </div>
     <div>
-      <QuestionList />
+      {/* <QuestionList /> */}
     </div>
   </div>
 );
