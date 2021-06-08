@@ -1,7 +1,14 @@
 import React from 'react';
 
-const QuestionsAnswers = (props) => {
-  return <div>QuestionsAnswers</div>;
-};
+const QuestionsAnswers = (props) => (
+  <div>
+    <div>
+      <Search/>
+    </div>
+    <div>
+      <QuestionList />
+    </div>
+  </div>
+);
 
 export default QuestionsAnswers;
