@@ -40,12 +40,6 @@
 }
 
 .style-card {
-  /* display: flex;
-  flex-direction: column;
-  width: 70px;
-  justify-content: flex-end;
-  align-content: center;
-  text-align: center; */
   position: relative;
   margin: 5px 10px;
   padding: 0;
@@ -54,21 +48,32 @@
   cursor: pointer;
 }
 
-/* .thumbnail-text {
-  font-size: 15px;
-  margin-bottom: 5px;
-} */
-
 .style-thumbnail {
   height: 70px;
   width: 70px;
   border-radius: 50%;
-  border: 1.5px solid #2d2d2d;
+  border: 1px solid #2d2d2d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumbnail-none {
+  height: 40px;
+  width: 40px;
+}
+
+.thumbnail-img {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
 }
 
 .fa-check {
   position: absolute;
-  right: -4px;
+  /* right: -4px; */
+  top: -4px;
+  right: -1px;
   font-size: 10px;
   border: 1px solid #2d2d2d;
   border-radius: 50%;
