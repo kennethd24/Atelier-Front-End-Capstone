@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Rating from 'react-rating';
 
 const ProductCard = (props) => {
   const { currentProduct } = props;
@@ -42,6 +43,22 @@ const ProductCard = (props) => {
       });
   };
 
+  const getRating = () => {
+
+  };
+
+  const getMetadata = () => {
+    if (currentProduct) {
+      axios.get(`/api/reviews/meta/${currentProduct.id}`)
+        .then((results) => {
+          console.log('results data', results);
+        })
+        .catch((err) => {
+          console.log('err getting metadata', err);
+        });
+    }
+  };
+
   const renderPhotos = () => {
     if (productDefault) {
       return (
@@ -61,6 +78,7 @@ const ProductCard = (props) => {
       <div>{currentProduct.name}</div>
       {checkSale()}
       <div>{currentProduct.default_price}</div>
+      {getMetadata()}
       <div>Product Rating</div>
       <button className="compare-button" type="button" onClick={handleCompare}>Compare</button>
     </div>
