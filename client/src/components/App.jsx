@@ -76,31 +76,31 @@ class App extends React.Component {
       });
   };
 
- getTotalReviews = () => {
-   const { currentItem } = this.state;
-   axios.get(`/api/reviews2/${currentItem.id}/10000`)
-     .then((results) => {
-       this.setState({
-         reviewsCount: results.data.results.length,
-       });
-     })
-     .catch((err) => {
-       console.log(err);
-     });
- };
+  getTotalReviews = () => {
+    const { currentItem } = this.state;
+    axios.get(`/api/reviews2/${currentItem.id}/10000`)
+      .then((results) => {
+        this.setState({
+          reviewsCount: results.data.results.length,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
- render() {
-   const { currentItem, rating, reviewsCount } = this.state;
+  render() {
+    const { currentItem, rating, reviewsCount } = this.state;
 
-   return (
-     <div>
-       <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
-       <RelatedItems currentItem={currentItem} />
-       <QuestionsAnswers currentItem={currentItem} />
-       <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
-     </div>
-   );
- }
+    return (
+      <div>
+        <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+        <RelatedItems currentItem={currentItem} rating={rating} />
+        <QuestionsAnswers currentItem={currentItem} />
+        <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+      </div>
+    );
+  }
 }
 
 export default App;
