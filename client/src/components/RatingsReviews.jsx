@@ -5,7 +5,7 @@ import SortBy from './ratingsReviews_components/SortBy';
 import ReviewList from './ratingsReviews_components/ReviewList';
 
 const RatingsReviews = (props) => {
-  const { currentItem, reviewsCount, rating, allReviews } = props;
+  const { currentItem, reviewsCount, rating } = props;
   const { id, name } = currentItem;
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
@@ -26,7 +26,7 @@ const RatingsReviews = (props) => {
 
   useEffect(() => {
     getCountReviews();
-  }, [id, count, sortState]);
+  }, [id, count, sortState, setSortState]);
 
   return (
     <div className="ratingsReview-container">
