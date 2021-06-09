@@ -36,7 +36,7 @@ class App extends React.Component {
     axios.get('/api/products')
       .then((res) => {
         this.setState({
-          currentItem: res.data[2],
+          currentItem: res.data[1],
           // currentItem: res.data[0] changed for better dummy review data
         });
       })
