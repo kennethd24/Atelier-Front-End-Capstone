@@ -21,24 +21,23 @@ const atelier = {
       });
   },
 
-
   getQuestions: (req, res) => {
     let { product_id } = req.params;
     const options = {
       method: 'get',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=16060&count=100`,
-            headers: {
+      headers: {
         Authorization: `${config.TOKEN}`,
       },
     };
     axios(options)
       .then((response) => {
-        res.status(200).send(response.data)
+        res.status(200).send(response.data);
       })
       .catch((err) => {
-        res.status(404).send(err)
-      })
-    }
+        res.status(404).send(err);
+      });
+  },
 
   getReviews: (req, res) => {
     const { id, count } = req.params;
