@@ -27,7 +27,7 @@ const atelier = {
     const options = {
       method: 'get',
       // url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/?product_id=${id}&count=1000`,
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/?product_id=${id}&count=${count}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews?product_id=${id}&count=${count}`,
       headers: {
         Authorization: `${config.TOKEN}`,
       },
@@ -54,7 +54,6 @@ const atelier = {
 
     axios(options)
       .then((response) => {
-        console.log(response.data);
         res.status(200).send(response.data);
       })
       .catch((err) => {

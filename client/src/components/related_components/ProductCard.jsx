@@ -51,7 +51,7 @@ const ProductCard = (props) => {
     if (currentProduct) {
       axios.get(`/api/reviews/meta/${currentProduct.id}`)
         .then((results) => {
-          console.log('results data', results);
+          // console.log('results data', results);
         })
         .catch((err) => {
           console.log('err getting metadata', err);
