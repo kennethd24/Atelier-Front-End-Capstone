@@ -35,7 +35,7 @@ const ReviewList = (props) => {
       <div>
         ✓ I recommend this product!
       </div>
-      ) : null);
+    ) : null);
 
   return (
     <div className="reviewListEntry">
