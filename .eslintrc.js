@@ -19,5 +19,11 @@ module.exports = {
     'react',
   ],
   rules: {
+    'no-console': 'off',
+    'operator-linebreak': 'off',
+    'react/prop-types': 0,
+    'no-use-before-define': 'off',
+    'no-plusplus': 'off',
+    'react/no-array-index-key': 'off',
   },
 };
