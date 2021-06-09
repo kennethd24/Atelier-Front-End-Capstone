@@ -5,7 +5,7 @@ import SortBy from './ratingsReviews_components/SortBy';
 import ReviewList from './ratingsReviews_components/ReviewList';
 
 const RatingsReviews = (props) => {
-  const { currentItem } = props;
+  const { currentItem, reviewsCount, rating } = props;
   const { id, name } = currentItem;
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
@@ -48,20 +48,20 @@ const RatingsReviews = (props) => {
           {name}
           )
           <br />
-          {(props.reviewsCount < 1) ?
+          {(reviewsCount < 1) ?
             <button type="submit">Submit a new review!</button>
             : (
               <span>
                 <div className="sortBy-container">
-                  <SortBy totalReviews={props.reviewsCount} />
+                  <SortBy totalReviews={reviewsCount} />
                 </div>
                 <div className="reviews-container">
-                  {reviews.map((review) => (
-                    <ReviewList review={review} key={review.review_id} />
+                  {reviews.slice(0).reverse().map((review) => (
+                    <ReviewList rating={rating} review={review} key={review.review_id} />
                   ))}
                 </div>
                 <div className="buttons-container">
-                  {(count > 1 && count < props.reviewsCount) ?
+                  {(count > 1 && count < reviewsCount) ?
                     <button type="button" onClick={() => setCount(count + 2)}>More Reviews</button>
                     :
                     null}

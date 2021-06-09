@@ -4,20 +4,17 @@
   width: 100%;
   border: 1px solid #2d2d2d;
 }
-
 .ratingsReviewList-container {
   display: flex;
   flex-direction: row;
   width: 100%;
   border: 1px solid #2d2d2d;
 }
-
 .ratings {
   width: 30%;
   float: left;
   border: 1px solid #2d2d2d;
 }
-
 .reviewList {
   width: 70%;
   float: right;
@@ -25,6 +22,38 @@
 }
 .reviews-container {
   border: 1px solid #2d2d2d;
-  height: 50px;
+  height: 800px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.reviewListEntry {
+  min-height: 48%;
+  padding: 5px;
+  border: 1px solid #2d2d2d;
+
+}
+.reviewListEntry-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+.reviewListEntry-summary {
+  font-weight: bold;
+}
+.reviewListEntry-recommendation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 1px solid #2d2d2d;
+}
+.reviewListEntry-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.reviewListEntry-response {
+  border: 1px solid #2d2d2d;
+  background-color: rgba(0, 0, 255, .2);
 }
