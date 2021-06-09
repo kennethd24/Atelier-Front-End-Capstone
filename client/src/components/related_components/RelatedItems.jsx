@@ -40,7 +40,7 @@ const RelatedItemsComp = (props) => {
   }, [currentItem]);
 
   return (
-    <div>
+    <div className="related-items-carousel">
       {relatedItems.map((item) => (
         <ProductCard
           relatedItem={item}

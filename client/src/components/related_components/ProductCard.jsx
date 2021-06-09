@@ -107,10 +107,16 @@ const ProductCard = (props) => {
       const imgUrl = productDefault.photos[0].thumbnail_url;
       if (imgUrl) {
         return (
-          <img src={productDefault.photos[0].thumbnail_url} alt="product" />
+          <div className="product-photo-wrapper">
+            <img className="product-photo" src={productDefault.photos[0].thumbnail_url} alt="product" />
+          </div>
         );
       }
-      return <img src="no-photo.png" alt="no product" />;
+      return (
+        <div className="product-photo-wrapper">
+          <img className="product-photo" src="no-photo.png" alt="no product" />
+        </div>
+      );
     }
   };
 
@@ -123,16 +129,18 @@ const ProductCard = (props) => {
   return (
     <div className="product-card">
       {renderPhotos()}
-      <div>{relatedItem.category}</div>
-      <div>{relatedItem.name}</div>
-      {checkSale()}
-      <Rating
-        initialRating={rating}
-        readonly
-        emptySymbol="far fa-star"
-        fullSymbol="fas fa-star"
-      />
-      <button className="compare-button" type="button" onClick={handleCompare}>Compare</button>
+      <div className="product-info-wrapper">
+        <div>{relatedItem.category}</div>
+        <div>{relatedItem.name}</div>
+        {checkSale()}
+        <Rating
+          initialRating={rating}
+          readonly
+          emptySymbol="far fa-star"
+          fullSymbol="fas fa-star"
+        />
+        <button className="compare-button" type="button" onClick={handleCompare}>Compare</button>
+      </div>
     </div>
   );
 };

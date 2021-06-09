@@ -1,0 +1,45 @@
+.related-outfit-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #2d2d2d;
+}
+
+.related-items-wrapper, .your-outfit-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #2d2d2d;
+}
+
+.related-items-carousel, .your-outfit-carousel {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #2d2d2d;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 100%;
+  padding: 7px;
+  border: 1px solid #2d2d2d;
+}
+
+.product-photo-wrapper {
+  flex: 2;
+  /* height: 100%;
+  width: 100% */
+}
+
+.product-info-wrapper {
+  flex: 1;
+  /* height: 100%;
+  width: 100%; */
+}
+
+.product-photo {
+  height: 225px;
+  width: 100%;
+}
