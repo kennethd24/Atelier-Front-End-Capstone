@@ -89,13 +89,23 @@ class App extends React.Component {
       });
   };
 
+  handleRelatedClick = (relatedItem) => {
+    this.setState({
+      currentItem: relatedItem,
+    });
+  }
+
   render() {
     const { currentItem, rating, reviewsCount } = this.state;
 
     return (
       <div>
         <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
-        <RelatedItems currentItem={currentItem} rating={rating} />
+        <RelatedItems
+          currentItem={currentItem}
+          rating={rating}
+          handleClick={this.handleRelatedClick}
+        />
         <QuestionsAnswers currentItem={currentItem} />
         <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
       </div>

@@ -3,14 +3,19 @@ import axios from 'axios';
 import Rating from 'react-rating';
 
 const ProductCard = (props) => {
-  const { relatedItem, selectedRating, selectedItem } = props;
+  const {
+    relatedItem,
+    selectedRating,
+    selectedItem,
+    handleClick,
+  } = props;
 
   const [productDefault, setProductDefault] = useState();
   const [selectedDefault, setSelectedDefault] = useState();
   const [selectedChars, setSelectedChars] = useState();
   const [relatedChars, setRelatedChars] = useState();
   const [onSale, setOnSale] = useState(false);
-  const [salePrice, setSalePrice] = useState(null);
+  const [salePrice, setSalePrice] = useState(0);
   const [rating, setRating] = useState(0);
 
   const handleCompare = (e) => {
@@ -23,7 +28,7 @@ const ProductCard = (props) => {
     if (productDefault) {
       if (productDefault.sale_price) {
         setOnSale(true);
-        setSalePrice(productDefault.sale_price);
+        setSalePrice(salePrice + productDefault.sale_price);
       }
       if (onSale) {
         return (
@@ -127,7 +132,7 @@ const ProductCard = (props) => {
   }, [relatedItem]);
 
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={() => handleClick(relatedItem)} role="button" tabIndex="0" onKeyPress={() => handleClick(relatedItem)}>
       {renderPhotos()}
       <div className="product-info-wrapper">
         <div>{relatedItem.category}</div>

@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ProductCard from './ProductCard.jsx';
+import ProductCard from './ProductCard';
 
 const RelatedItemsComp = (props) => {
-  const { currentItem, selectedRating } = props;
+  const { currentItem, selectedRating, handleClick } = props;
   const [relatedItems, setRelatedItems] = useState([]);
 
   const getRelatedItems = (arr) => {
     const items = [];
-
+    // console.log('arr', arr);
+    // console.log('relateditems', relatedItems);
     arr.map((item) => (
       axios.get(`/api/products/${item}`)
         .then((results) => {
           items.push(results.data);
         })
         .then(() => {
-          setRelatedItems(relatedItems.concat(items));
+          setRelatedItems([...items]);
         })
         .catch((err) => {
           console.log('err in getRelatedItems', err);
@@ -47,6 +48,7 @@ const RelatedItemsComp = (props) => {
           selectedRating={selectedRating}
           selectedItem={currentItem}
           key={item.id}
+          handleClick={handleClick}
         />
       ))}
     </div>

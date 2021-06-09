@@ -25,6 +25,7 @@
   height: 100%;
   padding: 7px;
   border: 1px solid #2d2d2d;
+  cursor: pointer;
 }
 
 .product-photo-wrapper {
