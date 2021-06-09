@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import SortBy from './RatingsReviews/SortBy';
-import ReviewList from './RatingsReviews/ReviewList';
+import SortBy from './ratingsReviews_components/SortBy';
+import ReviewList from './ratingsReviews_components/ReviewList';
 
 const RatingsReviews = (props) => {
-  const { currentItem } = props;
+  const { currentItem, reviewsCount, rating } = props;
   const { id, name } = currentItem;
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
-  const [totalReviews, setTotalReviews] = useState(0);
 
   const getCountReviews = () => {
     if (Object.keys(currentItem).length > 0) {
@@ -23,22 +22,9 @@ const RatingsReviews = (props) => {
         });
     }
   };
-  const getTotalReviews = () => {
-    if (Object.keys(currentItem).length > 0) {
-      axios.get(`/api/reviews2/${id}/100000`)
-        .then((results) => {
-          const totalReviewsArrLength = results.data.results.length;
-          setTotalReviews(totalReviewsArrLength);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
 
   useEffect(() => {
     getCountReviews();
-    getTotalReviews();
   }, [id, count]);
 
   return (
@@ -62,20 +48,20 @@ const RatingsReviews = (props) => {
           {name}
           )
           <br />
-          {(totalReviews < 1) ?
+          {(reviewsCount < 1) ?
             <button type="submit">Submit a new review!</button>
             : (
               <span>
                 <div className="sortBy-container">
-                  <SortBy totalReviews={totalReviews} />
+                  <SortBy totalReviews={reviewsCount} />
                 </div>
                 <div className="reviews-container">
-                  {reviews.map((review) => (
-                    <ReviewList review={review} key={review.review_id} />
+                  {reviews.slice(0).reverse().map((review) => (
+                    <ReviewList rating={rating} review={review} key={review.review_id} />
                   ))}
                 </div>
                 <div className="buttons-container">
-                  {(count > 1 && count < totalReviews) ?
+                  {(count > 1 && count < reviewsCount) ?
                     <button type="button" onClick={() => setCount(count + 2)}>More Reviews</button>
                     :
                     null}

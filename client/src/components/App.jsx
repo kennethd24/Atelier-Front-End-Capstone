@@ -28,6 +28,7 @@ class App extends React.Component {
     if ((prevLength === 0 && currentLength > 0)
       || (prevState.currentItem.id !== currentItem.id)) {
       this.getMetadata();
+      this.getTotalReviews();
     }
   }
 
@@ -35,7 +36,7 @@ class App extends React.Component {
     axios.get('/api/products')
       .then((res) => {
         this.setState({
-          currentItem: res.data[0],
+          currentItem: res.data[1],
           // currentItem: res.data[0] changed for better dummy review data
         });
       })
@@ -61,7 +62,6 @@ class App extends React.Component {
 
     this.setState({
       rating: roundedRating,
-      reviewsCount: count,
     });
   };
 
@@ -76,6 +76,19 @@ class App extends React.Component {
       });
   };
 
+  getTotalReviews = () => {
+    const { currentItem } = this.state;
+    axios.get(`/api/reviews2/${currentItem.id}/10000`)
+      .then((results) => {
+        this.setState({
+          reviewsCount: results.data.results.length,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
     const { currentItem, rating, reviewsCount } = this.state;
 
@@ -84,7 +97,7 @@ class App extends React.Component {
         <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
         <RelatedItems currentItem={currentItem} rating={rating} />
         <QuestionsAnswers currentItem={currentItem} />
-        <RatingsReviews currentItem={currentItem} />
+        <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
       </div>
     );
   }
