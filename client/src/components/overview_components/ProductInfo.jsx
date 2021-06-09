@@ -1,5 +1,6 @@
 import React from 'react';
 import Reviews from './Reviews';
+import Price from './Price';
 import StyleSelector from './StyleSelector';
 
 const ProductInfo = (props) => {
@@ -10,6 +11,7 @@ const ProductInfo = (props) => {
     setCurrentStyle,
     rating,
     reviewsCount,
+    price,
   } = props;
 
   return (
@@ -17,6 +19,7 @@ const ProductInfo = (props) => {
       <Reviews rating={rating} reviewsCount={reviewsCount} />
       <span>{currentProduct.category}</span>
       <span>{currentProduct.name}</span>
+      <Price price={price} currentStyle={currentStyle} />
       <StyleSelector
         styles={styles}
         currentStyle={currentStyle}

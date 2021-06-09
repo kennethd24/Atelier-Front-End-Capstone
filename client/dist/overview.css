@@ -80,3 +80,12 @@
   padding: 2px;
   color: #484848;
 }
+
+.sale-price {
+  color: red;
+  margin-right: 10px;
+}
+
+.orig-price {
+  text-decoration: line-through;
+}
