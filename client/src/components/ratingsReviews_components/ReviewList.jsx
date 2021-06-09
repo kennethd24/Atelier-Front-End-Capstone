@@ -4,13 +4,14 @@ import Rating from 'react-rating';
 
 const ReviewList = (props) => {
   const {
+    response,
+    date,
     review_id,
     rating,
     summary,
     body,
     recommend,
     reviewer_name,
-    response,
     helpfulness,
   } = props.review;
 
@@ -25,7 +26,7 @@ const ReviewList = (props) => {
     return null;
   };
   const formatDate = () => {
-    const entireDate = new Date(props.review.date).toString();
+    const entireDate = new Date(date).toString();
     return (
       `${entireDate.slice(4, 10)},${entireDate.slice(10, 16)}`
     );
