@@ -3,6 +3,8 @@ const atelier = require('../helpers/atelier');
 
 router.get('/products', atelier.getProducts);
 
+router.get('/qa/questions', atelier.getQuestions);
+
 router.get('/products/:id/styles', atelier.getProductStyles);
 
 // router.get('/reviews2/:id', atelier.getReviews);

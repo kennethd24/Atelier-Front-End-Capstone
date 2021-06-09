@@ -1,8 +1,8 @@
 import React from 'react';
 
-const QuestionList = () => (
+const QuestionList = ({ question }) => (
   <div>
-    Q: questions
+    {question.question_body}
   </div>
 );
 
