@@ -82,7 +82,7 @@ class App extends React.Component {
     return (
       <div>
         <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
-        <RelatedItems currentItem={currentItem} />
+        <RelatedItems currentItem={currentItem} rating={rating} />
         <QuestionsAnswers currentItem={currentItem} />
         <RatingsReviews currentItem={currentItem} />
       </div>
