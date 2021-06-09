@@ -22,13 +22,13 @@
 }
 .reviews-container {
   border: 1px solid #2d2d2d;
-  height: 800px;
+  height: 600px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
 .reviewListEntry {
-  min-height: 48%;
+  min-height: 47%;
   padding: 5px;
   border: 1px solid #2d2d2d;
 

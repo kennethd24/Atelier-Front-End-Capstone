@@ -40,11 +40,11 @@ const atelier = {
   },
 
   getReviews: (req, res) => {
-    const { id, count } = req.params;
+    const { id, count, sort } = req.params;
     const options = {
       method: 'get',
       // url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/?product_id=${id}&count=1000`,
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews?product_id=${id}&count=${count}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews?product_id=${id}&count=${count}&sort=${sort}`,
 
       headers: {
         Authorization: `${config.TOKEN}`,
