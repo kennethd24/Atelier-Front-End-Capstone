@@ -13,6 +13,8 @@ const Overview = (props) => {
 
   const [styles, setStyles] = useState([]);
 
+  const [price, setPrice] = useState(0);
+
   useEffect(() => {
     if (styles.length > 0 && currentStyle === null) {
       for (let i = 0; i < styles.length; i++) {
@@ -27,6 +29,7 @@ const Overview = (props) => {
   useEffect(() => {
     if (currentStyle !== null) {
       shiftSelectedStyle();
+      filterPrice();
     }
   }, [currentStyle]);
 
@@ -50,6 +53,14 @@ const Overview = (props) => {
     setStyles(copy);
   };
 
+  const filterPrice = () => {
+    if (currentStyle.sale_price) {
+      setPrice(Number(currentStyle.sale_price));
+    } else {
+      setPrice(Number(currentStyle.original_price));
+    }
+  };
+
   return (
     <div className="overview-container">
       <div className="top">
@@ -63,6 +74,7 @@ const Overview = (props) => {
             setCurrentStyle={setCurrentStyle}
             rating={rating}
             reviewsCount={reviewsCount}
+            price={price}
           />
           )}
       </div>
