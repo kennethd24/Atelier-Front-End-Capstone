@@ -3,7 +3,7 @@ import axios from 'axios';
 import ProductCard from './ProductCard.jsx';
 
 const RelatedItemsComp = (props) => {
-  const { currentItem } = props;
+  const { currentItem, selectedRating } = props;
   const [relatedItems, setRelatedItems] = useState([]);
 
   const getRelatedItems = (arr) => {
@@ -42,7 +42,12 @@ const RelatedItemsComp = (props) => {
   return (
     <div>
       {relatedItems.map((item) => (
-        <ProductCard currentProduct={item} key={item.id} />
+        <ProductCard
+          relatedItem={item}
+          selectedRating={selectedRating}
+          selectedItem={currentItem}
+          key={item.id}
+        />
       ))}
     </div>
   );
