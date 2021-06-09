@@ -9,9 +9,9 @@ const SortBy = (props) => {
       reviews, sorted by
       &nbsp;
       <select>
+        <option>Relevant</option>
         <option>Newest</option>
         <option>Helpful</option>
-        <option>Relevant</option>
       </select>
     </span>
   );

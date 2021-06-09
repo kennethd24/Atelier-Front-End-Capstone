@@ -36,7 +36,7 @@ class App extends React.Component {
     axios.get('/api/products')
       .then((res) => {
         this.setState({
-          currentItem: res.data[0],
+          currentItem: res.data[1],
           // currentItem: res.data[0] changed for better dummy review data
         });
       })
@@ -97,7 +97,7 @@ class App extends React.Component {
        <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
        <RelatedItems currentItem={currentItem} />
        <QuestionsAnswers currentItem={currentItem} />
-       <RatingsReviews currentItem={currentItem} reviewsCount={reviewsCount} />
+       <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
      </div>
    );
  }
