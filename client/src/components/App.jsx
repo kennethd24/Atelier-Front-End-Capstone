@@ -77,27 +77,29 @@ class App extends React.Component {
       });
   };
 
-  getTotalReviews = () => {
-    const { currentItem } = this.state;
-    axios.get(`/api/reviews2/${currentItem.id}/10000`)
-      .then((results) => {
-        this.setState({
-          reviewsCount: results.data.results.length,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+ getTotalReviews = () => {
+   const { currentItem } = this.state;
+   if (Object.keys(currentItem).length > 0) {
+     axios.get(`/api/reviews2/${currentItem.id}/10000/relevant`)
+       .then((results) => {
+         this.setState({
+           reviewsCount: results.data.results.length,
+         });
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   }
+ };
 
-  handleRelatedClick = (relatedItem) => {
+handleRelatedClick = (relatedItem) => {
     this.setState({
       currentItem: relatedItem,
     });
   }
 
-  render() {
-    const { currentItem, rating, reviewsCount } = this.state;
+ render() {
+   const { currentItem, rating, reviewsCount } = this.state;
 
     return (
       <div>
