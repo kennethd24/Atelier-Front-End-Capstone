@@ -46,7 +46,7 @@ class App extends React.Component {
       });
   }
 
-  calcAvgRating = (ratingsObj) => {
+  calcAvgRating = (ratingsObj, cb) => {
     let count = 0;
     let sumproduct = 0;
 
@@ -64,17 +64,30 @@ class App extends React.Component {
     this.setState({
       rating: roundedRating,
     });
+    if (cb) {
+      cb(roundedRating);
+    }
   };
 
-  getMetadata = () => {
-    const { currentItem } = this.state;
-    axios.get(`/api/reviews/meta/${currentItem.id}`)
-      .then((res) => {
-        this.calcAvgRating(res.data.ratings);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  getMetadata = (id, cb) => {
+    if (!id) {
+      const { currentItem } = this.state;
+      axios.get(`/api/reviews/meta/${currentItem.id}`)
+        .then((res) => {
+          this.calcAvgRating(res.data.ratings, cb);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios.get(`/api/reviews/meta/${id}`)
+        .then((res) => {
+          this.calcAvgRating(res.data.ratings, cb);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
  getTotalReviews = () => {
@@ -92,14 +105,14 @@ class App extends React.Component {
    }
  };
 
-handleRelatedClick = (relatedItem) => {
+  handleRelatedClick = (relatedItem) => {
     this.setState({
       currentItem: relatedItem,
     });
   }
 
- render() {
-   const { currentItem, rating, reviewsCount } = this.state;
+  render() {
+    const { currentItem, rating, reviewsCount } = this.state;
 
     return (
       <div>
@@ -108,6 +121,7 @@ handleRelatedClick = (relatedItem) => {
           currentItem={currentItem}
           rating={rating}
           handleClick={this.handleRelatedClick}
+          getRating={this.getMetadata}
         />
         <QuestionsAnswers currentItem={currentItem} />
         <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />

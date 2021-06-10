@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import RelatedItemsComp from './related_components/RelatedItems';
 import YourOutfitComp from './related_components/YourOutfit';
 
 const RelatedItems = (props) => {
-  const { currentItem, rating, handleClick } = props;
+  const {
+    currentItem,
+    rating,
+    handleClick,
+    getRating
+  } = props;
 
   return (
     <div className="related-outfit-wrapper">
@@ -15,6 +20,7 @@ const RelatedItems = (props) => {
             currentItem={currentItem}
             selectedRating={rating}
             handleClick={handleClick}
+            getRating={getRating}
           />
         </div>
       </div>
