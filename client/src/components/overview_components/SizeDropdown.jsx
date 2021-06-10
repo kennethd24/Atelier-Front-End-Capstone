@@ -49,8 +49,8 @@ const SizeDropdown = (props) => {
         {
           availableSizes.map((availableSize, index) => (
             <DropdownItem
-              availableSize={availableSize}
-              size={size}
+              option={availableSize}
+              selected={size}
               key={index}
             />
           ))

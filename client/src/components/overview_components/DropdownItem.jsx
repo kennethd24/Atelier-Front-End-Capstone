@@ -2,14 +2,14 @@ import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const DropdownItem = (props) => {
-  const { availableSize, size } = props;
+  const { option, selected } = props;
 
   return (
     <Dropdown.Item
-      eventKey={availableSize}
-      active={availableSize === size}
+      eventKey={option}
+      active={option === selected}
     >
-      {availableSize}
+      {option}
     </Dropdown.Item>
   );
 };
