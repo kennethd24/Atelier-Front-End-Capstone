@@ -20,7 +20,7 @@ const RelatedItems = (props) => {
       </div>
       <div className="your-outfit-wrapper">
         <h3 className="your-outfit-title">Your Outfit</h3>
-        <div className="your-outfit-carousel-wrapper"><YourOutfitComp /></div>
+        <div className="your-outfit-carousel-wrapper"><YourOutfitComp currentItem={currentItem} /></div>
       </div>
     </div>
   );

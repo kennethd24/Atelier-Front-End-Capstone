@@ -28,7 +28,8 @@ const RelatedItemsComp = (props) => {
     if (Object.keys(currentItem).length > 0) {
       axios.get(`/api/related/${id}`)
         .then((results) => {
-          getRelatedItems(results.data);
+          const uniq = [...new Set(results.data)];
+          getRelatedItems(uniq);
         })
         .catch((err) => {
           console.log('error in getRelatedIds', err);
