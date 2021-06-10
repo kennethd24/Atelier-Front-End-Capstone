@@ -2,6 +2,7 @@ import React from 'react';
 import Reviews from './Reviews';
 import Price from './Price';
 import StyleSelector from './StyleSelector';
+import SizeDropdown from './SizeDropdown';
 
 const ProductInfo = (props) => {
   const {
@@ -12,6 +13,8 @@ const ProductInfo = (props) => {
     rating,
     reviewsCount,
     price,
+    size,
+    setSize,
   } = props;
 
   return (
@@ -25,6 +28,7 @@ const ProductInfo = (props) => {
         currentStyle={currentStyle}
         setCurrentStyle={setCurrentStyle}
       />
+      <SizeDropdown currentStyle={currentStyle} size={size} setSize={setSize} />
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Ratings = (props) => {
       const recommend = Number(metaData.recommended.true);
       const notRecommend = Number(metaData.recommended.false);
       return (
-        `${(recommend / (recommend + notRecommend)) * 100}%`
+        `${(recommend / (recommend + notRecommend)).toFixed(2) * 100}%`
       );
     }
   };
@@ -41,7 +41,11 @@ const Ratings = (props) => {
       <div>
         {' '}
         Rating Breakdown
-        <div> 5 star</div>
+        <div>
+          5 star
+          {' '}
+          <span>~~Add bar lines here~~</span>
+        </div>
         <div> 4 star</div>
         <div> 3 star</div>
         <div> 2 star</div>

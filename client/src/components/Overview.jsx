@@ -15,6 +15,8 @@ const Overview = (props) => {
 
   const [price, setPrice] = useState(0);
 
+  const [size, setSize] = useState(null);
+
   useEffect(() => {
     if (styles.length > 0 && currentStyle === null) {
       for (let i = 0; i < styles.length; i++) {
@@ -75,6 +77,8 @@ const Overview = (props) => {
             rating={rating}
             reviewsCount={reviewsCount}
             price={price}
+            size={size}
+            setSize={setSize}
           />
           )}
       </div>

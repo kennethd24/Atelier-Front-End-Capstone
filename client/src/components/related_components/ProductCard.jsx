@@ -3,14 +3,20 @@ import axios from 'axios';
 import Rating from 'react-rating';
 
 const ProductCard = (props) => {
-  const { relatedItem, selectedRating, selectedItem } = props;
+  const {
+    relatedItem,
+    selectedRating,
+    selectedItem,
+    handleClick,
+    getRating,
+  } = props;
 
   const [productDefault, setProductDefault] = useState();
   const [selectedDefault, setSelectedDefault] = useState();
   const [selectedChars, setSelectedChars] = useState();
   const [relatedChars, setRelatedChars] = useState();
   const [onSale, setOnSale] = useState(false);
-  const [salePrice, setSalePrice] = useState(null);
+  const [salePrice, setSalePrice] = useState(0);
   const [rating, setRating] = useState(0);
 
   const handleCompare = (e) => {
@@ -23,7 +29,7 @@ const ProductCard = (props) => {
     if (productDefault) {
       if (productDefault.sale_price) {
         setOnSale(true);
-        setSalePrice(productDefault.sale_price);
+        setSalePrice(salePrice + productDefault.sale_price);
       }
       if (onSale) {
         return (
@@ -69,70 +75,49 @@ const ProductCard = (props) => {
       });
   };
 
-  const getRating = (ratings) => {
-    let counter = 0;
-    let total = 0;
-
-    Object.entries(ratings).forEach((set) => {
-      const star = Number(set[0]);
-      const quantity = Number(set[1]);
-      total += star * quantity;
-      counter += quantity;
-    });
-
-    const avg = total / counter;
-    const round = (Math.round(avg * 4) / 4).toFixed(2);
-    setRating(round);
-  };
-
-  const getMetadata = (id, selected) => {
-    if (relatedItem) {
-      axios.get(`/api/reviews/meta/${id}`)
-        .then((results) => {
-          getRating(results.data.ratings);
-          if (!selected) {
-            setRelatedChars(results.data.characteristics);
-          } else {
-            setSelectedChars(results.data.characteristics);
-          }
-        })
-        .catch((err) => {
-          console.log('err getting metadata', err);
-        });
-    }
-  };
-
   const renderPhotos = () => {
     if (productDefault) {
       const imgUrl = productDefault.photos[0].thumbnail_url;
       if (imgUrl) {
         return (
-          <img src={productDefault.photos[0].thumbnail_url} alt="product" />
+          <div className="product-photo-wrapper">
+            <img className="product-photo" src={productDefault.photos[0].thumbnail_url} alt="product" />
+          </div>
         );
       }
-      return <img src="no-photo.png" alt="no product" />;
+      return (
+        <div className="product-photo-wrapper">
+          <img className="product-photo" src="no-photo.png" alt="no product" />
+        </div>
+      );
     }
   };
 
   useEffect(() => {
     getStyles(relatedItem.id, false);
-    getMetadata(relatedItem.id, false);
-    // getMetadata(selectedItem.id, true);
+  }, [relatedItem]);
+
+  useEffect(() => {
+    getRating(relatedItem.id, (results) => {
+      setRating(results);
+    });
   }, [relatedItem]);
 
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={() => handleClick(relatedItem)} role="button" tabIndex="0" onKeyPress={() => handleClick(relatedItem)}>
       {renderPhotos()}
-      <div>{relatedItem.category}</div>
-      <div>{relatedItem.name}</div>
-      {checkSale()}
-      <Rating
-        initialRating={rating}
-        readonly
-        emptySymbol="far fa-star"
-        fullSymbol="fas fa-star"
-      />
-      <button className="compare-button" type="button" onClick={handleCompare}>Compare</button>
+      <div className="product-info-wrapper">
+        <div>{relatedItem.category}</div>
+        <div>{relatedItem.name}</div>
+        {checkSale()}
+        <Rating
+          initialRating={rating}
+          readonly
+          emptySymbol="far fa-star"
+          fullSymbol="fas fa-star"
+        />
+        <button className="compare-button" type="button" onClick={handleCompare}>Compare</button>
+      </div>
     </div>
   );
 };
