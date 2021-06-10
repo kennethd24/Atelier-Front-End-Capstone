@@ -16,4 +16,6 @@ router.get('/related/:id', atelier.getRelatedItems);
 
 router.get('/products/:id', atelier.getOneProduct);
 
+router.get('/qa/questions/:question_id/answers', atelier.getAnswersByQuestionId);
+
 module.exports = router;
