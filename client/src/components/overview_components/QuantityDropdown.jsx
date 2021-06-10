@@ -52,7 +52,7 @@ const QuantityDropdown = (props) => {
 
   if (limitedQuantity) {
     dropdown = (
-      <DropdownButton id="quantity-dropdown" title={quantity} variant="outline-dark" onSelect={onSelect}>
+      <DropdownButton id="quantity-dropdown" title={quantity} variant="outline-dark" onSelect={onSelect} size="lg">
         {
           [...Array(limitedQuantity)]
             .map(
@@ -63,7 +63,7 @@ const QuantityDropdown = (props) => {
     );
   } else {
     dropdown = (
-      <DropdownButton id="quantity-dropdown" title="-" variant="outline-dark" disabled />
+      <DropdownButton id="quantity-dropdown" title="-" variant="outline-dark" size="lg" disabled />
     );
   }
 
