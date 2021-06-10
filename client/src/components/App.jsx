@@ -92,14 +92,14 @@ class App extends React.Component {
    }
  };
 
-handleRelatedClick = (relatedItem) => {
+  handleRelatedClick = (relatedItem) => {
     this.setState({
       currentItem: relatedItem,
     });
   }
 
- render() {
-   const { currentItem, rating, reviewsCount } = this.state;
+  render() {
+    const { currentItem, rating, reviewsCount } = this.state;
 
     return (
       <div>
