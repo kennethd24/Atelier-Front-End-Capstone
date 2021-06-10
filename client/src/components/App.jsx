@@ -70,7 +70,6 @@ class App extends React.Component {
   };
 
   getMetadata = (id, cb) => {
-    console.log('cb', cb);
     if (!id) {
       const { currentItem } = this.state;
       axios.get(`/api/reviews/meta/${currentItem.id}`)
