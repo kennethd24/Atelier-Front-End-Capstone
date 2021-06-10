@@ -1,4 +1,7 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Reviews from './Reviews';
 import Price from './Price';
 import StyleSelector from './StyleSelector';
@@ -31,13 +34,21 @@ const ProductInfo = (props) => {
         currentStyle={currentStyle}
         setCurrentStyle={setCurrentStyle}
       />
-      <SizeDropdown currentStyle={currentStyle} size={size} setSize={setSize} />
-      <QuantityDropdown
-        currentStyle={currentStyle}
-        size={size}
-        quantity={quantity}
-        setQuantity={setQuantity}
-      />
+      <Container>
+        <Row>
+          <Col>
+            <SizeDropdown currentStyle={currentStyle} size={size} setSize={setSize} />
+          </Col>
+          <Col>
+            <QuantityDropdown
+              currentStyle={currentStyle}
+              size={size}
+              quantity={quantity}
+              setQuantity={setQuantity}
+            />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
