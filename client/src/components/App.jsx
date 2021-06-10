@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Overview from './Overview';
 import QuestionsAnswers from './QuestionsAnswers';
 import RatingsReviews from './RatingsReviews';
@@ -91,18 +92,28 @@ class App extends React.Component {
    }
  };
 
+handleRelatedClick = (relatedItem) => {
+    this.setState({
+      currentItem: relatedItem,
+    });
+  }
+
  render() {
    const { currentItem, rating, reviewsCount } = this.state;
 
-   return (
-     <div>
-       <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
-       <RelatedItems currentItem={currentItem} />
-       <QuestionsAnswers currentItem={currentItem} />
-       <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
-     </div>
-   );
- }
+    return (
+      <div>
+        <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+        <RelatedItems
+          currentItem={currentItem}
+          rating={rating}
+          handleClick={this.handleRelatedClick}
+        />
+        <QuestionsAnswers currentItem={currentItem} />
+        <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+      </div>
+    );
+  }
 }
 
 export default App;
