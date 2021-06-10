@@ -13,6 +13,7 @@ class App extends React.Component {
       currentItem: {},
       rating: 0,
       reviewsCount: 0,
+      metaData: [],
     };
   }
 
@@ -70,6 +71,9 @@ class App extends React.Component {
     axios.get(`/api/reviews/meta/${currentItem.id}`)
       .then((res) => {
         this.calcAvgRating(res.data.ratings);
+        this.setState({
+          metaData: res.data,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -92,14 +96,14 @@ class App extends React.Component {
  };
 
  render() {
-   const { currentItem, rating, reviewsCount } = this.state;
+   const { currentItem, rating, reviewsCount, metaData } = this.state;
 
    return (
      <div>
        <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
        <RelatedItems currentItem={currentItem} />
        <QuestionsAnswers currentItem={currentItem} />
-       <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+       <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} metaData={metaData} />
      </div>
    );
  }
