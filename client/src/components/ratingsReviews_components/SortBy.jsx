@@ -7,12 +7,12 @@ const SortBy = (props) => {
     <span>
       {totalReviews}
       {' '}
-      reviews, sorted by
+      reviews, Sort by
       &nbsp;
       <select onChange={(e) => { setSortState(e.target.value); }}>
-        <option value="relevant">Relevance</option>
+        <option value="relevant">Most Relevant</option>
         <option value="newest">Most Recent</option>
-        <option value="helpful">Helpfulness</option>
+        <option value="helpful">Most Helpful</option>
       </select>
     </span>
   );
