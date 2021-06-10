@@ -8,12 +8,14 @@ router.get('/qa/questions', atelier.getQuestions);
 router.get('/products/:id/styles', atelier.getProductStyles);
 
 // router.get('/reviews2/:id', atelier.getReviews);
-router.get('/reviews2/:id/:count', atelier.getReviews);
+router.get('/reviews2/:id/:count/:sort', atelier.getReviews);
 
 router.get('/reviews/meta/:id', atelier.getReviewMetadata);
 
 router.get('/related/:id', atelier.getRelatedItems);
 
 router.get('/products/:id', atelier.getOneProduct);
+
+router.get('/qa/questions/:question_id/answers', atelier.getAnswersByQuestionId);
 
 module.exports = router;

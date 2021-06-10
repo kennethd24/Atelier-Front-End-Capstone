@@ -28,6 +28,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.2",
+    "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
@@ -35,6 +36,7 @@
     "path": "^0.12.7",
     "preset-react": "^1.0.0",
     "react": "^17.0.2",
+    "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-items-carousel": "^2.8.0",
     "react-rating": "^2.0.5",
@@ -43,11 +45,13 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "css-loader": "^5.2.6",
     "eslint": "^7.27.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "style-loader": "^2.0.0"
   }
 }

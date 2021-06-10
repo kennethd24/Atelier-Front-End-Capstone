@@ -3,7 +3,12 @@ import axios from 'axios';
 import ProductCard from './ProductCard';
 
 const RelatedItemsComp = (props) => {
-  const { currentItem, selectedRating, handleClick } = props;
+  const {
+    currentItem,
+    selectedRating,
+    handleClick,
+    getRating,
+  } = props;
   const [relatedItems, setRelatedItems] = useState([]);
 
   const getRelatedItems = (arr) => {
@@ -50,6 +55,7 @@ const RelatedItemsComp = (props) => {
           selectedItem={currentItem}
           key={item.id}
           handleClick={handleClick}
+          getRating={getRating}
         />
       ))}
     </div>

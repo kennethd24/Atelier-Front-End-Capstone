@@ -22,10 +22,10 @@ const atelier = {
   },
 
   getQuestions: (req, res) => {
-    let { product_id } = req.params;
+    const { product_id } = req.params;
     const options = {
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=16060&count=100`,
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=16060&count=100',
       headers: {
         Authorization: `${config.TOKEN}`,
       },
@@ -40,11 +40,11 @@ const atelier = {
   },
 
   getReviews: (req, res) => {
-    const { id, count } = req.params;
+    const { id, count, sort } = req.params;
     const options = {
       method: 'get',
       // url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/?product_id=${id}&count=1000`,
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews?product_id=${id}&count=${count}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews?product_id=${id}&count=${count}&sort=${sort}`,
 
       headers: {
         Authorization: `${config.TOKEN}`,
@@ -133,6 +133,26 @@ const atelier = {
       })
       .catch((err) => {
         res.status(400).send(err);
+      });
+  },
+
+  getAnswersByQuestionId: (req, res) => {
+    const { question_id } = req.params;
+    const options = {
+      method: 'get',
+      // eslint-disable-next-line camelcase
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${question_id}/answers`,
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+
+    axios(options)
+      .then((response) => {
+        res.status(200).send(response.data);
+      })
+      .catch((err) => {
+        res.status(404).send(err);
       });
   },
 

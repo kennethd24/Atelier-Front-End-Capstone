@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -25,5 +26,6 @@ module.exports = {
     'no-use-before-define': 'off',
     'no-plusplus': 'off',
     'react/no-array-index-key': 'off',
+    'linebreak-style': 0,
   },
 };

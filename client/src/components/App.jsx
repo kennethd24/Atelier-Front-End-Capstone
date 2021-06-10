@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Overview from './Overview';
 import QuestionsAnswers from './QuestionsAnswers';
 import RatingsReviews from './RatingsReviews';
@@ -45,7 +46,7 @@ class App extends React.Component {
       });
   }
 
-  calcAvgRating = (ratingsObj) => {
+  calcAvgRating = (ratingsObj, cb) => {
     let count = 0;
     let sumproduct = 0;
 
@@ -63,31 +64,47 @@ class App extends React.Component {
     this.setState({
       rating: roundedRating,
     });
+    if (cb) {
+      cb(roundedRating);
+    }
   };
 
-  getMetadata = () => {
-    const { currentItem } = this.state;
-    axios.get(`/api/reviews/meta/${currentItem.id}`)
-      .then((res) => {
-        this.calcAvgRating(res.data.ratings);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  getTotalReviews = () => {
-    const { currentItem } = this.state;
-    axios.get(`/api/reviews2/${currentItem.id}/10000`)
-      .then((results) => {
-        this.setState({
-          reviewsCount: results.data.results.length,
+  getMetadata = (id, cb) => {
+    console.log('cb', cb);
+    if (!id) {
+      const { currentItem } = this.state;
+      axios.get(`/api/reviews/meta/${currentItem.id}`)
+        .then((res) => {
+          this.calcAvgRating(res.data.ratings, cb);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    } else {
+      axios.get(`/api/reviews/meta/${id}`)
+        .then((res) => {
+          this.calcAvgRating(res.data.ratings, cb);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
+
+ getTotalReviews = () => {
+   const { currentItem } = this.state;
+   if (Object.keys(currentItem).length > 0) {
+     axios.get(`/api/reviews2/${currentItem.id}/10000/relevant`)
+       .then((results) => {
+         this.setState({
+           reviewsCount: results.data.results.length,
+         });
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   }
+ };
 
   handleRelatedClick = (relatedItem) => {
     this.setState({
@@ -105,6 +122,7 @@ class App extends React.Component {
           currentItem={currentItem}
           rating={rating}
           handleClick={this.handleRelatedClick}
+          getRating={this.getMetadata}
         />
         <QuestionsAnswers currentItem={currentItem} />
         <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
