@@ -98,9 +98,11 @@ const ProductCard = (props) => {
   }, [relatedItem]);
 
   useEffect(() => {
-    getRating(relatedItem.id, (results) => {
-      setRating(results);
-    });
+    if (getRating) {
+      getRating(relatedItem.id, (results) => {
+        setRating(results);
+      });
+    }
   }, [relatedItem]);
 
   return (
