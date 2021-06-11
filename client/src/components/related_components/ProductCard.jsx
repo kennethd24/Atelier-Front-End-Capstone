@@ -49,6 +49,7 @@ const ProductCard = (props) => {
   };
 
   const getStyles = (id, selected) => {
+    console.log('getStyles Fired');
     axios.get(`/api/products/${id}/styles`)
       .then((results) => {
         const resultsArr = results.data.results;
@@ -98,9 +99,11 @@ const ProductCard = (props) => {
   }, [relatedItem]);
 
   useEffect(() => {
-    getRating(relatedItem.id, (results) => {
-      setRating(results);
-    });
+    if (getRating) {
+      getRating(relatedItem.id, (results) => {
+        setRating(results);
+      });
+    }
   }, [relatedItem]);
 
   return (
