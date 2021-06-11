@@ -14,6 +14,7 @@ class App extends React.Component {
       currentItem: {},
       rating: 0,
       reviewsCount: 0,
+      metaData: [],
     };
   }
 
@@ -104,7 +105,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentItem, rating, reviewsCount } = this.state;
+    const {
+      currentItem, rating, reviewsCount, metaData,
+    } = this.state;
 
     return (
       <div>
@@ -116,7 +119,12 @@ class App extends React.Component {
           getRating={this.getMetadata}
         />
         <QuestionsAnswers currentItem={currentItem} />
-        <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+        <RatingsReviews
+          currentItem={currentItem}
+          rating={rating}
+          reviewsCount={reviewsCount}
+          metaData={metaData}
+        />
       </div>
     );
   }
