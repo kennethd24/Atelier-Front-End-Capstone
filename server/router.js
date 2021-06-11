@@ -18,4 +18,6 @@ router.get('/products/:id', atelier.getOneProduct);
 
 router.get('/qa/questions/:question_id/answers', atelier.getAnswersByQuestionId);
 
+router.put('/qa/answers/:answer_id/helpful', atelier.updateHelpfulAnswer);
+
 module.exports = router;

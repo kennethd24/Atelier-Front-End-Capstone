@@ -9,6 +9,13 @@ const QuestionList = ({ question }) => {
     moreAnswers: [],
   });
 
+  const handleMoreAnswers = () => {
+    setAnswers({
+      results: answers.results.concat(answers.moreAnswers.slice(0, 2)),
+      moreAnswers: answers.moreAnswers.slice(2),
+    });
+  };
+
   useEffect(() => {
     axios.get(`/api/qa/questions/${question.question_id}/answers`)
       .then((response) => {
@@ -30,8 +37,12 @@ const QuestionList = ({ question }) => {
       </div>
       <div>
         {answers.results.map((answer, index) => (
-          <AnswerEntry answer={answer} key={index} />
+          <AnswerEntry
+            answer={answer}
+            key={index}
+          />
         ))}
+        <input type="button" value="Load More Answers" onClick={handleMoreAnswers} />
       </div>
     </div>
   );
