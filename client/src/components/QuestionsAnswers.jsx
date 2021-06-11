@@ -6,7 +6,7 @@ import QuestionList from './QnA_components/QuestionList';
 const QuestionsAnswers = (props) => {
   const [questions, setQuestions] = useState({
     results: [],
-    moreQuestion: [],
+    moreQuestions: [],
   });
 
   const handleMoreQuestions = () => {
@@ -36,12 +36,12 @@ const QuestionsAnswers = (props) => {
       <div className="Search">
         <Search />
       </div>
-      <div className="QuestionList">
-        {questions.results.map((question, index) => (
-          <QuestionList question={question} key={index} />
+      <div className="questionList">
+        {questions.results.map((question) => (
+          <QuestionList question={question} key={question.question_id} />
         ))}
       </div>
-      <input type="button" value="More Answered Questions" onClick={handleMoreQuestions} />
+      {!questions.moreQuestions.length < 1 ? <input type="button" value="More Answered Questions" onClick={handleMoreQuestions} /> : null}
       <input type="button" value="Add Question +" />
     </div>
   );
