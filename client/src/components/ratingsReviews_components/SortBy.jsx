@@ -1,20 +1,38 @@
 import React from 'react';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const SortBy = (props) => {
   const { totalReviews, setSortState } = props;
   // need to fix sorting when count is only 2
   return (
-    <span>
+    <div className="sortBy-header">
       {totalReviews}
       {' '}
-      reviews, Sort by
+      reviews
       &nbsp;
-      <select onChange={(e) => { setSortState(e.target.value); }}>
+      <DropdownButton id="dropdown-item-button" title="Sort by" variant="outline-dark">
+        <Dropdown.Item onClick={() => { setSortState('relevant'); }}>Most Relevant</Dropdown.Item>
+        <Dropdown.Item onClick={() => { setSortState('newest'); }}>Most Recent</Dropdown.Item>
+        <Dropdown.Item onClick={() => { setSortState('helpful'); }}>Most Helpful</Dropdown.Item>
+      </DropdownButton>
+      {/* <select onChange={(e) => { setSortState(e.target.value); }}>
         <option value="relevant">Most Relevant</option>
         <option value="newest">Most Recent</option>
         <option value="helpful">Most Helpful</option>
-      </select>
-    </span>
+      </select> */}
+    </div>
+    // <span>
+    //   {totalReviews}
+    //   {' '}
+    //   reviews, Sort by
+    //   &nbsp;
+    //   <select onChange={(e) => { setSortState(e.target.value); }}>
+    //     <option value="relevant">Most Relevant</option>
+    //     <option value="newest">Most Recent</option>
+    //     <option value="helpful">Most Helpful</option>
+    //   </select>
+    // </span>
   );
 };
 

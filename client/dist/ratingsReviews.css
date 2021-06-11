@@ -57,3 +57,8 @@
   border: 1px solid #2d2d2d;
   background-color: rgba(0, 0, 255, .2);
 }
+.sortBy-header {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
