@@ -11,7 +11,7 @@ const SortBy = (props) => {
       {' '}
       reviews
       &nbsp;
-      <DropdownButton id="dropdown-item-button" title="Sort by" variant="outline-dark">
+      <DropdownButton id="dropdown-item-button" title="Sort by" variant="outline-dark" size="sm">
         <Dropdown.Item onClick={() => { setSortState('relevant'); }}>Most Relevant</Dropdown.Item>
         <Dropdown.Item onClick={() => { setSortState('newest'); }}>Most Recent</Dropdown.Item>
         <Dropdown.Item onClick={() => { setSortState('helpful'); }}>Most Helpful</Dropdown.Item>
