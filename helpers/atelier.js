@@ -156,6 +156,26 @@ const atelier = {
       });
   },
 
+  updateHelpfulAnswer: (req, res) => {
+    const { answer_id } = req.params;
+    const options = {
+      method: 'put',
+      // eslint-disable-next-line camelcase
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/answers/${answer_id}/helpful`,
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+
+    axios(options)
+      .then((response) => {
+        res.status(200).send(response.data);
+      })
+      .catch((err) => {
+        res.status(404).send(err);
+      });
+  },
+
 };
 
 module.exports = atelier;
