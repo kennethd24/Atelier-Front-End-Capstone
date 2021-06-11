@@ -70,24 +70,16 @@ class App extends React.Component {
   };
 
   getMetadata = (id, cb) => {
-    if (!id) {
-      const { currentItem } = this.state;
-      axios.get(`/api/reviews/meta/${currentItem.id}`)
-        .then((res) => {
-          this.calcAvgRating(res.data.ratings, cb);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      axios.get(`/api/reviews/meta/${id}`)
-        .then((res) => {
-          this.calcAvgRating(res.data.ratings, cb);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    const { currentItem } = this.state;
+    const itemId = id || currentItem.id;
+
+    axios.get(`/api/reviews/meta/${itemId}`)
+      .then((res) => {
+        this.calcAvgRating(res.data.ratings, cb);
+      })
+      .catch((err) => {
+        console.log('err getting metadata', err);
+      });
   };
 
  getTotalReviews = () => {
