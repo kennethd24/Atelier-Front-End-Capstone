@@ -77,6 +77,9 @@ class App extends React.Component {
     axios.get(`/api/reviews/meta/${itemId}`)
       .then((res) => {
         this.calcAvgRating(res.data.ratings, cb);
+        this.setState({
+          metaData: res.data,
+        });
       })
       .catch((err) => {
         console.log('err getting metadata', err);
