@@ -11,16 +11,11 @@ const SortBy = (props) => {
       {' '}
       reviews
       &nbsp;
-      <DropdownButton id="dropdown-item-button" title="Sort by" variant="outline-dark" size="sm">
+      <DropdownButton id="dropdown-sortby-button" title="Sort by" variant="outline-dark" size="sm">
         <Dropdown.Item onClick={() => { setSortState('relevant'); }}>Most Relevant</Dropdown.Item>
         <Dropdown.Item onClick={() => { setSortState('newest'); }}>Most Recent</Dropdown.Item>
         <Dropdown.Item onClick={() => { setSortState('helpful'); }}>Most Helpful</Dropdown.Item>
       </DropdownButton>
-      {/* <select onChange={(e) => { setSortState(e.target.value); }}>
-        <option value="relevant">Most Relevant</option>
-        <option value="newest">Most Recent</option>
-        <option value="helpful">Most Helpful</option>
-      </select> */}
     </div>
     // <span>
     //   {totalReviews}
