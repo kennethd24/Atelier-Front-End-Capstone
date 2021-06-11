@@ -45,12 +45,12 @@ const SizeDropdown = (props) => {
 
   if (active) {
     dropdown = (
-      <DropdownButton id="dropdown-item-button" title={size || 'SELECT SIZE'} variant="outline-dark" onSelect={onSelect}>
+      <DropdownButton id="dropdown-item-button" title={size || 'SELECT SIZE'} variant="outline-dark" onSelect={onSelect} size="lg">
         {
           availableSizes.map((availableSize, index) => (
             <DropdownItem
-              availableSize={availableSize}
-              size={size}
+              option={availableSize}
+              selected={size}
               key={index}
             />
           ))
@@ -59,7 +59,7 @@ const SizeDropdown = (props) => {
     );
   } else {
     dropdown = (
-      <DropdownButton id="dropdown-item-button" title="OUT OF STOCK" variant="outline-dark" disabled />
+      <DropdownButton id="dropdown-item-button" title="OUT OF STOCK" variant="outline-dark" size="lg" disabled />
     );
   }
 

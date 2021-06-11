@@ -42,6 +42,7 @@ const QuestionsAnswers = (props) => {
         ))}
       </div>
       <input type="button" value="More Answered Questions" onClick={handleMoreQuestions} />
+      <input type="button" value="Add Question +" />
     </div>
   );
 };
