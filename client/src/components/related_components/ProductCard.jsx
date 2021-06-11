@@ -49,7 +49,7 @@ const ProductCard = (props) => {
   };
 
   const getStyles = (id, selected) => {
-    console.log('getStyles Fired');
+    // console.log('getStyles Fired');
     axios.get(`/api/products/${id}/styles`)
       .then((results) => {
         const resultsArr = results.data.results;
