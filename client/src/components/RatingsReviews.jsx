@@ -3,9 +3,10 @@ import axios from 'axios';
 
 import SortBy from './ratingsReviews_components/SortBy';
 import ReviewList from './ratingsReviews_components/ReviewList';
+import Ratings from './ratingsReviews_components/Ratings';
 
 const RatingsReviews = (props) => {
-  const { currentItem, reviewsCount, rating } = props;
+  const { currentItem, reviewsCount, rating, metaData } = props;
   const { id, name } = currentItem;
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
@@ -40,7 +41,7 @@ const RatingsReviews = (props) => {
           (ID is equal to &nbsp;
           {id}
           )
-          {/* <Ratings ratings={ratings}/> */}
+          <Ratings rating={rating} metaData={metaData} />
         </div>
         <div className="reviewList">
           Review List
