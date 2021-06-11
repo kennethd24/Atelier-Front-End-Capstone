@@ -3,16 +3,18 @@ import axios from 'axios';
 
 import SortBy from './ratingsReviews_components/SortBy';
 import ReviewList from './ratingsReviews_components/ReviewList';
+import Ratings from './ratingsReviews_components/Ratings';
 
 const RatingsReviews = (props) => {
-  const { currentItem, reviewsCount, rating } = props;
+  const { currentItem, reviewsCount, rating, metaData } = props;
   const { id, name } = currentItem;
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
+  const [sortState, setSortState] = useState('relevant');
 
   const getCountReviews = () => {
     if (Object.keys(currentItem).length > 0) {
-      axios.get(`/api/reviews2/${id}/${count}`)
+      axios.get(`/api/reviews2/${id}/${count}/${sortState}`)
         .then((results) => {
           const countReviews = results.data.results;
           setReviews(countReviews);
@@ -25,7 +27,7 @@ const RatingsReviews = (props) => {
 
   useEffect(() => {
     getCountReviews();
-  }, [id, count]);
+  }, [id, count, sortState, setSortState]);
 
   return (
     <div className="ratingsReview-container">
@@ -39,7 +41,7 @@ const RatingsReviews = (props) => {
           (ID is equal to &nbsp;
           {id}
           )
-          {/* <Ratings ratings={ratings}/> */}
+          <Ratings rating={rating} metaData={metaData} />
         </div>
         <div className="reviewList">
           Review List
@@ -53,10 +55,10 @@ const RatingsReviews = (props) => {
             : (
               <span>
                 <div className="sortBy-container">
-                  <SortBy totalReviews={reviewsCount} />
+                  <SortBy totalReviews={reviewsCount} setSortState={setSortState} />
                 </div>
                 <div className="reviews-container">
-                  {reviews.slice(0).reverse().map((review) => (
+                  {reviews.map((review) => (
                     <ReviewList rating={rating} review={review} key={review.review_id} />
                   ))}
                 </div>

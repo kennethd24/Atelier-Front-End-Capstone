@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Overview from './Overview';
 import QuestionsAnswers from './QuestionsAnswers';
 import RatingsReviews from './RatingsReviews';
@@ -13,6 +14,7 @@ class App extends React.Component {
       currentItem: {},
       rating: 0,
       reviewsCount: 0,
+      metaData: [],
     };
   }
 
@@ -45,7 +47,7 @@ class App extends React.Component {
       });
   }
 
-  calcAvgRating = (ratingsObj) => {
+  calcAvgRating = (ratingsObj, cb) => {
     let count = 0;
     let sumproduct = 0;
 
@@ -63,41 +65,69 @@ class App extends React.Component {
     this.setState({
       rating: roundedRating,
     });
+    if (cb) {
+      cb(roundedRating);
+    }
   };
 
-  getMetadata = () => {
+  getMetadata = (id, cb) => {
     const { currentItem } = this.state;
-    axios.get(`/api/reviews/meta/${currentItem.id}`)
+    const itemId = id || currentItem.id;
+
+    axios.get(`/api/reviews/meta/${itemId}`)
       .then((res) => {
-        this.calcAvgRating(res.data.ratings);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  getTotalReviews = () => {
-    const { currentItem } = this.state;
-    axios.get(`/api/reviews2/${currentItem.id}/10000`)
-      .then((results) => {
+        this.calcAvgRating(res.data.ratings, cb);
         this.setState({
-          reviewsCount: results.data.results.length,
+          metaData: res.data,
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.log('err getting metadata', err);
       });
   };
 
+ getTotalReviews = () => {
+   const { currentItem } = this.state;
+   if (Object.keys(currentItem).length > 0) {
+     axios.get(`/api/reviews2/${currentItem.id}/10000/relevant`)
+       .then((results) => {
+         this.setState({
+           reviewsCount: results.data.results.length,
+         });
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   }
+ };
+
+  handleRelatedClick = (relatedItem) => {
+    this.setState({
+      currentItem: relatedItem,
+    });
+  }
+
   render() {
-    const { currentItem, rating, reviewsCount } = this.state;
+    const {
+      currentItem, rating, reviewsCount, metaData,
+    } = this.state;
 
     return (
       <div>
         <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
-        <RelatedItems currentItem={currentItem} rating={rating} />
+        <RelatedItems
+          currentItem={currentItem}
+          rating={rating}
+          handleClick={this.handleRelatedClick}
+          getRating={this.getMetadata}
+        />
         <QuestionsAnswers currentItem={currentItem} />
-        <RatingsReviews currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+        <RatingsReviews
+          currentItem={currentItem}
+          rating={rating}
+          reviewsCount={reviewsCount}
+          metaData={metaData}
+        />
       </div>
     );
   }
