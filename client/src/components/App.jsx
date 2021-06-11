@@ -107,49 +107,6 @@ class App extends React.Component {
     });
   }
 
-  //ANDREW PRODUCT CARD GET STYLES
-  // getStyles = (id, selected) => {
-  //   // console.log('getStyles Fired');
-  //   axios.get(`/api/products/${id}/styles`)
-  //     .then((results) => {
-  //       const resultsArr = results.data.results;
-  //       let foundDefault = false;
-  //       for (let i = 0; i < resultsArr.length; i++) {
-  //         const currentResult = resultsArr[i];
-  //         if (currentResult['default?']) {
-  //           foundDefault = true;
-  //           if (!selected) {
-  //             setProductDefault(currentResult);
-  //           } else if (selected) {
-  //             setSelectedDefault(currentResult);
-  //           }
-  //         }
-  //       }
-  //       if (foundDefault === false && selected === false) {
-  //         setProductDefault(resultsArr[0]);
-  //       } else {
-  //         setSelectedDefault(resultsArr[0]);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log('err in getStyles', err);
-  //     });
-  // };
-
-  //CHRIS OVERVIEW GET STYLES
-  // const getStyles = () => {
-  //   if (Object.keys(currentItem).length > 0) {
-  //     axios.get(`/api/products/${currentItem.id}/styles`)
-  //       .then((res) => {
-  //         setStyles(res.data.results);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  // };
-
-
   render() {
     const {
       currentItem, rating, reviewsCount, metaData,
