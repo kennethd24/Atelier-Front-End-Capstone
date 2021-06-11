@@ -6,6 +6,8 @@ const Overview = (props) => {
   const { currentItem, rating, reviewsCount } = props;
 
   useEffect(() => {
+    // reset the current style when a new product is clicked
+    setCurrentStyle(null);
     getStyles();
   }, [currentItem]);
 
@@ -17,6 +19,8 @@ const Overview = (props) => {
 
   const [size, setSize] = useState(null);
 
+  const [quantity, setQuantity] = useState(null);
+
   useEffect(() => {
     if (styles.length > 0 && currentStyle === null) {
       for (let i = 0; i < styles.length; i++) {
@@ -25,6 +29,9 @@ const Overview = (props) => {
           return;
         }
       }
+
+      // if no default style found, set it to the first style available
+      setCurrentStyle(styles[0]);
     }
   }, [styles]);
 
@@ -79,6 +86,8 @@ const Overview = (props) => {
             price={price}
             size={size}
             setSize={setSize}
+            quantity={quantity}
+            setQuantity={setQuantity}
           />
           )}
       </div>
