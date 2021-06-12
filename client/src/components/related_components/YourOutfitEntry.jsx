@@ -1,47 +1,36 @@
 import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
 import Rating from 'react-rating';
-import Image from './Image';
 
 const ProductCard = (props) => {
-  // const {
-  //   relatedItem,
-  //   selectedRating,
-  //   selectedItem,
-  //   handleClick,
-  //   getRating,
-  //   getDefault,
-  // } = props;
-
   const {
-    item,
-    rating,
-    defaultStyle,
+    relatedItem,
+    selectedRating,
+    selectedItem,
     handleClick,
-    handleCompare,
+    getRating,
+    getDefault,
   } = props;
 
-  // const [relatedDefault, setRelatedDefault] = useState();
+  const [relatedDefault, setRelatedDefault] = useState();
   const [onSale, setOnSale] = useState(false);
   const [salePrice, setSalePrice] = useState(0);
-  // const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(0);
   // const [selectedDefault, setSelectedDefault] = useState();
   // const [selectedChars, setSelectedChars] = useState();
   // const [relatedChars, setRelatedChars] = useState();
 
-  // const handleCompare = (e) => {
-  //   e.preventDefault();
-  //   // console.log('selectedChars', selectedChars);
-  //   // console.log('relatedChars', relatedChars);
-  // };
+  const handleCompare = (e) => {
+    e.preventDefault();
+    // console.log('selectedChars', selectedChars);
+    // console.log('relatedChars', relatedChars);
+  };
 
   const checkSale = () => {
-    // console.log('item in product card', item);
-    // console.log('default style in product card', defaultStyle);
-    // console.log('checking sale');
-    if (defaultStyle) {
-      if (defaultStyle.sale_price) {
+    if (relatedDefault) {
+      if (relatedDefault.sale_price) {
         setOnSale(true);
-        setSalePrice(salePrice + defaultStyle.sale_price);
+        setSalePrice(salePrice + relatedDefault.sale_price);
       }
       if (onSale) {
         return (
@@ -54,7 +43,7 @@ const ProductCard = (props) => {
       return (
         <div>
           $
-          {item.default_price}
+          {relatedItem.default_price}
         </div>
       );
     }
@@ -89,28 +78,23 @@ const ProductCard = (props) => {
   //     });
   // };
 
-  // const renderPhotos = () => {
-  //   console.log('renderPhotos Fired');
-  //   // console.log('item', item);
-  //   // console.log('rating', rating);
-  //   // console.log('default style', defaultStyle);
-  //   let image;
-  //   if (defaultStyle.photos) {
-  //     const imgUrl = defaultStyle.photos[0].thumbnail_url;
-  //     if (imgUrl) {
-  //       image = (
-  //         <div className="product-photo-wrapper">
-  //           <img className="product-photo" src={defaultStyle.photos[0].thumbnail_url} alt="product" />
-  //         </div>
-  //       );
-  //     }
-  //     image = (
-  //       <div className="product-photo-wrapper">
-  //         <img className="product-photo" src="no-photo.png" alt="no product" />
-  //       </div>
-  //     );
-  //   }
-  // };
+  const renderPhotos = () => {
+    if (relatedDefault) {
+      const imgUrl = relatedDefault.photos[0].thumbnail_url;
+      if (imgUrl) {
+        return (
+          <div className="product-photo-wrapper">
+            <img className="product-photo" src={relatedDefault.photos[0].thumbnail_url} alt="product" />
+          </div>
+        );
+      }
+      return (
+        <div className="product-photo-wrapper">
+          <img className="product-photo" src="no-photo.png" alt="no product" />
+        </div>
+      );
+    }
+  };
 
   // useEffect(() => {
   //   getStyles(relatedItem.id, false);
@@ -118,20 +102,20 @@ const ProductCard = (props) => {
 
 
 
-  // useEffect(() => {
-  //   if (getRating) {
-  //     getRating(relatedItem.id, (results) => {
-  //       setRating(results);
-  //     });
-  //   }
-  // }, [relatedItem]);
+  useEffect(() => {
+    if (getRating) {
+      getRating(relatedItem.id, (results) => {
+        setRating(results);
+      });
+    }
+  }, [relatedItem]);
 
   return (
-    <div className="product-card" onClick={() => handleClick(item)} role="button" tabIndex="0" onKeyPress={() => handleClick(item)}>
-      {/* <Image defaultStyle={defaultStyle} /> */}
+    <div className="product-card" onClick={() => handleClick(relatedItem)} role="button" tabIndex="0" onKeyPress={() => handleClick(relatedItem)}>
+      {renderPhotos()}
       <div className="product-info-wrapper">
-        <div>{item.category}</div>
-        <div>{item.name}</div>
+        <div>{relatedItem.category}</div>
+        <div>{relatedItem.name}</div>
         {checkSale()}
         <Rating
           initialRating={rating}

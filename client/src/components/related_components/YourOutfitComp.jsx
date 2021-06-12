@@ -3,14 +3,19 @@ import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 
 const YourOutfitComp = (props) => {
-  const { currentItem } = props;
+  const {
+    selectedItem,
+    selectedRating,
+    selectedDefault
+  } = props;
+
   const [yourOutfit, setYourOutfit] = useState([]);
   const [outfitIds, setOutfitIds] = useState([]);
 
   const handleAdd = () => {
-    if (!outfitIds.includes(currentItem.id)) {
-      setOutfitIds([...outfitIds, currentItem.id]);
-      setYourOutfit([...yourOutfit, currentItem]);
+    if (!outfitIds.includes(selectedItem.id)) {
+      setOutfitIds([...outfitIds, selectedItem.id]);
+      setYourOutfit([...yourOutfit, selectedItem]);
     }
   };
 
@@ -18,7 +23,10 @@ const YourOutfitComp = (props) => {
     <div className="your-outfit-carousel">
       <button type="button" onClick={handleAdd}>Add Selected Item to Your Outfit</button>
       {yourOutfit.map((item) => (
-        <ProductCard relatedItem={item} key={item.id} />
+        <ProductCard
+          relatedItem={item}
+          key={item.id}
+        />
       ))}
     </div>
   );

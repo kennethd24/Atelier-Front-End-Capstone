@@ -15,6 +15,8 @@ class App extends React.Component {
       rating: 0,
       reviewsCount: 0,
       metaData: [],
+      styles: [],
+      defaultStyle: {},
     };
   }
 
@@ -105,21 +107,60 @@ class App extends React.Component {
     this.setState({
       currentItem: relatedItem,
     });
-  }
+  };
+
+  getStyles = (id, cb) => {
+    const { currentItem } = this.state;
+    const itemId = id || currentItem.id;
+
+    axios.get(`/api/products/${itemId}/styles`)
+      .then((res) => {
+        const stylesArr = res.data.results;
+        this.setState({
+          styles: stylesArr,
+        });
+        this.setDefault(stylesArr, cb);
+      })
+      .catch((err) => {
+        console.log('error in getStyles', err);
+      });
+  };
+
+  setDefault = (stylesArr, cb) => {
+    let defaultStyle;
+
+    for (let i = 0; i < stylesArr.length; i++) {
+      if (stylesArr[i]['default?']) {
+        defaultStyle = stylesArr[i];
+      }
+    }
+
+    if (!defaultStyle) { [defaultStyle] = stylesArr; }
+
+    if (cb) {
+      cb(defaultStyle);
+    } else {
+      this.setState({
+        defaultStyle,
+      });
+    }
+  };
 
   render() {
     const {
-      currentItem, rating, reviewsCount, metaData,
+      currentItem, rating, reviewsCount, metaData, styles, defaultStyle,
     } = this.state;
 
     return (
       <div>
         <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
         <RelatedItems
-          currentItem={currentItem}
-          rating={rating}
+          selectedItem={currentItem}
+          selectedRating={rating}
+          selectedDefault={defaultStyle}
           handleClick={this.handleRelatedClick}
           getRating={this.getMetadata}
+          getDefault={this.getStyles}
         />
         <QuestionsAnswers currentItem={currentItem} />
         <RatingsReviews
