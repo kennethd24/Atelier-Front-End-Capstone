@@ -1,7 +1,7 @@
 .answerListScroll {
   max-height: 40vh;
   overflow: auto;
-  height: 12vh;
+  height: 15vh;
 }
 
 .questions {
@@ -17,4 +17,8 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.addAnswer {
+  float: right;
 }

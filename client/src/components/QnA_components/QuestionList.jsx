@@ -32,8 +32,11 @@ const QuestionList = ({ question }) => {
 
   return (
     <div>
-      <div className="questions">
-        Q:{question.question_body}
+      <div>
+        <span className="questions">Q:{question.question_body}</span>
+        <span className="addAnswer">Helpful?
+          <u>Yes</u> (#) <u>Add Answer</u>
+        </span>
       </div>
       <div className="answerListScroll">
         {answers.results.map((answer) => (
