@@ -16,53 +16,25 @@ const RelatedItemEntry = (props) => {
 
   const [defaultStyle, setDefaultStyle] = useState({});
   const [rating, setRating] = useState(0);
-  const [price, setPrice] = useState({});
   const itemId = relatedItem.id;
 
   // GET/SET DEFAULT STYLE
   useEffect(() => {
-    console.log('get default firing');
+    // console.log('get default firing');
     getDefault(itemId, ((results) => {
       setDefaultStyle(results);
-      console.log('defaultStyle', results);
-      checkSale(results.sale_price, results.original_price);
+      // console.log('defaultStyle', results);
     }));
   }, [relatedItem]);
 
   // GET RATING
   useEffect(() => {
-    console.log('get rating firing');
+    // console.log('get rating firing');
     getRating(itemId, ((results) => {
       setRating(results);
       // console.log('rating', results);
     }));
   }, [relatedItem]);
-
-  // SET SALE INFO (after default is set)
-  const checkSale = (sale, original) => {
-    if (sale) {
-      setPrice({
-        sale: true,
-        price: sale,
-      });
-    }
-    setPrice({
-      sale: false,
-      price: original,
-    });
-  };
-  // useEffect(() => {
-  //   // if (defaultStyle.sale_price) {
-  //     setPrice(() => {
-  //       price.sale = true;
-  //       price.price = defaultStyle.sale_price;
-  //     });
-  //   }
-  //   setPrice(() => {
-  //     price.sale = false;
-  //     price.price = defaultStyle.original_price;
-  //   })
-  // }), [defaultStyle];
 
   return (
     <div>
@@ -73,9 +45,10 @@ const RelatedItemEntry = (props) => {
         -
         {defaultStyle.name}
       </div>
-      {/* <Price sale={/> */}
-      <div>{price.price}</div>
-      <div>{String(price.sale)}</div>
+      <Price
+        sale={defaultStyle.sale_price}
+        original={defaultStyle.original_price}
+      />
       <Rating
         initialRating={rating}
         readonly
