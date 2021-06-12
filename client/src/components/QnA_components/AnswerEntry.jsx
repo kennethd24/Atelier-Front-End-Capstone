@@ -15,7 +15,7 @@ const AnswerEntry = ({ answer, question }) => {
       .catch((err) => console.error(err));
   };
 
-  const handleAnswerReport = (id, target) => {
+  const handleAnswerReport = (id) => {
     const report = {
       reported: true,
     };
@@ -40,14 +40,14 @@ const AnswerEntry = ({ answer, question }) => {
             setHelpful(helpful + 1);
             setClick(true);
           }}>
-            helpful? <u className="pointer">Yes</u> (
+            Helpful? <u className="pointer">Yes</u> (
             {helpful}
             )
             &nbsp;
           </span>
         ) : (
           <span>
-            helpful? <u className="pointer">Yes</u> (
+            Helpful? <u className="pointer">Yes</u> (
             {helpful}
             )
             &nbsp;

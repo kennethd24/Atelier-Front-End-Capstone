@@ -8,6 +8,8 @@ const QuestionList = ({ question }) => {
     results: [],
     moreAnswers: [],
   });
+  const [qHelpful, setqHelpful] = useState(question.question_helpfulness);
+  const [qClick, setqClick] = useState(false);
 
   const handleMoreAnswers = () => {
     setAnswers({
@@ -16,10 +18,18 @@ const QuestionList = ({ question }) => {
     });
   };
 
+  const handleQuestionHelpfulness = (id, help) => {
+    const questionHelp = {
+      questionHelpfulness: help + 1,
+    };
+    axios.put(`/api/qa/questions/${question.question_id}/helpful`, questionHelp)
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     axios.get(`/api/qa/questions/${question.question_id}/answers`)
       .then((response) => {
-        // console.log('answers', response.data);
+        console.log('answers', response.data);
         setAnswers({
           results: response.data.results.slice(0, 2),
           moreAnswers: response.data.results.slice(2),
@@ -34,8 +44,19 @@ const QuestionList = ({ question }) => {
     <div>
       <div>
         <span className="questions">Q:{question.question_body}</span>
-        <span className="addAnswer">Helpful?
-          <u>Yes</u> (#) <u>Add Answer</u>
+        <span className="addAnswer">Helpful? &nbsp;
+          {!qClick ?
+            <span>
+              <u onClick={() => {
+                handleQuestionHelpfulness(question.question_id, qHelpful);
+                setqHelpful(qHelpful + 1);
+                setqClick(true);
+              }}>
+                Yes
+              </u>{qHelpful})
+            </span> : <span><u>Yes</u> ({qHelpful}) </span>}
+          &nbsp;
+          <u>Add Answer</u>
         </span>
       </div>
       <div className="answerListScroll">
