@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,7 +9,6 @@ import Price from './Price';
 import StyleSelector from './StyleSelector';
 import SizeDropdown from './SizeDropdown';
 import QuantityDropdown from './QuantityDropdown';
-import SizeDropdownv2 from './SizeDropdownv2';
 
 const ProductInfo = (props) => {
   const {
@@ -27,8 +26,6 @@ const ProductInfo = (props) => {
     addToCart,
   } = props;
 
-  // const sizeDropdownRef = useRef(null);
-
   const [showAlert, setShowAlert] = useState(false);
 
   const [showCartBtn, setShowCartBtn] = useState(true);
@@ -42,24 +39,16 @@ const ProductInfo = (props) => {
         size,
         quantity,
       });
+
+      setSize(null);
+      setQuantity(null);
     }
   };
 
-
-  // useEffect(() => {
-    // console.log(sizeDropdownRef.current);
-    // const sizeBtnText = sizeDropdownRef.current.querySelector('button').textContent;
-
-    // if (sizeBtnText === 'OUT OF STOCK'
-    // || (size && !quantity)) {
-    //   setShowCartBtn(false);
-    // } else {
-    //   setShowCartBtn(true);
-    // }
-  // }, [currentProduct, styles, currentStyle, size, quantity]);
-
   useEffect(() => {
     setShowAlert(false);
+    setSize(null);
+    setQuantity(null);
   }, [currentStyle]);
 
   useEffect(() => {
@@ -89,19 +78,11 @@ const ProductInfo = (props) => {
         </Row>
         <Row className="mb-3">
           <Col xs={7}>
-            {/* <SizeDropdown
+            <SizeDropdown
               currentStyle={currentStyle}
               size={size}
               setSize={setSize}
-              sizeDropdownRef={sizeDropdownRef}
-            /> */}
-            <SizeDropdownv2
-              currentStyle={currentStyle}
-              size={size}
-              setSize={setSize}
-              // sizeDropdownRef={sizeDropdownRef}
               showAlert={showAlert}
-              showCartBtn={showCartBtn}
               setShowCartBtn={setShowCartBtn}
             />
           </Col>
