@@ -62,3 +62,17 @@
   flex-direction: row;
   text-align: center;
 }
+.ratingNumber {
+  font-size: 5vh;
+}
+.ratingbreakdown-side {
+ float: left;
+ width: 15%;
+}
+.ratingbreakdown-middle {
+  float: left;
+  width: 70%;
+}
+.ratingbreakdown-right {
+  text-align: center;
+}
