@@ -24,7 +24,11 @@ const Ratings = (props) => {
     if (Object.keys(metaData).length > 0) {
       return (
         Object.keys(metaData.characteristics).map((characteristic, index) => (
-          <Characteristics characteristic={characteristic} key={index} />
+          <Characteristics
+            characteristic={characteristic}
+            key={index}
+            objValue={metaData.characteristics}
+          />
         ))
       );
     }
@@ -105,7 +109,7 @@ const Ratings = (props) => {
           {progressbars(2)}
           {progressbars(1)}
         </div>
-        <div>
+        <div className="percentRecommend">
           {percentRecommend()}
           {' '}
           of reviews recommend the product
