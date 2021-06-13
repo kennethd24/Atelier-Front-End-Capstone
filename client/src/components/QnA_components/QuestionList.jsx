@@ -33,17 +33,30 @@ const QuestionList = ({ question }) => {
   return (
     <div>
       <div>
-        Q:{question.question_body}
+        <span className="questions">Q:{question.question_body}</span>
+        <span className="addAnswer">Helpful?
+          <u>Yes</u> (#) <u>Add Answer</u>
+        </span>
       </div>
-      <div>
-        {answers.results.map((answer, index) => (
+      <div className="answerListScroll">
+        {answers.results.map((answer) => (
           <AnswerEntry
             answer={answer}
-            key={index}
+            key={answer.answer_id}
+            question={question}
           />
         ))}
-        <input type="button" value="Load More Answers" onClick={handleMoreAnswers} />
+        {!answers.moreAnswers.length < 1 ?
+          (
+            <input
+              type="button"
+              value="Load More Answers"
+              onClick={handleMoreAnswers}
+            />
+          ) :
+          (null)}
       </div>
+      <hr />
     </div>
   );
 };
