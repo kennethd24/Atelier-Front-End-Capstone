@@ -43,8 +43,27 @@ const atelier = {
     const { id, count, sort } = req.params;
     const options = {
       method: 'get',
-      // url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/?product_id=${id}&count=1000`,
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews?product_id=${id}&count=${count}&sort=${sort}`,
+
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+    axios(options)
+      .then((response) => {
+        res.status(200).send(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).send(err);
+      });
+  },
+
+  updateHelpfulReview: (req, res) => {
+    const { id } = req.params;
+    const options = {
+      method: 'put',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/${id}/helpful`,
 
       headers: {
         Authorization: `${config.TOKEN}`,
