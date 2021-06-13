@@ -14,7 +14,11 @@ class App extends React.Component {
       currentItem: {},
       rating: 0,
       reviewsCount: 0,
+<<<<<<< HEAD
       metaData: [],
+=======
+      cart: [],
+>>>>>>> ff13b60... added a 'cart' state to App.jsx
     };
   }
 
@@ -120,14 +124,33 @@ class App extends React.Component {
     });
   }
 
+  addToCart = (item) => {
+    this.setState((prevState) => ({
+      cart: prevState.cart.concat(item),
+    }));
+  };
+
   render() {
     const {
+<<<<<<< HEAD
       currentItem, rating, reviewsCount, metaData,
+=======
+      currentItem,
+      rating,
+      reviewsCount,
+      cart,
+>>>>>>> ff13b60... added a 'cart' state to App.jsx
     } = this.state;
 
     return (
       <div>
-        <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+        <Overview
+          currentItem={currentItem}
+          rating={rating}
+          reviewsCount={reviewsCount}
+          cart={cart}
+          addToCart={this.addToCart}
+        />
         <RelatedItems
           currentItem={currentItem}
           rating={rating}
