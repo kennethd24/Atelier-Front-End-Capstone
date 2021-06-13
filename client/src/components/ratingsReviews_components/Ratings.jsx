@@ -98,12 +98,12 @@ const Ratings = (props) => {
       <div className="ratingbreakdown">
         Rating Breakdown
         <div>
-        {/* {allProgressBars()} */}
-        {progressbars(5)}
-        {progressbars(4)}
-        {progressbars(3)}
-        {progressbars(2)}
-        {progressbars(1)}
+          {/* {allProgressBars()} */}
+          {progressbars(5)}
+          {progressbars(4)}
+          {progressbars(3)}
+          {progressbars(2)}
+          {progressbars(1)}
         </div>
         <div>
           {percentRecommend()}
