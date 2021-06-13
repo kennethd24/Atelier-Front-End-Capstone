@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownItem from './DropdownItem';
 
 const SizeDropdown = (props) => {
-  const { currentStyle, size, setSize } = props;
+  const {
+    currentStyle,
+    size,
+    setSize,
+    sizeDropdownRef,
+  } = props;
 
   useEffect(() => {
     if (currentStyle) {
@@ -15,6 +20,33 @@ const SizeDropdown = (props) => {
   const [availableSizes, setAvailableSizes] = useState([]);
 
   const [active, setActive] = useState(null);
+
+  const [showMenu, setShowMenu] = useState(false);
+
+  const node = useRef();
+
+  const handleClickOutside = (e) => {
+    if (node.current.contains(e.target)) {
+      return;
+    }
+    setShowMenu(false);
+  };
+
+  const handleClick = () => {
+    setShowMenu(!showMenu);
+  };
+
+  useEffect(() => {
+    if (showMenu) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [showMenu]);
 
   const findSizes = () => {
     const skusArr = Object.values(currentStyle.skus);
@@ -45,21 +77,23 @@ const SizeDropdown = (props) => {
 
   if (active) {
     dropdown = (
-      <DropdownButton id="dropdown-item-button" title={size || 'SELECT SIZE'} variant="outline-dark" onSelect={onSelect} size="lg">
-        {
-          availableSizes.map((availableSize, index) => (
-            <DropdownItem
-              option={availableSize}
-              selected={size}
-              key={index}
-            />
-          ))
-        }
-      </DropdownButton>
+      <div ref={node}>
+        <DropdownButton id="size-dropdown" title={size || 'SELECT SIZE'} variant="outline-dark" onSelect={onSelect} size="lg" ref={sizeDropdownRef} show={showMenu} onClick={handleClick}>
+          {
+            availableSizes.map((availableSize, index) => (
+              <DropdownItem
+                option={availableSize}
+                selected={size}
+                key={index}
+              />
+            ))
+          }
+        </DropdownButton>
+      </div>
     );
   } else {
     dropdown = (
-      <DropdownButton id="dropdown-item-button" title="OUT OF STOCK" variant="outline-dark" size="lg" disabled />
+      <DropdownButton id="size-dropdown" title="OUT OF STOCK" variant="outline-dark" size="lg" disabled ref={sizeDropdownRef} />
     );
   }
 
