@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import Rating from 'react-rating';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 const ReviewList = (props) => {
