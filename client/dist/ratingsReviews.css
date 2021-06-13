@@ -63,6 +63,9 @@
   flex-direction: row;
   text-align: center;
 }
+.dropdown-sortby-button{
+  width: max-content;
+}
 .ratingNumber {
   font-size: 5vh;
 }

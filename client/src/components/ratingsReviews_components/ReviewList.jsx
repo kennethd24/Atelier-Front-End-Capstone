@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import Rating from 'react-rating';
+import Button from 'react-bootstrap/Button'
 
 const ReviewList = (props) => {
   const {
@@ -70,9 +71,10 @@ const ReviewList = (props) => {
       <div>Need to Add Photos(bootstrap?)</div>
       <div className="reviewListEntry-footer">
         Was this review helpful?
-        Yes(
-        {helpfulness}
-        )
+          Yes(
+          {helpfulness}
+          )
+          <Button variant="outline-secondary">Yes</Button>{' '}
       </div>
     </div>
   );
