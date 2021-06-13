@@ -14,11 +14,8 @@ class App extends React.Component {
       currentItem: {},
       rating: 0,
       reviewsCount: 0,
-<<<<<<< HEAD
       metaData: [],
-=======
       cart: [],
->>>>>>> ff13b60... added a 'cart' state to App.jsx
     };
   }
 
@@ -132,14 +129,11 @@ class App extends React.Component {
 
   render() {
     const {
-<<<<<<< HEAD
-      currentItem, rating, reviewsCount, metaData,
-=======
       currentItem,
       rating,
       reviewsCount,
+      metaData,
       cart,
->>>>>>> ff13b60... added a 'cart' state to App.jsx
     } = this.state;
 
     return (
