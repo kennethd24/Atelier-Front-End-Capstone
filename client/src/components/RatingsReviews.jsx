@@ -6,7 +6,9 @@ import ReviewList from './ratingsReviews_components/ReviewList';
 import Ratings from './ratingsReviews_components/Ratings';
 
 const RatingsReviews = (props) => {
-  const { currentItem, reviewsCount, rating, metaData } = props;
+  const {
+    currentItem, reviewsCount, rating, metaData,
+  } = props;
   const { id, name } = currentItem;
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);

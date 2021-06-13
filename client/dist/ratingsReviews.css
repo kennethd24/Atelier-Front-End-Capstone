@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   border: 1px solid #2d2d2d;
+  margin: 10px;
 }
 .ratingsReviewList-container {
   display: flex;
@@ -61,4 +62,47 @@
   display: flex;
   flex-direction: row;
   text-align: center;
+}
+.ratingNumber {
+  font-size: 5vh;
+}
+.ratingbreakdown-side {
+ float: left;
+ width: 20%;
+ /* overflow: hidden */
+}
+.ratingbreakdown-middle {
+  float: left;
+  width: 70%;
+}
+.ratingbreakdown-right {
+  text-align: center;
+}
+.percentRecommend {
+  margin: 10px;
+}
+.characteristic-entry {
+  display: flex;
+  flex-direction: row;
+}
+.characteristic-left {
+  float: left;
+  width: 20%;
+}
+.characteristic-right {
+  float: left;
+  width: 70%;
+}
+
+@media (max-width: 1000px) {
+  .ratingbreakdown-side, .ratingbreakdown-middle, .characteristic-left, .characteristic-right  {
+    width: 100%;
+  }
+  .characteristic-entry {
+    flex-direction: column;
+  }
+  /* Hide the right column on small screens */
+  .ratingbreakdown-right {
+    display: none;
+  }
 }
