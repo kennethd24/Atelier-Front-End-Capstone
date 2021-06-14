@@ -90,7 +90,7 @@ const Ratings = (props) => {
     <div className="ratingsInner-container">
       <div className="ratings-header">
         <span className="ratingNumber">
-          {rating}
+          {rating.toFixed(1)}
         </span>
         <Rating
           initialRating={rating}
@@ -98,6 +98,10 @@ const Ratings = (props) => {
           emptySymbol="far fa-star"
           fullSymbol="fas fa-star"
         />
+        {' '}
+        {totalRatings}
+        {' '}
+        ratings
       </div>
       <div className="ratingbreakdown">
         Rating Breakdown

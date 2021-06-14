@@ -23,7 +23,7 @@
 }
 .reviews-container {
   border: 1px solid #2d2d2d;
-  height: 650px;
+  height: 750px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -46,8 +46,9 @@
 .reviewListEntry-recommendation {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  border: 1px solid #2d2d2d;
+  justify-content: left;
+  /* margin-left: 5px;
+  border: 1px solid #2d2d2d; */
 }
 .reviewListEntry-footer {
   display: flex;
@@ -69,6 +70,17 @@
 .reviewListEntry-response {
   border: 1px solid #2d2d2d;
   background-color: rgba(0, 0, 255, .2);
+}
+.reviews-photo-container {
+  display: flex;
+  flex-direction: row;
+}
+.reviews-photo-single {
+  object-fit: cover;
+  height: 6vh;
+  width: 8vh;
+  padding: 1vh;
+  cursor: pointer;
 }
 .sortBy-header {
   display: flex;
