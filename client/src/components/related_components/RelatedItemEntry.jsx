@@ -5,6 +5,7 @@ import Price from './Price';
 import ProductInfo from './ProductInfo';
 
 const RelatedItemEntry = (props) => {
+  // console.log('relatedItemEntry fired');
   const {
     relatedItem,
     // selectedItem,

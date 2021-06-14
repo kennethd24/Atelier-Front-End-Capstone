@@ -3,6 +3,7 @@ import axios from 'axios';
 import RelatedItemEntry from './RelatedItemEntry';
 
 const RelatedItemsComp = (props) => {
+  // console.log('relatedItemsComp fired');
   const {
     selectedItem,
     // selectedRating,

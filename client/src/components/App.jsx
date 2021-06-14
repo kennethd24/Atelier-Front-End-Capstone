@@ -17,6 +17,8 @@ class App extends React.Component {
       metaData: [],
       defaultStyle: {},
       cart: [],
+      styles: [],
+      stateCount: 0,
     };
   }
 
@@ -69,9 +71,10 @@ class App extends React.Component {
     if (cb) {
       cb(roundedRating);
     } else {
-      this.setState({
+      this.setState((prevState) => ({
         rating: roundedRating,
-      });
+        stateCount: prevState.stateCount + 1,
+      }));
     }
   };
 
@@ -96,6 +99,11 @@ class App extends React.Component {
             metaData: res.data,
           });
         })
+        .then(() => {
+          this.setState((prevState) => ({
+            stateCount: prevState.stateCount + 1,
+          }));
+        })
         .catch((err) => {
           console.log('err getting metadata currentItem', err);
         });
@@ -111,6 +119,11 @@ class App extends React.Component {
            reviewsCount: results.data.results.length,
          });
        })
+       .then(() => {
+         this.setState((prevState) => ({
+           stateCount: prevState.stateCount + 1,
+         }));
+       })
        .catch((err) => {
          console.log('getTotalReviews: ', err);
        });
@@ -120,6 +133,7 @@ class App extends React.Component {
   handleRelatedClick = (relatedItem) => {
     this.setState({
       currentItem: relatedItem,
+      stateCount: 0,
     });
   };
 
@@ -130,9 +144,10 @@ class App extends React.Component {
       .then((res) => {
         const stylesArr = res.data.results;
         if (!cb) {
-          this.setState({
+          this.setState((prevState) => ({
             styles: stylesArr,
-          });
+            stateCount: prevState.stateCount + 1,
+          }));
         }
         this.setDefault(stylesArr, cb);
       })
@@ -155,9 +170,10 @@ class App extends React.Component {
     if (cb) {
       cb(defaultStyle);
     } else {
-      this.setState({
+      this.setState((prevState) => ({
         defaultStyle,
-      });
+        stateCount: prevState.stateCount + 1,
+      }));
     }
   };
 
@@ -175,8 +191,15 @@ class App extends React.Component {
       reviewsCount,
       metaData,
       cart,
+      styles,
+      stateCount,
     } = this.state;
 
+    if (stateCount < 5) {
+      return (
+        <div>Loading...</div>
+      );
+    }
     return (
       <div>
         <Overview
