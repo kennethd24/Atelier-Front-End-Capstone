@@ -15,7 +15,10 @@ class App extends React.Component {
       rating: 0,
       reviewsCount: 0,
       metaData: [],
+      defaultStyle: {},
       cart: [],
+      styles: [],
+      stateCount: 0,
     };
   }
 
@@ -32,6 +35,7 @@ class App extends React.Component {
       || (prevState.currentItem.id !== currentItem.id)) {
       this.getMetadata();
       this.getTotalReviews();
+      this.getStyles();
       this.getMetadataCurrentItem();
     }
   }
@@ -64,18 +68,19 @@ class App extends React.Component {
     const avgRating = sumproduct / count;
     const roundedRating = Number((Math.round(avgRating * 4) / 4).toFixed(2));
 
-    this.setState({
-      rating: roundedRating,
-    });
     if (cb) {
       cb(roundedRating);
+    } else {
+      this.setState((prevState) => ({
+        rating: roundedRating,
+        stateCount: prevState.stateCount + 1,
+      }));
     }
   };
 
   getMetadata = (id, cb) => {
     const { currentItem } = this.state;
     const itemId = id || currentItem.id;
-
     axios.get(`/api/reviews/meta/${itemId}`)
       .then((res) => {
         this.calcAvgRating(res.data.ratings, cb);
@@ -94,6 +99,11 @@ class App extends React.Component {
             metaData: res.data,
           });
         })
+        .then(() => {
+          this.setState((prevState) => ({
+            stateCount: prevState.stateCount + 1,
+          }));
+        })
         .catch((err) => {
           console.log('err getting metadata currentItem', err);
         });
@@ -109,6 +119,11 @@ class App extends React.Component {
            reviewsCount: results.data.results.length,
          });
        })
+       .then(() => {
+         this.setState((prevState) => ({
+           stateCount: prevState.stateCount + 1,
+         }));
+       })
        .catch((err) => {
          console.log('getTotalReviews: ', err);
        });
@@ -118,8 +133,49 @@ class App extends React.Component {
   handleRelatedClick = (relatedItem) => {
     this.setState({
       currentItem: relatedItem,
+      stateCount: 0,
     });
-  }
+  };
+
+  getStyles = (id, cb) => {
+    const { currentItem } = this.state;
+    const itemId = id || currentItem.id;
+    axios.get(`/api/products/${itemId}/styles`)
+      .then((res) => {
+        const stylesArr = res.data.results;
+        if (!cb) {
+          this.setState((prevState) => ({
+            styles: stylesArr,
+            stateCount: prevState.stateCount + 1,
+          }));
+        }
+        this.setDefault(stylesArr, cb);
+      })
+      .catch((err) => {
+        console.log('error in getStyles', err);
+      });
+  };
+
+  setDefault = (stylesArr, cb) => {
+    let defaultStyle;
+
+    for (let i = 0; i < stylesArr.length; i++) {
+      if (stylesArr[i]['default?']) {
+        defaultStyle = stylesArr[i];
+      }
+    }
+
+    if (!defaultStyle) { [defaultStyle] = stylesArr; }
+
+    if (cb) {
+      cb(defaultStyle);
+    } else {
+      this.setState((prevState) => ({
+        defaultStyle,
+        stateCount: prevState.stateCount + 1,
+      }));
+    }
+  };
 
   addToCart = (item) => {
     this.setState((prevState) => ({
@@ -130,12 +186,20 @@ class App extends React.Component {
   render() {
     const {
       currentItem,
+      defaultStyle,
       rating,
       reviewsCount,
       metaData,
       cart,
+      styles,
+      stateCount,
     } = this.state;
 
+    if (stateCount < 5) {
+      return (
+        <div>Loading...</div>
+      );
+    }
     return (
       <div>
         <Overview
@@ -146,10 +210,12 @@ class App extends React.Component {
           addToCart={this.addToCart}
         />
         <RelatedItems
-          currentItem={currentItem}
-          rating={rating}
+          selectedItem={currentItem}
+          selectedRating={rating}
+          selectedDefault={defaultStyle}
           handleClick={this.handleRelatedClick}
           getRating={this.getMetadata}
+          getDefault={this.getStyles}
         />
         <QuestionsAnswers currentItem={currentItem} />
         <RatingsReviews
