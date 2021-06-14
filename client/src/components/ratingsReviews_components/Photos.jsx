@@ -5,10 +5,9 @@ import Button from 'react-bootstrap/Button';
 const Photos = (props) => {
   const [modalShow, setModalShow] = useState(false);
 
-  function MyVerticallyCenteredModal(props) {
+  function MyVerticallyCenteredModal() {
     return (
       <Modal
-        {...props}
         size="xl"
         dialogClassName="modal-90w"
         centered
