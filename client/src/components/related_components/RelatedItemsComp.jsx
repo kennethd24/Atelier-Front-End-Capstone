@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ProductCard from './ProductCard';
+import RelatedItemEntry from './RelatedItemEntry';
 
 const RelatedItemsComp = (props) => {
+  // console.log('relatedItemsComp fired');
   const {
-    currentItem,
-    selectedRating,
+    selectedItem,
+    // selectedRating,
+    // selectedDefault,
     handleClick,
     getRating,
+    getDefault,
   } = props;
+
   const [relatedItems, setRelatedItems] = useState([]);
 
   const getRelatedItems = (arr) => {
     const items = [];
-    // console.log('arr', arr);
-    // console.log('relateditems', relatedItems);
     arr.map((item) => (
       axios.get(`/api/products/${item}`)
         .then((results) => {
           items.push(results.data);
         })
         .then(() => {
-          setRelatedItems([...items]);
+          if (items.length === arr.length) {
+            setRelatedItems([...items]);
+          }
         })
         .catch((err) => {
           console.log('err in getRelatedItems', err);
@@ -30,7 +34,7 @@ const RelatedItemsComp = (props) => {
   };
 
   const getRelatedIds = (id) => {
-    if (Object.keys(currentItem).length > 0) {
+    if (Object.keys(selectedItem).length > 0) {
       axios.get(`/api/related/${id}`)
         .then((results) => {
           const uniq = [...new Set(results.data)];
@@ -43,19 +47,20 @@ const RelatedItemsComp = (props) => {
   };
 
   useEffect(() => {
-    getRelatedIds(currentItem.id);
-  }, [currentItem]);
+    getRelatedIds(selectedItem.id);
+  }, [selectedItem]);
 
   return (
     <div className="related-items-carousel">
       {relatedItems.map((item) => (
-        <ProductCard
+        <RelatedItemEntry
           relatedItem={item}
-          selectedRating={selectedRating}
-          selectedItem={currentItem}
-          key={item.id}
+          // selectedRating={selectedRating}
+          selectedItem={selectedItem}
           handleClick={handleClick}
           getRating={getRating}
+          getDefault={getDefault}
+          key={item.id}
         />
       ))}
     </div>
