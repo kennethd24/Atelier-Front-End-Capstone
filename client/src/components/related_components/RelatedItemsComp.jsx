@@ -22,7 +22,9 @@ const RelatedItemsComp = (props) => {
           items.push(results.data);
         })
         .then(() => {
-          setRelatedItems([...items]);
+          if (items.length === arr.length) {
+            setRelatedItems([...items]);
+          }
         })
         .catch((err) => {
           console.log('err in getRelatedItems', err);

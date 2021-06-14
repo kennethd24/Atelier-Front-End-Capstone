@@ -29,9 +29,6 @@ const RelatedItemEntry = (props) => {
     getDefault(itemId, ((results) => {
       setDefaultStyle(results);
     }));
-  }, [relatedItem]);
-
-  useEffect(() => {
     getRating(itemId, ((results) => {
       setRating(results);
     }));

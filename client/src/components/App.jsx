@@ -66,18 +66,18 @@ class App extends React.Component {
     const avgRating = sumproduct / count;
     const roundedRating = Number((Math.round(avgRating * 4) / 4).toFixed(2));
 
-    this.setState({
-      rating: roundedRating,
-    });
     if (cb) {
       cb(roundedRating);
+    } else {
+      this.setState({
+        rating: roundedRating,
+      });
     }
   };
 
   getMetadata = (id, cb) => {
     const { currentItem } = this.state;
     const itemId = id || currentItem.id;
-
     axios.get(`/api/reviews/meta/${itemId}`)
       .then((res) => {
         this.calcAvgRating(res.data.ratings, cb);
@@ -126,13 +126,14 @@ class App extends React.Component {
   getStyles = (id, cb) => {
     const { currentItem } = this.state;
     const itemId = id || currentItem.id;
-
     axios.get(`/api/products/${itemId}/styles`)
       .then((res) => {
         const stylesArr = res.data.results;
-        this.setState({
-          styles: stylesArr,
-        });
+        if (!cb) {
+          this.setState({
+            styles: stylesArr,
+          });
+        }
         this.setDefault(stylesArr, cb);
       })
       .catch((err) => {
