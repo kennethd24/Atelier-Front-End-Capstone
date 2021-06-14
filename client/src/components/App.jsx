@@ -33,6 +33,7 @@ class App extends React.Component {
       || (prevState.currentItem.id !== currentItem.id)) {
       this.getMetadata();
       this.getTotalReviews();
+      this.getStyles();
     }
   }
 

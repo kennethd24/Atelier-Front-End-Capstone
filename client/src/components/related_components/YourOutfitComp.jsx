@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-import ProductCard from './ProductCard';
+import React, { useState } from 'react';
+import YourOutfitEntry from './YourOutfitEntry';
 
 const YourOutfitComp = (props) => {
   const {
     selectedItem,
     selectedRating,
-    selectedDefault
+    selectedDefault,
   } = props;
 
   const [yourOutfit, setYourOutfit] = useState([]);
@@ -15,7 +14,22 @@ const YourOutfitComp = (props) => {
   const handleAdd = () => {
     if (!outfitIds.includes(selectedItem.id)) {
       setOutfitIds([...outfitIds, selectedItem.id]);
+      selectedItem.rating = selectedRating;
+      selectedItem.photos = selectedDefault.photos;
+      selectedItem.styleName = selectedDefault.name;
+      selectedItem.salePrice = selectedDefault.sale_price;
+      selectedItem.origPrice = selectedDefault.original_price;
       setYourOutfit([...yourOutfit, selectedItem]);
+    }
+  };
+
+  const handleRemove = (id) => {
+    if (outfitIds.length === 1) {
+      setOutfitIds([]);
+      setYourOutfit([]);
+    } else {
+      setOutfitIds(outfitIds.filter((outfitId) => outfitId !== id));
+      setYourOutfit(yourOutfit.filter((outfitItem) => outfitItem.id !== id));
     }
   };
 
@@ -23,8 +37,9 @@ const YourOutfitComp = (props) => {
     <div className="your-outfit-carousel">
       <button type="button" onClick={handleAdd}>Add Selected Item to Your Outfit</button>
       {yourOutfit.map((item) => (
-        <ProductCard
-          relatedItem={item}
+        <YourOutfitEntry
+          item={item}
+          handleRemove={handleRemove}
           key={item.id}
         />
       ))}

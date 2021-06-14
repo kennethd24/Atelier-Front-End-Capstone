@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import ProductCard from './ProductCard';
-// import RelatedItemEntry from './RelatedItemEntry';
-import RelatedItemEntry from './RelatedItemEntry2';
+import RelatedItemEntry from './RelatedItemEntry';
 
 const RelatedItemsComp = (props) => {
   const {
@@ -18,18 +16,13 @@ const RelatedItemsComp = (props) => {
 
   const getRelatedItems = (arr) => {
     const items = [];
-    arr.map((item, i) => (
+    arr.map((item) => (
       axios.get(`/api/products/${item}`)
         .then((results) => {
           items.push(results.data);
         })
-        // .then(() => {
-        //   setRelatedItems([...items]);
-        // })
         .then(() => {
-          if (i === arr.length - 1) {
-            setRelatedItems([...items]);
-          }
+          setRelatedItems([...items]);
         })
         .catch((err) => {
           console.log('err in getRelatedItems', err);
@@ -49,13 +42,6 @@ const RelatedItemsComp = (props) => {
         });
     }
   };
-
-  // const setDefault = (arr) => {
-  //   console.log('arr in setDefault', arr);
-  //   arr.forEach((relatedItem) => {
-
-  //   })
-  // };
 
   useEffect(() => {
     getRelatedIds(selectedItem.id);
