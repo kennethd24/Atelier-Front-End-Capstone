@@ -29,7 +29,12 @@ const RatingsReviews = (props) => {
 
   useEffect(() => {
     getCountReviews();
-  }, [id, count, sortState, setSortState]);
+  }, [count, sortState, setSortState]);
+
+  useEffect(() => {
+    setCount(2);
+    getCountReviews();
+  }, [id]);
 
   return (
     <div className="ratingsReview-container">
