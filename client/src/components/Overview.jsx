@@ -3,7 +3,13 @@ import axios from 'axios';
 import ProductInfo from './overview_components/ProductInfo';
 
 const Overview = (props) => {
-  const { currentItem, rating, reviewsCount } = props;
+  const {
+    currentItem,
+    rating,
+    reviewsCount,
+    cart,
+    addToCart,
+  } = props;
 
   useEffect(() => {
     // reset the current style when a new product is clicked
@@ -88,6 +94,7 @@ const Overview = (props) => {
             setSize={setSize}
             quantity={quantity}
             setQuantity={setQuantity}
+            addToCart={addToCart}
           />
           )}
       </div>
