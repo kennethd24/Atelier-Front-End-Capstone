@@ -9,38 +9,70 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   border: 1px solid #2d2d2d;
 }
 
 .related-items-carousel, .your-outfit-carousel {
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  align-items: start;
   border: 1px solid #2d2d2d;
+}
+
+.related-items-carousel {
+  justify-content: space-between;
+}
+
+.your-outfit-carousel {
+  justify-content: flex-start;
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 24%;
   height: 100%;
   padding: 7px;
-  border: 1px solid #2d2d2d;
+  border: 1px solid #ff0000;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .product-photo-wrapper {
   flex: 2;
-  /* height: 100%;
-  width: 100% */
+  display: flex;
+  min-height: 200px;
+  max-height: 250px;
+  width: 100%;
+  align-items: center;
 }
 
 .product-info-wrapper {
   flex: 1;
-  /* height: 100%;
-  width: 100%; */
+  min-height: 50px;
+  max-height: 50px;
 }
 
 .product-photo {
-  height: 225px;
+  height: 100%;
+  max-height: 200px;
+  display: block;
   width: 100%;
+}
+
+.compare-button {
+  flex: 1;
+  justify-content: end;
+}
+
+.your-outfit-add {
+  width: 25%;
+  height: 100%;
+  border: 1px solid #2d2d2d;
+  padding: 7px;
+  cursor: pointer;
 }

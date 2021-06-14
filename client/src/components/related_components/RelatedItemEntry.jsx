@@ -22,8 +22,6 @@ const RelatedItemEntry = (props) => {
     e.preventDefault();
     // console.log('selectedChars', selectedChars);
     // console.log('relatedChars', relatedChars);
-    // console.log('rating in RE', rating);
-    // console.log('typeofrating in RE', typeof rating);
   };
 
   useEffect(() => {
@@ -35,6 +33,11 @@ const RelatedItemEntry = (props) => {
     }));
   }, [relatedItem]);
 
+  if (Object.keys(defaultStyle) < 1) {
+    return (
+      <div>Product Loading</div>
+    );
+  }
   return (
     <div className="product-card" onClick={() => handleClick(relatedItem)} role="button" tabIndex="0" onKeyPress={() => handleClick(relatedItem)}>
       <Image photos={defaultStyle.photos} />

@@ -191,39 +191,39 @@ class App extends React.Component {
       reviewsCount,
       metaData,
       cart,
-      styles,
       stateCount,
+      styles,
     } = this.state;
 
-    if (stateCount < 5) {
-      return (
-        <div>Loading...</div>
-      );
-    }
     return (
       <div>
-        <Overview
-          currentItem={currentItem}
-          rating={rating}
-          reviewsCount={reviewsCount}
-          cart={cart}
-          addToCart={this.addToCart}
-        />
-        <RelatedItems
-          selectedItem={currentItem}
-          selectedRating={rating}
-          selectedDefault={defaultStyle}
-          handleClick={this.handleRelatedClick}
-          getRating={this.getMetadata}
-          getDefault={this.getStyles}
-        />
-        <QuestionsAnswers currentItem={currentItem} />
-        <RatingsReviews
-          currentItem={currentItem}
-          rating={rating}
-          reviewsCount={reviewsCount}
-          metaData={metaData}
-        />
+        {(Object.keys(defaultStyle).length > 0) &&
+          (
+          <div>
+            <Overview
+              currentItem={currentItem}
+              rating={rating}
+              reviewsCount={reviewsCount}
+              cart={cart}
+              addToCart={this.addToCart}
+            />
+            <RelatedItems
+              selectedItem={currentItem}
+              selectedRating={rating}
+              selectedDefault={defaultStyle}
+              handleClick={this.handleRelatedClick}
+              getRating={this.getMetadata}
+              getDefault={this.getStyles}
+            />
+            <QuestionsAnswers currentItem={currentItem} />
+            <RatingsReviews
+              currentItem={currentItem}
+              rating={rating}
+              reviewsCount={reviewsCount}
+              metaData={metaData}
+            />
+          </div>
+          )}
       </div>
     );
   }

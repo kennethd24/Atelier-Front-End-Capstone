@@ -9,8 +9,8 @@ const ProductInfo = (props) => {
 
   return (
     <div className="product-info-wrapper">
-      <div>{category}</div>
-      <div>
+      <div className="product-info-category">{category}</div>
+      <div className="product-info-name">
         {mainName}
         -
         {styleName}

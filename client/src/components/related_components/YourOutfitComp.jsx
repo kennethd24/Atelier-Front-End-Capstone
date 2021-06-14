@@ -35,7 +35,7 @@ const YourOutfitComp = (props) => {
 
   return (
     <div className="your-outfit-carousel">
-      <button type="button" onClick={handleAdd}>Add Selected Item to Your Outfit</button>
+      <button type="button" onClick={handleAdd} className="your-outfit-add">Add Selected Item to Your Outfit</button>
       {yourOutfit.map((item) => (
         <YourOutfitEntry
           item={item}
