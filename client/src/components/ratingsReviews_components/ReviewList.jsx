@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { useState } from 'react';
 import Rating from 'react-rating';
 import axios from 'axios';
 import Photos from './Photos';
 
 const ReviewList = (props) => {
+  const { review } = props;
   const {
     response,
     date,
@@ -16,7 +17,9 @@ const ReviewList = (props) => {
     reviewer_name,
     helpfulness,
     photos,
-  } = props.review;
+  } = review;
+
+  const { helpfulClicked, setHelpfulClicked } = useState(false);
 
   const showResponse = () => {
     if (response !== null && response !== '') {
@@ -41,13 +44,17 @@ const ReviewList = (props) => {
       </div>
     ) : null);
   const addHelpful = () => {
+    // console.log(helpfulClicked);
+    // if (helpfulClicked === false) {
     axios.put(`/api/reviews2/${review_id}/helpful`)
       .then(() => {
         props.getCountReviews();
+        // setHelpfulClicked(true);
       })
       .catch((err) => {
         console.log('addHelpful: ', err);
       });
+    // }
   };
   const showPhotos = () => {
     if (photos.length > 0) {
