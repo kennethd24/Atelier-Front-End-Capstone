@@ -54,28 +54,26 @@ const Ratings = (props) => {
     }
   };
   const progressbars = (star) => {
-    if (metaData.ratings) {
-      if (totalRatings > 0) {
-        const now = (metaData.ratings[star] / totalRatings) * 100;
-        const checkZeroReviews = Number.isNaN(now);
-        const zeroBar = <ProgressBar variant="success" now={0} />;
-        const progressInstance = <ProgressBar variant="success" now={now} />;
-        return (
-          <>
-            <div className="ratingbreakdown-side">
-              {star}
-              {' '}
-              Star
-            </div>
-            <div className="ratingbreakdown-middle">
-              {checkZeroReviews ? zeroBar : progressInstance}
-            </div>
-            <div className="ratingbreakdown-right">
-              {metaData.ratings[star] || '0'}
-            </div>
-          </>
-        );
-      }
+    if (metaData.ratings && totalRatings > 0) {
+      const now = (metaData.ratings[star] / totalRatings) * 100;
+      const checkZeroReviews = Number.isNaN(now);
+      const zeroBar = <ProgressBar variant="success" now={0} />;
+      const progressInstance = <ProgressBar variant="success" now={now} />;
+      return (
+        <>
+          <div className="ratingbreakdown-side">
+            {star}
+            {' '}
+            Star
+          </div>
+          <div className="ratingbreakdown-middle">
+            {checkZeroReviews ? zeroBar : progressInstance}
+          </div>
+          <div className="ratingbreakdown-right">
+            {metaData.ratings[star] || '0'}
+          </div>
+        </>
+      );
     }
   };
 
