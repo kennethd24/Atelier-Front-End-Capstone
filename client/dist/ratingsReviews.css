@@ -110,15 +110,16 @@
 }
 .characteristic-entry {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .characteristic-left {
   float: left;
   width: 20%;
 }
 .characteristic-right {
-  float: left;
-  width: 70%;
+  float: right;
+  width: 90%;
+  padding-inline-start: 1vh;
 }
 
 @media (max-width: 1000px) {
