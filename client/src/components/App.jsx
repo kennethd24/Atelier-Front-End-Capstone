@@ -15,8 +15,8 @@ class App extends React.Component {
       rating: 0,
       reviewsCount: 0,
       metaData: [],
-      styles: [],
       defaultStyle: {},
+      cart: [],
     };
   }
 
@@ -34,6 +34,7 @@ class App extends React.Component {
       this.getMetadata();
       this.getTotalReviews();
       this.getStyles();
+      this.getMetadataCurrentItem();
     }
   }
 
@@ -41,7 +42,7 @@ class App extends React.Component {
     axios.get('/api/products')
       .then((res) => {
         this.setState({
-          currentItem: res.data[1],
+          currentItem: res.data[0],
           // currentItem: res.data[0] changed for better dummy review data
         });
       })
@@ -80,13 +81,25 @@ class App extends React.Component {
     axios.get(`/api/reviews/meta/${itemId}`)
       .then((res) => {
         this.calcAvgRating(res.data.ratings, cb);
-        this.setState({
-          metaData: res.data,
-        });
       })
       .catch((err) => {
         console.log('err getting metadata', err);
       });
+  };
+
+  getMetadataCurrentItem = () => {
+    const { currentItem } = this.state;
+    if (Object.keys(currentItem).length > 0) {
+      axios.get(`/api/reviews/meta/${currentItem.id}`)
+        .then((res) => {
+          this.setState({
+            metaData: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log('err getting metadata currentItem', err);
+        });
+    }
   };
 
  getTotalReviews = () => {
@@ -99,7 +112,7 @@ class App extends React.Component {
          });
        })
        .catch((err) => {
-         console.log(err);
+         console.log('getTotalReviews: ', err);
        });
    }
  };
@@ -147,14 +160,31 @@ class App extends React.Component {
     }
   };
 
+  addToCart = (item) => {
+    this.setState((prevState) => ({
+      cart: prevState.cart.concat(item),
+    }));
+  };
+
   render() {
     const {
-      currentItem, rating, reviewsCount, metaData, styles, defaultStyle,
+      currentItem,
+      defaultStyle,
+      rating,
+      reviewsCount,
+      metaData,
+      cart,
     } = this.state;
 
     return (
       <div>
-        <Overview currentItem={currentItem} rating={rating} reviewsCount={reviewsCount} />
+        <Overview
+          currentItem={currentItem}
+          rating={rating}
+          reviewsCount={reviewsCount}
+          cart={cart}
+          addToCart={this.addToCart}
+        />
         <RelatedItems
           selectedItem={currentItem}
           selectedRating={rating}

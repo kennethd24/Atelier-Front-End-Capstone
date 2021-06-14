@@ -1,0 +1,24 @@
+.answerListScroll {
+  max-height: 40vh;
+  overflow: auto;
+  height: 15vh;
+}
+
+.questions {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.questionList {
+  max-height: 100vh;
+  overflow: auto;
+  height: 65.5vh;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.addAnswer {
+  float: right;
+}
