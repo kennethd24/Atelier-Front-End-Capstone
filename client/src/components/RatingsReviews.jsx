@@ -61,7 +61,12 @@ const RatingsReviews = (props) => {
                 </div>
                 <div className="reviews-container">
                   {reviews.map((review) => (
-                    <ReviewList rating={rating} review={review} key={review.review_id} />
+                    <ReviewList
+                      rating={rating}
+                      review={review}
+                      key={review.review_id}
+                      getCountReviews={getCountReviews}
+                    />
                   ))}
                 </div>
                 <div className="buttons-container">
