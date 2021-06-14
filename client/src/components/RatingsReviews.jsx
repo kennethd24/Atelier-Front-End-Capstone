@@ -32,6 +32,7 @@ const RatingsReviews = (props) => {
   }, [count, sortState, setSortState]);
 
   useEffect(() => {
+    setReviews([]);
     setCount(2);
     getCountReviews();
   }, [id]);
