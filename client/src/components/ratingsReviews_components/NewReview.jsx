@@ -5,6 +5,7 @@ import {
 import Rating from 'react-rating';
 import DisplayCharNewReview from './DisplayCharNewReview';
 import ReviewBody from './ReviewBody';
+import AddPhotos from './AddPhotos';
 
 const NewReview = (props) => {
   const {
@@ -180,16 +181,7 @@ const NewReview = (props) => {
               <FormControl id="summary" value={submission.summary} onChange={(event) => handleChange(event)} maxLength={60} aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Example: Best purchase ever!" />
             </InputGroup>
           </Form.Row>
-          <Form.Row>
-            <ReviewBody submission={submission} handleChange={handleChange} />
-            {/* <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text>Review Body*</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl id="body" value={submission.body} onChange={(event) => handleChange(event)} maxLength={1000} required as="textarea" aria-label="With textarea" placeholder="Why did you like the product or not?" />
-            </InputGroup> */}
-
-          </Form.Row>
+          <ReviewBody submission={submission} handleChange={handleChange} />
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>Email*</Form.Label>
@@ -198,7 +190,6 @@ const NewReview = (props) => {
                 For authentication reasons, you will not be emailed
               </Form.Text>
             </Form.Group>
-
             <Form.Group as={Col}>
               <Form.Label>Nickname*</Form.Label>
               <Form.Control id="name" value={submission.name} onChange={(event) => handleChange(event)} maxLength={60} required type="nickname" placeholder="Example: jackson11!" />
@@ -207,15 +198,9 @@ const NewReview = (props) => {
               </Form.Text>
             </Form.Group>
           </Form.Row>
-          <Form.Group>
-            <Form.Label>Photo URL</Form.Label>
-            <InputGroup className="uploadPhotos">
-              <InputGroup.Text id="basic-addon3">
-                Add URL
-              </InputGroup.Text>
-              <FormControl id="photos" />
-            </InputGroup>
-          </Form.Group>
+          <Form.Row>
+            <AddPhotos submission={submission} setSubmission={setSubmission} />
+          </Form.Row>
           <Button variant="primary" type="submit">
             Submit
           </Button>
