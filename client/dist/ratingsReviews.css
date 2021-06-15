@@ -3,7 +3,6 @@
   flex-direction: column;
   width: 100%;
   border: 1px solid #2d2d2d;
-  margin: 10px;
 }
 .ratingsReviewList-container {
   display: flex;
@@ -23,7 +22,7 @@
 }
 .reviews-container {
   border: 1px solid #2d2d2d;
-  height: 750px;
+  height: 650px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -77,8 +76,8 @@
 }
 .reviews-photo-single {
   object-fit: cover;
-  height: 6vh;
-  width: 8vh;
+  height: 8vh;
+  width: 10vh;
   padding: 1vh;
   cursor: pointer;
 }

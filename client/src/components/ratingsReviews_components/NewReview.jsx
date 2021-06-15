@@ -5,7 +5,6 @@ import {
 
 const NewReview = (props) => {
   const { show, onHide, name } = props;
-
   return (
     <Modal
       show={show}
@@ -46,8 +45,8 @@ const NewReview = (props) => {
               <Form.Label>Do you recommend this product?*</Form.Label>
               {['radio'].map((type) => (
                 <div key={`inline-${type}`} className="mb-3">
-                  <Form.Check inline label="Yes" name="group1" type={type} id={`inline-${type}-Yes`} />
-                  <Form.Check inline label="No" name="group1" type={type} id={`inline-${type}-No`} />
+                  <Form.Check inline label="Yes" name="group2" type={type} id={`inline-${type}-Yes`} />
+                  <Form.Check inline label="No" name="group2" type={type} id={`inline-${type}-No`} />
                 </div>
               ))}
             </Form.Group>
@@ -58,11 +57,11 @@ const NewReview = (props) => {
               <Form.Label>Characteristics*</Form.Label>
               {['radio'].map((type) => (
                 <div key={`inline-${type}`} className="Characteristics">
-                  <Form.Check inline label="1" name="group1" type={type} id={`1inline-${type}-1`} />
-                  <Form.Check inline label="2" name="group1" type={type} id={`2inline-${type}-2`} />
-                  <Form.Check inline label="3" name="group1" type={type} id={`3inline-${type}-3`} />
-                  <Form.Check inline label="4" name="group1" type={type} id={`4inline-${type}-4`} />
-                  <Form.Check inline label="5" name="group1" type={type} id={`5inline-${type}-5`} />
+                  <Form.Check inline label="1" name="group3" type={type} id={`1inline-${type}-1`} />
+                  <Form.Check inline label="2" name="group3" type={type} id={`2inline-${type}-2`} />
+                  <Form.Check inline label="3" name="group3" type={type} id={`3inline-${type}-3`} />
+                  <Form.Check inline label="4" name="group3" type={type} id={`4inline-${type}-4`} />
+                  <Form.Check inline label="5" name="group3" type={type} id={`5inline-${type}-5`} />
                 </div>
               ))}
             </Form.Group>
