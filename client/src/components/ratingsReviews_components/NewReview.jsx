@@ -19,6 +19,46 @@ const NewReview = (props) => {
     characteristics: {},
   });
 
+  const ratingSelectionText = () => {
+    const ratingChosen = submission.rating;
+    if (ratingChosen === 5) {
+      return (
+        <span>
+          5 stars - “Great”
+        </span>
+      );
+    }
+    if (ratingChosen === 4) {
+      return (
+        <span>
+          4 stars - “Good”
+        </span>
+      );
+    }
+    if (ratingChosen === 3) {
+      return (
+        <span>
+          3 stars - “Average”
+        </span>
+      );
+    }
+    if (ratingChosen === 2) {
+      return (
+        <span>
+          2 stars - “Fair”
+        </span>
+      );
+    }
+    if (ratingChosen === 1) {
+      return (
+        <span>
+          1 star - “Poor”
+        </span>
+      );
+    }
+    return null;
+  };
+
   const overallRating = (
     <Form.Group>
       <Form.Row>
@@ -34,10 +74,10 @@ const NewReview = (props) => {
           emptySymbol="far fa-star"
           fullSymbol="fas fa-star"
         />
+        {ratingSelectionText()}
       </Form.Row>
     </Form.Group>
   );
-
   const recommendProduct = (
     <Form.Group>
       <Form.Label>Do you recommend this product?*</Form.Label>
@@ -54,9 +94,17 @@ const NewReview = (props) => {
               setRecommendation(true);
             }}
           />
-          <Form.Check required inline label="No" name="group2" type={type} id={`inline-${type}-No`} onChange={() => {
+          <Form.Check
+            required
+            inline
+            label="No"
+            name="group2"
+            type={type}
+            id={`inline-${type}-No`}
+            onChange={() => {
               setRecommendation(false);
-            }} />
+            }}
+          />
         </div>
       ))}
     </Form.Group>
