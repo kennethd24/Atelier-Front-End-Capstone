@@ -4,7 +4,7 @@ import axios from 'axios';
 import AnswerEntry from './AnswerEntry';
 import NewAnswer from './NewAnswer';
 
-const QuestionList = ({ question }) => {
+const QuestionList = ({ question, product }) => {
   const [answers, setAnswers] = useState({
     results: [],
     moreAnswers: [],
@@ -59,7 +59,7 @@ const QuestionList = ({ question }) => {
             </span> : <span><u>Yes</u> ({qHelpful}) </span>}
           &nbsp;
           <u onClick={() => setAnswerModal(true)}>Add Answer</u>
-            <NewAnswer show={answerModal} onHide={() => setAnswerModal(false)}/>
+            <NewAnswer show={answerModal} onHide={() => setAnswerModal(false)} question={question} product={product} />
         </span>
       </div>
       <div className="answerListScroll">

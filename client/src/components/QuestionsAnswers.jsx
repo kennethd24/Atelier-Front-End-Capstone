@@ -3,7 +3,7 @@ import axios from 'axios';
 import Search from './QnA_components/Search';
 import QuestionList from './QnA_components/QuestionList';
 
-const QuestionsAnswers = (props) => {
+const QuestionsAnswers = ({ currentItem }) => {
   const [questions, setQuestions] = useState({
     results: [],
     moreQuestions: [],
@@ -38,7 +38,7 @@ const QuestionsAnswers = (props) => {
       </div>
       <div className="questionList">
         {questions.results.map((question) => (
-          <QuestionList question={question} key={question.question_id} />
+          <QuestionList question={question} key={question.question_id} product={currentItem} />
         ))}
       </div>
       {!questions.moreQuestions.length < 1 ? <input type="button" value="More Answered Questions" onClick={handleMoreQuestions} /> : null}

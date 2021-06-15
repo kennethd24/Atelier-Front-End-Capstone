@@ -3,12 +3,12 @@ import {
   Modal, Button, Col, Form, InputGroup, FormControl,
 } from 'react-bootstrap';
 
-const NewAnswer = ({ show, onHide }) => {
+const NewAnswer = ({ show, onHide, question, product }) => {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>Submit You Answer
-          <Modal.Title>[product][questionBody]</Modal.Title>
+          <Modal.Title>[{product.name}][{question.question_body}]</Modal.Title>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -52,13 +52,13 @@ const NewAnswer = ({ show, onHide }) => {
 
           <Form.Row>
             <Col>
+              <Form.Label>Upload your photos</Form.Label>
               <Form.File/>
             </Col>
             <Col>
               <Button type="submit" className="float-right">Submit</Button>
             </Col>
           </Form.Row>
-
 
         </Form>
       </Modal.Body>
