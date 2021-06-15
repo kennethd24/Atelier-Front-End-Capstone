@@ -27,5 +27,8 @@ module.exports = {
     'no-plusplus': 'off',
     'react/no-array-index-key': 'off',
     'linebreak-style': 0,
+    'no-unused-vars': 'warn',
+    'react/destructuring-assignment': 'warn',
+    'react/jsx-curly-brace-presence': 'warn',
   },
 };

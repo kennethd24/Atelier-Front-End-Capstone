@@ -1,22 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import DropdownItem from './DropdownItem';
+import React, { Component } from 'react';
+import Select from 'react-select';
 
-const SizeDropdown = (props) => {
-  const { currentStyle, size, setSize } = props;
+export default class SizeDropDown extends Component {
+  constructor(props) {
+    super(props);
 
-  useEffect(() => {
-    if (currentStyle) {
-      findSizes();
+    this.state = {
+      options: [],
+      active: null,
+      menuIsOpen: false,
+    };
+
+    this.selectRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.findSizes();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { options, active } = this.state;
+    const {
+      currentStyle,
+      size,
+      setSize,
+      showAlert,
+      setShowCartBtn,
+    } = this.props;
+
+    if (currentStyle.style_id !== prevProps.currentStyle.style_id) {
+      this.findSizes();
       setSize(null);
     }
-  }, [currentStyle]);
 
-  const [availableSizes, setAvailableSizes] = useState([]);
+    if ((showAlert !== prevProps.showAlert) && showAlert && !prevState.menuIsOpen) {
+      this.openMenu();
+    }
 
-  const [active, setActive] = useState(null);
+    if (active !== prevState.active) {
+      if (active) {
+        setShowCartBtn(true);
+      } else {
+        setShowCartBtn(false);
+      }
+    }
+  }
 
-  const findSizes = () => {
+  findSizes = () => {
+    const { currentStyle } = this.props;
     const skusArr = Object.values(currentStyle.skus);
     const sizeSet = new Set();
     let stockFound = false;
@@ -28,44 +59,76 @@ const SizeDropdown = (props) => {
       }
     });
 
-    const sizeArr = Array.from(sizeSet);
+    let sizeArr = Array.from(sizeSet);
+    sizeArr = sizeArr.map((availSize) => ({
+      label: availSize,
+      value: availSize,
+    }));
 
-    setAvailableSizes(sizeArr);
-    setActive(stockFound);
-  };
-
-  const onSelect = (eventKey, e) => {
-    e.preventDefault();
-    if (size !== eventKey) {
-      setSize(eventKey);
-    }
-  };
-
-  let dropdown;
-
-  if (active) {
-    dropdown = (
-      <DropdownButton id="dropdown-item-button" title={size || 'SELECT SIZE'} variant="outline-dark" onSelect={onSelect} size="lg">
-        {
-          availableSizes.map((availableSize, index) => (
-            <DropdownItem
-              option={availableSize}
-              selected={size}
-              key={index}
-            />
-          ))
-        }
-      </DropdownButton>
-    );
-  } else {
-    dropdown = (
-      <DropdownButton id="dropdown-item-button" title="OUT OF STOCK" variant="outline-dark" size="lg" disabled />
-    );
+    this.setState({
+      options: sizeArr,
+      active: stockFound,
+    });
   }
 
-  return (
-    dropdown
-  );
-};
+  onChange = (option) => {
+    this.props.setSize(option.value);
+  }
 
-export default SizeDropdown;
+  onInputChange = (options, { action }) => {
+    if (action === 'menu-close') {
+      this.selectRef.current.blur();
+      this.setState({ menuIsOpen: false });
+    }
+  }
+
+  openMenu = () => {
+    this.selectRef.current.focus();
+    this.setState({ menuIsOpen: true });
+  }
+
+  render() {
+    const { options, active, menuIsOpen } = this.state;
+    const { currentStyle, size } = this.props;
+
+    const customStyles = {
+      dropdownIndicator: (provided, state) => ({
+        ...provided,
+        transform: state.selectProps.menuIsOpen && 'rotate(180deg)',
+        transition: 'all .15s ease-in-out',
+      }),
+    };
+
+    let selectComponent;
+
+    if (active) {
+      selectComponent = (
+        <Select
+          value={size ? { label: size, value: size } : null}
+          placeholder={'SELECT SIZE'}
+          ref={this.selectRef}
+          options={options}
+          onFocus={this.openMenu}
+          onInputChange={this.onInputChange}
+          menuIsOpen={menuIsOpen}
+          onChange={this.onChange}
+          isSearchable={false}
+          styles={customStyles}
+        />
+      );
+    } else {
+      selectComponent = (
+        <Select
+          value={size ? { label: size, value: size } : null}
+          placeholder={'OUT OF STOCK'}
+          ref={this.selectRef}
+          isDisabled
+        />
+      );
+    }
+
+    return (
+      selectComponent
+    );
+  }
+}

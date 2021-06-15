@@ -71,7 +71,6 @@
 
 .fa-check {
   position: absolute;
-  /* right: -4px; */
   top: -4px;
   right: -1px;
   font-size: 10px;
@@ -90,7 +89,6 @@
   text-decoration: line-through;
 }
 
-.dropdown, .dropdown-toggle {
-  width: 100%;
-  height: 100%;
+.alert-text {
+  font-size: 14px;
 }

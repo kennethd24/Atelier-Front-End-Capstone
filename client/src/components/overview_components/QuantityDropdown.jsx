@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import DropdownItem from './DropdownItem';
+import Select from 'react-select';
 
 const QuantityDropdown = (props) => {
   const {
@@ -41,29 +40,44 @@ const QuantityDropdown = (props) => {
     }
   };
 
-  const onSelect = (eventKey, e) => {
-    e.preventDefault();
-    if (quantity !== eventKey) {
-      setQuantity(eventKey);
+  const onChange = (option) => {
+    if (quantity !== option.value) {
+      setQuantity(option.value);
     }
   };
 
   let dropdown;
 
+  const customStyles = {
+    dropdownIndicator: (provided, state) => ({
+      ...provided,
+      transform: state.selectProps.menuIsOpen && 'rotate(180deg)',
+      transition: 'all .15s ease-in-out',
+    }),
+  };
+
   if (limitedQuantity) {
     dropdown = (
-      <DropdownButton id="quantity-dropdown" title={quantity} variant="outline-dark" onSelect={onSelect} size="lg">
-        {
+      <Select
+        value={quantity ? { label: quantity, value: quantity } : null}
+        options={
           [...Array(limitedQuantity)]
             .map(
-              (el, index) => <DropdownItem option={index + 1} selected={quantity} key={index} />,
+              (el, index) => ({ label: index + 1, value: index + 1 }),
             )
         }
-      </DropdownButton>
+        onChange={onChange}
+        isSearchable={false}
+        styles={customStyles}
+      />
     );
   } else {
     dropdown = (
-      <DropdownButton id="quantity-dropdown" title="-" variant="outline-dark" size="lg" disabled />
+      <Select
+        value={quantity ? { label: quantity, value: quantity } : null}
+        placeholder={'-'}
+        isDisabled
+      />
     );
   }
 

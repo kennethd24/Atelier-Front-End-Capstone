@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import Rating from 'react-rating';
+import axios from 'axios';
 
 const ReviewList = (props) => {
   const {
@@ -37,6 +38,16 @@ const ReviewList = (props) => {
         ✓ I recommend this product!
       </div>
     ) : null);
+  const addHelpful = () => {
+    // /reviews/:review_id/helpful
+    axios.put(`/api/reviews2/${review_id}/helpful`)
+      .then(() => {
+        props.getCountReviews();
+      })
+      .catch(err => {
+        console.log('addHelpful: ', err);
+      });
+  };
 
   return (
     <div className="reviewListEntry">
@@ -70,9 +81,11 @@ const ReviewList = (props) => {
       <div>Need to Add Photos(bootstrap?)</div>
       <div className="reviewListEntry-footer">
         Was this review helpful?
-        Yes(
-        {helpfulness}
-        )
+        {/* Yes(
+          {helpfulness}
+          ) */}
+        <button className="buttonLink" type="button" onClick={() => { addHelpful(); }}> Yes</button>
+        {`(${helpfulness})`}
       </div>
     </div>
   );
