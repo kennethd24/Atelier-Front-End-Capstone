@@ -8,7 +8,6 @@ const NewReview = (props) => {
   const {
     show, onHide, name, characteristics,
   } = props;
-  const [recommendation, setRecommendation] = useState(null);
   const [submission, setSubmission] = useState({
     product_id: 0,
     rating: 0,
@@ -68,8 +67,8 @@ const NewReview = (props) => {
       </Form.Row>
       <Form.Row>
         <Rating
-          onChange={(rate, prevState) => setSubmission({
-            ...prevState,
+          onChange={(rate) => setSubmission({
+            ...submission,
             rating: rate,
           })}
           initialRating={submission.rating}
@@ -93,7 +92,10 @@ const NewReview = (props) => {
             type={type}
             id={`inline-${type}-Yes`}
             onChange={() => {
-              setRecommendation(true);
+              setSubmission({
+                ...submission,
+                recommend: true,
+              });
             }}
           />
           <Form.Check
@@ -104,7 +106,10 @@ const NewReview = (props) => {
             type={type}
             id={`inline-${type}-No`}
             onChange={() => {
-              setRecommendation(false);
+              setSubmission({
+                ...submission,
+                recommend: false,
+              });
             }}
           />
         </div>
@@ -112,8 +117,42 @@ const NewReview = (props) => {
     </Form.Group>
   );
 
-  const DisplayCharacteristics = (props) => {
-    const { characteristic } = props;
+  const DisplayCharacteristics = ({ characteristic }) => {
+    const charSelections = {
+      Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
+      Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+      Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+      Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+      Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
+    };
+
+    const showSelected = (char) => {
+      if (submission.characteristics.char > 0) {
+        return (
+          <Form.Text className="text-muted">
+            {charSelections.char[submission.characteristics.char]}
+          </Form.Text>
+        );
+      }
+      return (
+        <Form.Text className="text-muted">
+          None Selected
+        </Form.Text>
+      );
+    };
+
+    const selectChar = (eventInput) => {
+      setSubmission({
+        ...submission,
+        characteristics: {
+          ...submission.characteristics,
+          [eventInput.target.name]: eventInput.target.value,
+        },
+      });
+      showSelected([eventInput.target.name]);
+    };
+
     return (
       <Form.Group>
         {['radio'].map((type) => (
@@ -121,24 +160,27 @@ const NewReview = (props) => {
             <Container>
               <Row>
                 <Col>
-                  <div>{characteristic}</div>
+                  <div>
+                    {characteristic}
+                    {showSelected({ characteristic })}
+                  </div>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <Form.Check inline label="1" name={`group-${characteristic}`} type={type} id={`inline-${type} -1-${characteristic}`} />
-                </Col>
-                <Col >
-                  <Form.Check inline label="2" name={`group-${characteristic}`} type={type} id={`inline-${type} -2-${characteristic}`} />
+                  <Form.Check inline label="1" value="1" name={`${characteristic}`} type={type} id={`inline-${type}-1-${characteristic}`} onClick={(event) => selectChar(event)} />
                 </Col>
                 <Col>
-                  <Form.Check inline label="3" name={`group-${characteristic}`} type={type} id={`inline-${type} -3-${characteristic}`} />
+                  <Form.Check inline label="2" value="2" name={`${characteristic}`} type={type} id={`inline-${type}-2-${characteristic}`} onClick={(event) => selectChar(event)} />
                 </Col>
                 <Col>
-                  <Form.Check inline label="4" name={`group-${characteristic}`} type={type} id={`inline-${type} -4-${characteristic}`} />
+                  <Form.Check inline label="3" value="3" name={`${characteristic}`} type={type} id={`inline-${type}-3-${characteristic}`} onClick={(event) => selectChar(event)} />
                 </Col>
                 <Col>
-                  <Form.Check inline label="5" name={`group-${characteristic}`} type={type} id={`inline-${type} -5-${characteristic}`} />
+                  <Form.Check inline label="4" value="4" name={`${characteristic}`} type={type} id={`inline-${type}-4-${characteristic}`} onClick={(event) => selectChar(event)} />
+                </Col>
+                <Col>
+                  <Form.Check inline label="5" value="5" name={`${characteristic}`} type={type} id={`inline-${type}-5-${characteristic}`} onClick={(event) => selectChar(event)} />
                 </Col>
               </Row>
             </Container>
