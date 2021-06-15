@@ -117,45 +117,32 @@ const NewReview = (props) => {
     return (
       <Form.Group>
         {['radio'].map((type) => (
-          <div key={`inline-${type}-${characteristic}`} className="CharacteristicsNewReview">
+          <div key={`inline-${type}`} className="CharacteristicsNewReview">
             <Container>
               <Row>
-                <Col xs lg="5">
+                <Col>
                   <div>{characteristic}</div>
                 </Col>
               </Row>
               <Row>
-                <Col xs lg="5">
+                <Col>
                   <Form.Check inline label="1" name={`group-${characteristic}`} type={type} id={`inline-${type} -1-${characteristic}`} />
                 </Col>
-                <Col xs lg="5">
+                <Col >
                   <Form.Check inline label="2" name={`group-${characteristic}`} type={type} id={`inline-${type} -2-${characteristic}`} />
                 </Col>
-                <Col xs lg="5">
+                <Col>
                   <Form.Check inline label="3" name={`group-${characteristic}`} type={type} id={`inline-${type} -3-${characteristic}`} />
                 </Col>
-                <Col xs lg="5">
+                <Col>
                   <Form.Check inline label="4" name={`group-${characteristic}`} type={type} id={`inline-${type} -4-${characteristic}`} />
                 </Col>
-                <Col xs lg="5">
+                <Col>
                   <Form.Check inline label="5" name={`group-${characteristic}`} type={type} id={`inline-${type} -5-${characteristic}`} />
                 </Col>
               </Row>
             </Container>
-            {/* <Container>
-              <Row>
-                <Col xs lg="3">
-                  <Form.Text className="text-muted">
-                    A size too small
-                  </Form.Text>
-                </Col>
-                <Col xs lg="3">
-                  <Form.Text className="text-muted">
-                    A size too wide
-                  </Form.Text>
-                </Col>
-              </Row>
-            </Container> */}
+
           </div>
         ))}
       </Form.Group>
@@ -181,7 +168,7 @@ const NewReview = (props) => {
       show={show}
       onHide={onHide}
       name={name}
-      // size="xl"
+      // size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
