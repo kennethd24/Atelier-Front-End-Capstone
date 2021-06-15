@@ -34,15 +34,46 @@ const CompareModal = (props) => {
       setRelFeats([...relatedItem.features]);
     }
   }, [relatedItem]);
-  // const checkFeatures = (selArr, relArr) => {
-  //   if (selArr >= relArr) {
-  //     selArr.forEach((selFeat) => {
-  //       relArr.forEach((relFeat) => {
 
-  //       })
-  //     }
-  //   }
-  // }
+  // take longer of the two arrays and set each feature as a key, each feature value as a value
+  // then iterate through shorter of the arrays, if key(feature)
+  // already exists, do something? (maybe push both to a new array)
+  const checkFeatures = (selArr, relArr) => {
+    const selObj = {};
+    const relObj = {};
+    const sharedObj = {};
+
+    if (selArr >= relArr) {
+      selArr.forEach((selFeat) => {
+        selObj[selFeat.feature] = selFeat.value;
+      });
+      relArr.forEach((relFeat) => {
+        if (selObj[relFeat.feature]) {
+          sharedObj[relFeat.feature] = [selObj[relFeat.feature], relFeat.value];
+        } else {
+          relObj[relFeat.feature] = relFeat.value;
+        }
+      });
+    } else {
+      relArr.forEach((relFeat) => {
+        relObj[relFeat.feature] = relFeat.value;
+      });
+      selArr.forEach((selFeat) => {
+        if (relObj[selFeat.feature]) {
+          sharedObj[selFeat.feature] = [relObj[selFeat.feature], selFeat.value];
+        } else {
+          selObj[selFeat.feature] = selFeat.value;
+        }
+      });
+    }
+    console.log('sel obj', selObj);
+    console.log('rel obj', relObj);
+    console.log('shared obj', sharedObj);
+  };
+
+  if (selFeats && relFeats) {
+    checkFeatures(selFeats, relFeats);
+  }
 
   return (
     <Modal
