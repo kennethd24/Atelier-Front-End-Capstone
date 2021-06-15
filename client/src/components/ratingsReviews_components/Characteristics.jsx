@@ -10,6 +10,7 @@ const Characteristics = (props) => {
         {characteristic}
       </div>
       <div className="characteristic-right">
+        {' '}
         <ProgressBar variant="success" now={now} />
       </div>
     </div>
