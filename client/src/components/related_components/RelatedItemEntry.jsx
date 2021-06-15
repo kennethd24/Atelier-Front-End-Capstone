@@ -39,8 +39,13 @@ const RelatedItemEntry = (props) => {
     );
   }
   return (
-    <div className="product-card" onClick={() => handleClick(relatedItem)} role="button" tabIndex="0" onKeyPress={() => handleClick(relatedItem)}>
-      <Image photos={defaultStyle.photos} />
+    // <div className="product-card" onClick={() => handleClick(relatedItem)} role="button" tabIndex="0" onKeyPress={() => handleClick(relatedItem)}>
+    <div className="product-card">
+      <Image
+        photos={defaultStyle.photos}
+        item={relatedItem}
+        handleClick={handleClick}
+      />
       <ProductInfo
         category={relatedItem.category}
         mainName={relatedItem.name}

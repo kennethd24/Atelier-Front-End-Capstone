@@ -3,7 +3,7 @@ import RelatedItemsComp from './related_components/RelatedItemsComp';
 import YourOutfitComp from './related_components/YourOutfitComp';
 
 const RelatedItems = (props) => {
-  console.log('relatedItems fired');
+  // console.log('relatedItems fired');
   const {
     selectedItem,
     selectedRating,
