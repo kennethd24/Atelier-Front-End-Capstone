@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import {
-  Modal, Button, Col, Form, InputGroup, FormControl,
+  Modal, Button, Col, Row, Form, InputGroup, FormControl, Container,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
 
 const NewReview = (props) => {
-  const { show, onHide, name } = props;
+  const {
+    show, onHide, name, characteristics,
+  } = props;
   const [recommendation, setRecommendation] = useState(null);
   const [submission, setSubmission] = useState({
     product_id: 0,
@@ -110,12 +112,76 @@ const NewReview = (props) => {
     </Form.Group>
   );
 
+  const DisplayCharacteristics = (props) => {
+    const { characteristic } = props;
+    return (
+      <Form.Group>
+        {['radio'].map((type) => (
+          <div key={`inline-${type}-${characteristic}`} className="CharacteristicsNewReview">
+            <Container>
+              <Row>
+                <Col xs lg="5">
+                  <div>{characteristic}</div>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs lg="5">
+                  <Form.Check inline label="1" name={`group-${characteristic}`} type={type} id={`inline-${type} -1-${characteristic}`} />
+                </Col>
+                <Col xs lg="5">
+                  <Form.Check inline label="2" name={`group-${characteristic}`} type={type} id={`inline-${type} -2-${characteristic}`} />
+                </Col>
+                <Col xs lg="5">
+                  <Form.Check inline label="3" name={`group-${characteristic}`} type={type} id={`inline-${type} -3-${characteristic}`} />
+                </Col>
+                <Col xs lg="5">
+                  <Form.Check inline label="4" name={`group-${characteristic}`} type={type} id={`inline-${type} -4-${characteristic}`} />
+                </Col>
+                <Col xs lg="5">
+                  <Form.Check inline label="5" name={`group-${characteristic}`} type={type} id={`inline-${type} -5-${characteristic}`} />
+                </Col>
+              </Row>
+            </Container>
+            {/* <Container>
+              <Row>
+                <Col xs lg="3">
+                  <Form.Text className="text-muted">
+                    A size too small
+                  </Form.Text>
+                </Col>
+                <Col xs lg="3">
+                  <Form.Text className="text-muted">
+                    A size too wide
+                  </Form.Text>
+                </Col>
+              </Row>
+            </Container> */}
+          </div>
+        ))}
+      </Form.Group>
+    );
+  };
+
+  const findCharacteristics = () => {
+    if (Object.keys(characteristics).length > 0) {
+      return (
+        Object.keys(characteristics).map((characteristic) => (
+          <DisplayCharacteristics
+            characteristic={characteristic}
+            key={characteristics[characteristic].id}
+          />
+        ))
+      );
+    }
+    return null;
+  };
+
   return (
     <Modal
       show={show}
       onHide={onHide}
       name={name}
-      size="xl"
+      // size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -140,21 +206,13 @@ const NewReview = (props) => {
           <Form.Row>
             <Form.Group>
               <Form.Label>Characteristics*</Form.Label>
-              {['radio'].map((type) => (
-                <div key={`inline-${type}`} className="Characteristics">
-                  <Form.Check inline label="1" name="group3" type={type} id={`1inline-${type}-1`} />
-                  <Form.Check inline label="2" name="group3" type={type} id={`2inline-${type}-2`} />
-                  <Form.Check inline label="3" name="group3" type={type} id={`3inline-${type}-3`} />
-                  <Form.Check inline label="4" name="group3" type={type} id={`4inline-${type}-4`} />
-                  <Form.Check inline label="5" name="group3" type={type} id={`5inline-${type}-5`} />
-                </div>
-              ))}
+              {findCharacteristics()}
             </Form.Group>
           </Form.Row>
           <Form.Row>
             <InputGroup size="sm" className="mb-3">
               <InputGroup.Prepend>
-                <InputGroup.Text id="inputGroup-sizing-sm">Review Summary</InputGroup.Text>
+                <InputGroup.Text maxLength="5" id="inputGroup-sizing-sm">Review Summary</InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Example: Best purchase ever!" />
             </InputGroup>
@@ -164,14 +222,14 @@ const NewReview = (props) => {
               <InputGroup.Prepend>
                 <InputGroup.Text>Review Body*</InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl as="textarea" aria-label="With textarea" placeholder="Why did you like the product or not?" />
+              <FormControl required as="textarea" aria-label="With textarea" placeholder="Why did you like the product or not?" />
             </InputGroup>
           </Form.Row>
 
           <Form.Row>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Email*</Form.Label>
-              <Form.Control type="email" placeholder="Example: jackson11@email.com" />
+              <Form.Control required type="email" placeholder="Example: jackson11@email.com" />
               <Form.Text className="text-muted">
                 For authentication reasons, you will not be emailed
               </Form.Text>
@@ -179,47 +237,12 @@ const NewReview = (props) => {
 
             <Form.Group as={Col} controlId="formGridNickname">
               <Form.Label>Nickname*</Form.Label>
-              <Form.Control type="nickname" placeholder="Example: jackson11!" />
+              <Form.Control required type="nickname" placeholder="Example: jackson11!" />
               <Form.Text className="text-muted">
                 For privacy reasons, do not use your full name or email address
               </Form.Text>
             </Form.Group>
           </Form.Row>
-          {/*
-          <Form.Group controlId="formGridAddress1">
-            <Form.Label>Address</Form.Label>
-            <Form.Control placeholder="1234 Main St" />
-          </Form.Group>
-
-          <Form.Group controlId="formGridAddress2">
-            <Form.Label>Address 2</Form.Label>
-            <Form.Control placeholder="Apartment, studio, or floor" />
-          </Form.Group>
-
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>City</Form.Label>
-              <Form.Control />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridState">
-              <Form.Label>State</Form.Label>
-              <Form.Control as="select" defaultValue="Choose...">
-                <option>Choose...</option>
-                <option>...</option>
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridZip">
-              <Form.Label>Zip</Form.Label>
-              <Form.Control />
-            </Form.Group>
-          </Form.Row>
-
-          <Form.Group id="formGridCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group> */}
-
           <Form.Group>
             <Form.File id="exampleFormControlFile1" label="Upload photos" />
           </Form.Group>

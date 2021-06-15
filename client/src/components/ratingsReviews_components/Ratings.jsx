@@ -32,6 +32,7 @@ const Ratings = (props) => {
         ))
       );
     }
+    return null;
   };
 
   useEffect(() => {
