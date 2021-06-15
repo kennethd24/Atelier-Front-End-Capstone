@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Modal, Button, Col, Row, Form, InputGroup, FormControl, Container,
 } from 'react-bootstrap';
@@ -19,6 +19,7 @@ const NewReview = (props) => {
     photos: [],
     characteristics: {},
   });
+  const inputRef = useRef();
 
   const ratingSelectionText = () => {
     const ratingChosen = submission.rating;
@@ -205,6 +206,10 @@ const NewReview = (props) => {
     return null;
   };
 
+  const handleChange = (eventInput) => {
+    setSubmission({ ...submission, [eventInput.target.id]: eventInput.target.value });
+  };
+
   return (
     <Modal
       show={show}
@@ -241,9 +246,9 @@ const NewReview = (props) => {
           <Form.Row>
             <InputGroup size="sm" className="mb-3">
               <InputGroup.Prepend>
-                <InputGroup.Text maxLength="5" id="inputGroup-sizing-sm">Review Summary</InputGroup.Text>
+                <InputGroup.Text id="inputGroup-sizing-sm">Review Summary</InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Example: Best purchase ever!" />
+              <FormControl id="summary" value={submission.summary} onChange={(event) => handleChange(event)} maxLength={60} aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Example: Best purchase ever!" />
             </InputGroup>
           </Form.Row>
           <Form.Row>
@@ -251,31 +256,36 @@ const NewReview = (props) => {
               <InputGroup.Prepend>
                 <InputGroup.Text>Review Body*</InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl required as="textarea" aria-label="With textarea" placeholder="Why did you like the product or not?" />
+              <FormControl id="body" value={submission.body} onChange={(event) => handleChange(event)} maxLength={1000} required as="textarea" aria-label="With textarea" placeholder="Why did you like the product or not?" />
             </InputGroup>
           </Form.Row>
 
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Email*</Form.Label>
-              <Form.Control required type="email" placeholder="Example: jackson11@email.com" />
+              <Form.Control id="email" value={submission.email} onChange={(event) => handleChange(event)} maxLength={60} required type="email" placeholder="Example: jackson11@email.com" />
               <Form.Text className="text-muted">
                 For authentication reasons, you will not be emailed
               </Form.Text>
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridNickname">
+            <Form.Group as={Col}>
               <Form.Label>Nickname*</Form.Label>
-              <Form.Control required type="nickname" placeholder="Example: jackson11!" />
+              <Form.Control id="name" value={submission.name} onChange={(event) => handleChange(event)} maxLength={60} required type="nickname" placeholder="Example: jackson11!" />
               <Form.Text className="text-muted">
                 For privacy reasons, do not use your full name or email address
               </Form.Text>
             </Form.Group>
           </Form.Row>
           <Form.Group>
-            <Form.File id="exampleFormControlFile1" label="Upload photos" />
+            <Form.Label>Photo URL</Form.Label>
+            <InputGroup className="uploadPhotos">
+              <InputGroup.Text id="basic-addon3">
+                Add URL
+              </InputGroup.Text>
+              <FormControl id="photos" />
+            </InputGroup>
           </Form.Group>
-
           <Button variant="primary" type="submit">
             Submit
           </Button>
