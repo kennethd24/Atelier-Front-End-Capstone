@@ -43,10 +43,9 @@ const NewAnswer = ({ show, onHide, question, product }) => {
               <InputGroup.Prepend>
                 <InputGroup.Text>Your Answer*</InputGroup.Text>
               </InputGroup.Prepend>
-              <Form.Control as="textarea" rows={7} name="body" onChange={(e) => handleChange(e)} maxLength={1000} />
-              {/* <Form.Control.Feedback>
-                Please enter a response
-              </Form.Control.Feedback> */}
+              {modalAnswer.body.length < 1 ? <Form.Control as="textarea" rows={7} name="body" onChange={(e) => handleChange(e)} maxLength={1000} required isInvalid />
+                :
+              <Form.Control as="textarea" rows={7} name="body" onChange={(e) => handleChange(e)} maxLength={1000} />}
             </InputGroup>
           </Form.Group>
 
@@ -55,10 +54,9 @@ const NewAnswer = ({ show, onHide, question, product }) => {
               <InputGroup.Prepend>
                 <InputGroup.Text>What is your nickname?*</InputGroup.Text>
               </InputGroup.Prepend>
-              <Form.Control as="input" placeholder="Example: jack543!" name="name" onChange={(e) => handleChange(e)} maxLength={60} />
-              {/* <Form.Control.Feedback>
-                Please enter a nickname
-              </Form.Control.Feedback> */}
+              {modalAnswer.name < 1 ? <Form.Control as="input" placeholder="Example: jack543!" name="name" onChange={(e) => handleChange(e)} maxLength={60} required isInvalid />
+                :
+              <Form.Control as="input" placeholder="Example: jack543!" name="name" onChange={(e) => handleChange(e)} maxLength={60} />}
             </InputGroup>
           </Form.Group>
 
@@ -67,10 +65,9 @@ const NewAnswer = ({ show, onHide, question, product }) => {
               <InputGroup.Prepend>
                 <InputGroup.Text>Your email*</InputGroup.Text>
               </InputGroup.Prepend>
-              <Form.Control type="text" placeholder="Example: jack@email.com" name="email" onChange={(e) => handleChange(e)} maxLength={60} />
-              {/* <Form.Control.Feedback type="invalid">
-                Please enter a email
-              </Form.Control.Feedback> */}
+              {modalAnswer.email < 1 ? <Form.Control type="text" placeholder="Example: jack@email.com" name="email" onChange={(e) => handleChange(e)} maxLength={60} required isInvalid />
+                :
+              <Form.Control type="text" placeholder="Example: jack@email.com" name="email" onChange={(e) => handleChange(e)} maxLength={60} />}
             </InputGroup>
           </Form.Group>
 
