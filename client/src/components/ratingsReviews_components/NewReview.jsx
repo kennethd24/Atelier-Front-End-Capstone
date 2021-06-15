@@ -4,6 +4,7 @@ import {
 } from 'react-bootstrap';
 import Rating from 'react-rating';
 import DisplayCharNewReview from './DisplayCharNewReview';
+import ReviewBody from './ReviewBody';
 
 const NewReview = (props) => {
   const {
@@ -180,14 +181,15 @@ const NewReview = (props) => {
             </InputGroup>
           </Form.Row>
           <Form.Row>
-            <InputGroup>
+            <ReviewBody submission={submission} handleChange={handleChange} />
+            {/* <InputGroup>
               <InputGroup.Prepend>
                 <InputGroup.Text>Review Body*</InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl id="body" value={submission.body} onChange={(event) => handleChange(event)} maxLength={1000} required as="textarea" aria-label="With textarea" placeholder="Why did you like the product or not?" />
-            </InputGroup>
-          </Form.Row>
+            </InputGroup> */}
 
+          </Form.Row>
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>Email*</Form.Label>
