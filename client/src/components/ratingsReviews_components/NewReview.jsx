@@ -6,25 +6,59 @@ import Rating from 'react-rating';
 
 const NewReview = (props) => {
   const { show, onHide, name } = props;
+  const [recommendation, setRecommendation] = useState(null);
   const [submission, setSubmission] = useState({
-    overallRating: 0,
+    product_id: 0,
+    rating: 0,
+    summary: '',
+    body: '',
+    recommend: null,
+    name: '',
+    email: '',
+    photos: [],
+    characteristics: {},
   });
 
   const overallRating = (
     <Form.Group>
-    <Form.Row>
-      <Form.Label>Overall Rating*</Form.Label>
-     </Form.Row>
+      <Form.Row>
+        <Form.Label>Overall Rating*</Form.Label>
+      </Form.Row>
       <Form.Row>
         <Rating
-          onChange={(rate) => setSubmission({
-            overallRating: rate,
+          onChange={(rate, prevState) => setSubmission({
+            ...prevState,
+            rating: rate,
           })}
-          initialRating={submission.overallRating}
+          initialRating={submission.rating}
           emptySymbol="far fa-star"
           fullSymbol="fas fa-star"
         />
       </Form.Row>
+    </Form.Group>
+  );
+
+  const recommendProduct = (
+    <Form.Group>
+      <Form.Label>Do you recommend this product?*</Form.Label>
+      {['radio'].map((type) => (
+        <div key={`inline-${type}`} className="mb-3">
+          <Form.Check
+            required
+            inline
+            label="Yes"
+            name="group2"
+            type={type}
+            id={`inline-${type}-Yes`}
+            onChange={() => {
+              setRecommendation(true);
+            }}
+          />
+          <Form.Check required inline label="No" name="group2" type={type} id={`inline-${type}-No`} onChange={() => {
+              setRecommendation(false);
+            }} />
+        </div>
+      ))}
     </Form.Group>
   );
 
@@ -50,30 +84,11 @@ const NewReview = (props) => {
         </h5>
         <Form>
           <Form.Row>
-
-              {overallRating}
-              {/* {['radio'].map((type) => (
-                <div key={`inline-${type}`} className="mb-3">
-                  <Form.Check inline label="1" name="group1" type={type} id={`inline-${type}-1`} />
-                  <Form.Check inline label="2" name="group1" type={type} id={`inline-${type}-2`} />
-                  <Form.Check inline label="3" name="group1" type={type} id={`inline-${type}-3`} />
-                  <Form.Check inline label="4" name="group1" type={type} id={`inline-${type}-4`} />
-                  <Form.Check inline label="5" name="group1" type={type} id={`inline-${type}-5`} />
-                </div>
-              ))} */}
+            {overallRating}
           </Form.Row>
           <Form.Row>
-            <Form.Group>
-              <Form.Label>Do you recommend this product?*</Form.Label>
-              {['radio'].map((type) => (
-                <div key={`inline-${type}`} className="mb-3">
-                  <Form.Check inline label="Yes" name="group2" type={type} id={`inline-${type}-Yes`} />
-                  <Form.Check inline label="No" name="group2" type={type} id={`inline-${type}-No`} />
-                </div>
-              ))}
-            </Form.Group>
+            {recommendProduct}
           </Form.Row>
-
           <Form.Row>
             <Form.Group>
               <Form.Label>Characteristics*</Form.Label>
@@ -109,13 +124,17 @@ const NewReview = (props) => {
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Email*</Form.Label>
               <Form.Control type="email" placeholder="Example: jackson11@email.com" />
-              <p>For authentication reasons, you will not be emailed</p>
+              <Form.Text className="text-muted">
+                For authentication reasons, you will not be emailed
+              </Form.Text>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridNickname">
               <Form.Label>Nickname*</Form.Label>
               <Form.Control type="nickname" placeholder="Example: jackson11!" />
-              <p>For privacy reasons, do not use your full name or email address</p>
+              <Form.Text className="text-muted">
+                For privacy reasons, do not use your full name or email address
+              </Form.Text>
             </Form.Group>
           </Form.Row>
           {/*
