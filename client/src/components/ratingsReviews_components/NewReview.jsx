@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Modal, Button, Col, Form, InputGroup, FormControl,
 } from 'react-bootstrap';
+import Rating from 'react-rating';
 
 const NewReview = (props) => {
   const { show, onHide, name } = props;
+  const [submission, setSubmission] = useState({
+    overallRating: 0,
+  });
+
+  const overallRating = (
+    <Form.Group>
+    <Form.Row>
+      <Form.Label>Overall Rating*</Form.Label>
+     </Form.Row>
+      <Form.Row>
+        <Rating
+          onChange={(rate) => setSubmission({
+            overallRating: rate,
+          })}
+          initialRating={submission.overallRating}
+          emptySymbol="far fa-star"
+          fullSymbol="fas fa-star"
+        />
+      </Form.Row>
+    </Form.Group>
+  );
+
   return (
     <Modal
       show={show}
@@ -27,9 +50,9 @@ const NewReview = (props) => {
         </h5>
         <Form>
           <Form.Row>
-            <Form.Group>
-              <Form.Label>Overall Rating*</Form.Label>
-              {['radio'].map((type) => (
+
+              {overallRating}
+              {/* {['radio'].map((type) => (
                 <div key={`inline-${type}`} className="mb-3">
                   <Form.Check inline label="1" name="group1" type={type} id={`inline-${type}-1`} />
                   <Form.Check inline label="2" name="group1" type={type} id={`inline-${type}-2`} />
@@ -37,8 +60,7 @@ const NewReview = (props) => {
                   <Form.Check inline label="4" name="group1" type={type} id={`inline-${type}-4`} />
                   <Form.Check inline label="5" name="group1" type={type} id={`inline-${type}-5`} />
                 </div>
-              ))}
-            </Form.Group>
+              ))} */}
           </Form.Row>
           <Form.Row>
             <Form.Group>
