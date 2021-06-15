@@ -36,11 +36,11 @@ const RelatedItemEntry = (props) => {
     }));
   }, [relatedItem]);
 
-  if (Object.keys(defaultStyle) < 1) {
-    return (
-      <div>Product Loading</div>
-    );
-  }
+  // if (Object.keys(defaultStyle) < 1) {
+  //   return (
+  //     <div>Product Loading</div>
+  //   );
+  // }
   return (
     <div className="product-card">
       <CompareModal
