@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AnswerEntry from './AnswerEntry';
+import NewAnswer from './NewAnswer';
 
 const QuestionList = ({ question }) => {
   const [answers, setAnswers] = useState({
@@ -10,6 +11,7 @@ const QuestionList = ({ question }) => {
   });
   const [qHelpful, setqHelpful] = useState(question.question_helpfulness);
   const [qClick, setqClick] = useState(false);
+  const [answerModal, setAnswerModal] = useState(false);
 
   const handleMoreAnswers = () => {
     setAnswers({
@@ -53,10 +55,11 @@ const QuestionList = ({ question }) => {
                 setqClick(true);
               }}>
                 Yes
-              </u>{qHelpful})
+              </u>({qHelpful})
             </span> : <span><u>Yes</u> ({qHelpful}) </span>}
           &nbsp;
-          <u>Add Answer</u>
+          <u onClick={() => setAnswerModal(true)}>Add Answer</u>
+            <NewAnswer show={answerModal} onHide={() => setAnswerModal(false)}/>
         </span>
       </div>
       <div className="answerListScroll">
@@ -64,7 +67,6 @@ const QuestionList = ({ question }) => {
           <AnswerEntry
             answer={answer}
             key={answer.answer_id}
-            question={question}
           />
         ))}
         {!answers.moreAnswers.length < 1 ?

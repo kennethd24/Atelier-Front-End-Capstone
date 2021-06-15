@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AnswerEntry = ({ answer, question }) => {
+const AnswerEntry = ({ answer }) => {
   const [helpful, setHelpful] = useState(answer.helpfulness);
   const [click, setClick] = useState(false);
   const [reported, setReported] = useState(false);
@@ -40,14 +40,14 @@ const AnswerEntry = ({ answer, question }) => {
             setHelpful(helpful + 1);
             setClick(true);
           }}>
-            Helpful? <u className="pointer">Yes</u> (
+            Helpful? <u>Yes</u>(
             {helpful}
             )
             &nbsp;
           </span>
         ) : (
           <span>
-            Helpful? <u className="pointer">Yes</u> (
+            Helpful? <u>Yes</u>(
             {helpful}
             )
             &nbsp;
