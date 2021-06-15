@@ -4,6 +4,8 @@ import {
 } from 'react-bootstrap';
 
 const DisplayCharNewReview = ({ characteristic, submission, setSubmission }) => {
+  const selected = { characteristic };
+  const nameSelected = Object.values(selected)[0];
   const charSelections = {
     Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
     Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -14,8 +16,6 @@ const DisplayCharNewReview = ({ characteristic, submission, setSubmission }) => 
   };
 
   const showSelected = () => {
-    const selected = { characteristic };
-    const nameSelected = Object.values(selected)[0];
     if (submission.characteristics[nameSelected] > 0) {
       const index = submission.characteristics[nameSelected] - 1;
       return (
@@ -26,7 +26,7 @@ const DisplayCharNewReview = ({ characteristic, submission, setSubmission }) => 
     }
     return (
       <Form.Text className="text-muted">
-        None Selected
+        None selected
       </Form.Text>
     );
   };
@@ -40,6 +40,7 @@ const DisplayCharNewReview = ({ characteristic, submission, setSubmission }) => 
       },
     });
   };
+
 
   return (
     <Form.Group>
@@ -69,6 +70,21 @@ const DisplayCharNewReview = ({ characteristic, submission, setSubmission }) => 
               </Col>
               <Col>
                 <Form.Check inline label="5" value="5" name={`${characteristic}`} type={type} id={`inline-${type}-5-${characteristic}`} onClick={(event) => selectChar(event)} />
+              </Col>
+              <Col />
+
+            </Row>
+            <Row>
+              <Col>
+                <Form.Text className="text-muted">
+                {charSelections[nameSelected][0]}
+                </Form.Text>
+              </Col>
+              <Col xs={4}> </Col>
+              <Col>
+                <Form.Text className="text-muted">
+                {charSelections[nameSelected][4]}
+                </Form.Text>
               </Col>
             </Row>
           </Container>
