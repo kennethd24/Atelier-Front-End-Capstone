@@ -215,6 +215,53 @@ const atelier = {
       });
   },
 
+  updateHelpfulQuestion: (req, res) => {
+    const { question_id } = req.params;
+    const options = {
+      method: 'put',
+      // eslint-disable-next-line camelcase
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${question_id}/helpful`,
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+
+    axios(options)
+      .then((response) => {
+        res.status(200).send(response.data);
+      })
+      .catch((err) => {
+        res.status(404).send(err);
+      });
+  },
+
+  postAnswer: (req, res) => {
+    const { question_id } = req.params;
+    const { body, name, email, photos } = req.body;
+    const options = {
+      method: 'post',
+      // eslint-disable-next-line camelcase
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${question_id}/answers`,
+      data: {
+        body,
+        name,
+        email,
+        photos,
+      },
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+
+    axios(options)
+      .then((response) => {
+        res.status(200).send(response.data);
+      })
+      .catch((err) => {
+        res.status(404).send(err);
+      });
+  },
+
 };
 
 module.exports = atelier;
