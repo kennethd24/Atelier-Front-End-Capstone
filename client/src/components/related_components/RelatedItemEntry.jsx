@@ -3,12 +3,13 @@ import Rating from 'react-rating';
 import Image from './Image';
 import Price from './Price';
 import ProductInfo from './ProductInfo';
+import CompareModal from './CompareModal';
 
 const RelatedItemEntry = (props) => {
   // console.log('relatedItemEntry fired');
   const {
     relatedItem,
-    // selectedItem,
+    selectedItem,
     handleClick,
     getRating,
     getDefault,
@@ -16,13 +17,15 @@ const RelatedItemEntry = (props) => {
 
   const [defaultStyle, setDefaultStyle] = useState({});
   const [rating, setRating] = useState(0);
+  const [showCompModal, setShowCompModal] = useState(false);
   const itemId = relatedItem.id;
 
-  const handleCompare = (e) => {
-    e.preventDefault();
-    // console.log('selectedChars', selectedChars);
-    // console.log('relatedChars', relatedChars);
-  };
+  // const handleCompare = (e) => {
+  //   e.preventDefault();
+  //   // console.log('selectedChars', selectedChars);
+  //   // console.log('relatedChars', relatedChars);
+  //   setShowCompModal
+  // };
 
   useEffect(() => {
     getDefault(itemId, ((results) => {
@@ -39,8 +42,13 @@ const RelatedItemEntry = (props) => {
     );
   }
   return (
-    // <div className="product-card" onClick={() => handleClick(relatedItem)} role="button" tabIndex="0" onKeyPress={() => handleClick(relatedItem)}>
     <div className="product-card">
+      <CompareModal
+        show={showCompModal}
+        onHide={() => setShowCompModal(false)}
+        selectedItem={selectedItem}
+        relatedItem={relatedItem}
+      />
       <Image
         photos={defaultStyle.photos}
         item={relatedItem}
@@ -61,7 +69,7 @@ const RelatedItemEntry = (props) => {
         emptySymbol="far fa-star"
         fullSymbol="fas fa-star"
       />
-      <button className="compare-button" type="button" onClick={handleCompare}>Compare</button>
+      <button className="compare-button" type="button" onClick={() => setShowCompModal(true)}>Compare</button>
     </div>
   );
 };
