@@ -61,7 +61,7 @@ const RatingsReviews = (props) => {
           )
           <br />
           {(reviewsCount < 1) ?
-            <button type="submit">Submit a new review!</button>
+            <button type="button" onClick={() => setModalNewReview(true)}>Submit a new review!</button>
             : (
               <span>
                 <div className="sortBy-container">
@@ -88,6 +88,7 @@ const RatingsReviews = (props) => {
                     show={modalNewReview}
                     onHide={() => setModalNewReview(false)}
                     name={name}
+                    characteristics={metaData.characteristics}
                   />
                 </div>
               </span>

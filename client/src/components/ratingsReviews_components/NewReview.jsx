@@ -1,16 +1,151 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Modal, Button, Col, Form, InputGroup, FormControl,
+  Modal, Button, Col, Row, Form, InputGroup, FormControl, Container,
 } from 'react-bootstrap';
+import Rating from 'react-rating';
+import DisplayCharNewReview from './DisplayCharNewReview';
+import ReviewBody from './ReviewBody';
+import AddPhotos from './AddPhotos';
 
 const NewReview = (props) => {
-  const { show, onHide, name } = props;
+  const {
+    show, onHide, name, characteristics,
+  } = props;
+  const [submission, setSubmission] = useState({
+    product_id: 0,
+    rating: 0,
+    summary: '',
+    body: '',
+    recommend: null,
+    name: '',
+    email: '',
+    photos: [],
+    characteristics: {},
+  });
+
+  const ratingSelectionText = () => {
+    const ratingChosen = submission.rating;
+    if (ratingChosen === 5) {
+      return (
+        <span>
+          5 stars - “Great”
+        </span>
+      );
+    }
+    if (ratingChosen === 4) {
+      return (
+        <span>
+          4 stars - “Good”
+        </span>
+      );
+    }
+    if (ratingChosen === 3) {
+      return (
+        <span>
+          3 stars - “Average”
+        </span>
+      );
+    }
+    if (ratingChosen === 2) {
+      return (
+        <span>
+          2 stars - “Fair”
+        </span>
+      );
+    }
+    if (ratingChosen === 1) {
+      return (
+        <span>
+          1 star - “Poor”
+        </span>
+      );
+    }
+    return null;
+  };
+
+  const overallRating = (
+    <Form.Group>
+      <Form.Row>
+        <Form.Label>Overall Rating*</Form.Label>
+      </Form.Row>
+      <Form.Row>
+        <Rating
+          onChange={(rate) => setSubmission({
+            ...submission,
+            rating: rate,
+          })}
+          initialRating={submission.rating}
+          emptySymbol="far fa-star"
+          fullSymbol="fas fa-star"
+        />
+        {ratingSelectionText()}
+      </Form.Row>
+    </Form.Group>
+  );
+  const recommendProduct = (
+    <Form.Group>
+      <Form.Label>Do you recommend this product?*</Form.Label>
+      {['radio'].map((type) => (
+        <div key={`inline-${type}`} className="mb-3">
+          <Form.Check
+            required
+            inline
+            label="Yes"
+            name="group2"
+            type={type}
+            id={`inline-${type}-Yes`}
+            onChange={() => {
+              setSubmission({
+                ...submission,
+                recommend: true,
+              });
+            }}
+          />
+          <Form.Check
+            required
+            inline
+            label="No"
+            name="group2"
+            type={type}
+            id={`inline-${type}-No`}
+            onChange={() => {
+              setSubmission({
+                ...submission,
+                recommend: false,
+              });
+            }}
+          />
+        </div>
+      ))}
+    </Form.Group>
+  );
+
+  const findCharacteristics = () => {
+    if (Object.keys(characteristics).length > 0) {
+      return (
+        Object.keys(characteristics).map((characteristic) => (
+          <DisplayCharNewReview
+            characteristic={characteristic}
+            key={characteristics[characteristic].id}
+            submission={submission}
+            setSubmission={setSubmission}
+          />
+        ))
+      );
+    }
+    return null;
+  };
+
+  const handleChange = (eventInput) => {
+    setSubmission({ ...submission, [eventInput.target.id]: eventInput.target.value });
+  };
+
   return (
     <Modal
       show={show}
       onHide={onHide}
       name={name}
-      size="xl"
+      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -27,43 +162,15 @@ const NewReview = (props) => {
         </h5>
         <Form>
           <Form.Row>
-            <Form.Group>
-              <Form.Label>Overall Rating*</Form.Label>
-              {['radio'].map((type) => (
-                <div key={`inline-${type}`} className="mb-3">
-                  <Form.Check inline label="1" name="group1" type={type} id={`inline-${type}-1`} />
-                  <Form.Check inline label="2" name="group1" type={type} id={`inline-${type}-2`} />
-                  <Form.Check inline label="3" name="group1" type={type} id={`inline-${type}-3`} />
-                  <Form.Check inline label="4" name="group1" type={type} id={`inline-${type}-4`} />
-                  <Form.Check inline label="5" name="group1" type={type} id={`inline-${type}-5`} />
-                </div>
-              ))}
-            </Form.Group>
+            {overallRating}
           </Form.Row>
           <Form.Row>
-            <Form.Group>
-              <Form.Label>Do you recommend this product?*</Form.Label>
-              {['radio'].map((type) => (
-                <div key={`inline-${type}`} className="mb-3">
-                  <Form.Check inline label="Yes" name="group2" type={type} id={`inline-${type}-Yes`} />
-                  <Form.Check inline label="No" name="group2" type={type} id={`inline-${type}-No`} />
-                </div>
-              ))}
-            </Form.Group>
+            {recommendProduct}
           </Form.Row>
-
           <Form.Row>
             <Form.Group>
               <Form.Label>Characteristics*</Form.Label>
-              {['radio'].map((type) => (
-                <div key={`inline-${type}`} className="Characteristics">
-                  <Form.Check inline label="1" name="group3" type={type} id={`1inline-${type}-1`} />
-                  <Form.Check inline label="2" name="group3" type={type} id={`2inline-${type}-2`} />
-                  <Form.Check inline label="3" name="group3" type={type} id={`3inline-${type}-3`} />
-                  <Form.Check inline label="4" name="group3" type={type} id={`4inline-${type}-4`} />
-                  <Form.Check inline label="5" name="group3" type={type} id={`5inline-${type}-5`} />
-                </div>
-              ))}
+              {findCharacteristics()}
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -71,70 +178,29 @@ const NewReview = (props) => {
               <InputGroup.Prepend>
                 <InputGroup.Text id="inputGroup-sizing-sm">Review Summary</InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Example: Best purchase ever!" />
+              <FormControl id="summary" value={submission.summary} onChange={(event) => handleChange(event)} maxLength={60} aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Example: Best purchase ever!" />
             </InputGroup>
           </Form.Row>
+          <ReviewBody submission={submission} handleChange={handleChange} />
           <Form.Row>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text>Review Body*</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl as="textarea" aria-label="With textarea" placeholder="Why did you like the product or not?" />
-            </InputGroup>
-          </Form.Row>
-
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Email*</Form.Label>
-              <Form.Control type="email" placeholder="Example: jackson11@email.com" />
-              <p>For authentication reasons, you will not be emailed</p>
+              <Form.Control id="email" value={submission.email} onChange={(event) => handleChange(event)} maxLength={60} required type="email" placeholder="Example: jackson11@email.com" />
+              <Form.Text className="text-muted">
+                For authentication reasons, you will not be emailed
+              </Form.Text>
             </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridNickname">
+            <Form.Group as={Col}>
               <Form.Label>Nickname*</Form.Label>
-              <Form.Control type="nickname" placeholder="Example: jackson11!" />
-              <p>For privacy reasons, do not use your full name or email address</p>
+              <Form.Control id="name" value={submission.name} onChange={(event) => handleChange(event)} maxLength={60} required type="nickname" placeholder="Example: jackson11!" />
+              <Form.Text className="text-muted">
+                For privacy reasons, do not use your full name or email address
+              </Form.Text>
             </Form.Group>
           </Form.Row>
-          {/*
-          <Form.Group controlId="formGridAddress1">
-            <Form.Label>Address</Form.Label>
-            <Form.Control placeholder="1234 Main St" />
-          </Form.Group>
-
-          <Form.Group controlId="formGridAddress2">
-            <Form.Label>Address 2</Form.Label>
-            <Form.Control placeholder="Apartment, studio, or floor" />
-          </Form.Group>
-
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>City</Form.Label>
-              <Form.Control />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridState">
-              <Form.Label>State</Form.Label>
-              <Form.Control as="select" defaultValue="Choose...">
-                <option>Choose...</option>
-                <option>...</option>
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridZip">
-              <Form.Label>Zip</Form.Label>
-              <Form.Control />
-            </Form.Group>
+            <AddPhotos submission={submission} setSubmission={setSubmission} />
           </Form.Row>
-
-          <Form.Group id="formGridCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group> */}
-
-          <Form.Group>
-            <Form.File id="exampleFormControlFile1" label="Upload photos" />
-          </Form.Group>
-
           <Button variant="primary" type="submit">
             Submit
           </Button>

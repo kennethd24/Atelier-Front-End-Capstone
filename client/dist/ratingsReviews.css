@@ -23,6 +23,7 @@
 .reviews-container {
   border: 1px solid #2d2d2d;
   height: 650px;
+  /* height: 90vh; */
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

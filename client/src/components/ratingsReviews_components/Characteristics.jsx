@@ -14,15 +14,6 @@ const Characteristics = (props) => {
         <ProgressBar variant="success" now={now} />
       </div>
     </div>
-    // <div className="characteristic-entry">
-    //   <div className="characteristic-left">
-    //   {characteristic}
-    //   </div>
-    //   {' '}
-    //   <div className="characteristic-right">
-    //     <ProgressBar variant="success" now={now} />
-    //   </div>
-    // </div>
   );
 };
 export default Characteristics;
