@@ -22,7 +22,7 @@ const QuestionsAnswers = ({ currentItem }) => {
   useEffect(() => {
     axios.get('/api/qa/questions/')
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setQuestions({
           results: response.data.results.slice(0, 4),
           moreQuestions: response.data.results.slice(4),
