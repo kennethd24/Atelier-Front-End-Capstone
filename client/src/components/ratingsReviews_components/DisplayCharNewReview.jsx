@@ -3,9 +3,10 @@ import {
   Modal, Button, Col, Row, Form, InputGroup, FormControl, Container,
 } from 'react-bootstrap';
 
-const DisplayCharNewReview = ({ characteristic, submission, setSubmission }) => {
+const DisplayCharNewReview = ({ characteristic, characteristicObj, submission, setSubmission }) => {
   const selected = { characteristic };
   const nameSelected = Object.values(selected)[0];
+  const charId = characteristicObj.id;
   const charSelections = {
     Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
     Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -16,8 +17,8 @@ const DisplayCharNewReview = ({ characteristic, submission, setSubmission }) => 
   };
 
   const showSelected = () => {
-    if (submission.characteristics[nameSelected] > 0) {
-      const index = submission.characteristics[nameSelected] - 1;
+    if (submission.characteristics[charId] > 0) {
+      const index = submission.characteristics[charId] - 1;
       return (
         <Form.Text className="text-muted">
           {charSelections[nameSelected][index]}
@@ -36,7 +37,7 @@ const DisplayCharNewReview = ({ characteristic, submission, setSubmission }) => 
       ...submission,
       characteristics: {
         ...submission.characteristics,
-        [eventInput.target.name]: eventInput.target.value,
+        [charId]: Number(eventInput.target.value),
       },
     });
   };

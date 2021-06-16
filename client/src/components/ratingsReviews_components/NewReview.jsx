@@ -123,10 +123,11 @@ const NewReview = (props) => {
   const findCharacteristics = () => {
     if (Object.keys(characteristics).length > 0) {
       return (
-        Object.keys(characteristics).map((characteristic) => (
+        Object.entries(characteristics).map((characteristicArr) => (
           <DisplayCharNewReview
-            characteristic={characteristic}
-            key={characteristics[characteristic].id}
+            characteristic={characteristicArr[0]}
+            characteristicObj={characteristicArr[1]}
+            key={characteristicArr[1].id}
             submission={submission}
             setSubmission={setSubmission}
           />

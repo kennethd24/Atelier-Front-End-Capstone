@@ -35,7 +35,6 @@ const AddPhotos = ({ submission, setSubmission }) => {
   };
 
   function showUploadedPics() {
-    console.log(submission.photos);
     if (submission.photos.length > 0) {
       return (
         <Form.Row>
