@@ -88,6 +88,22 @@
 .swiper-button-prev, .swiper-button-next {
   color: black !important;
   background-color: white !important;
+  height: 100% !important;
+  width: 100px !important;
+}
+
+.swiper-button-next {
+  position: absolute !important;
+  right: 0px !important;
+  top: 1px !important;
+  background: linear-gradient(to left, white, transparent 100%) !important;
+}
+
+.swiper-button-prev {
+  position: absolute !important;
+  left: 0px !important;
+  top: 0px !important;
+  background: linear-gradient(to right, white, transparent 50%) !important;
 }
 
 .product-name-style {
