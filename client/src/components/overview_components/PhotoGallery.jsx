@@ -98,6 +98,7 @@ const PhotoGallery = (props) => {
         navigation
         onSlideChange={(swiper) => setMainIndex(swiper.activeIndex)}
         onSwiper={setMainSwiper}
+        className="info-swiper"
       >
         {currentStyle.photos.map((photoObj, index) => (
           <SwiperSlide key={index}>
