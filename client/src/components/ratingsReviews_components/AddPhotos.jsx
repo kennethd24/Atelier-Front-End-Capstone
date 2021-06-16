@@ -6,30 +6,19 @@ import {
 const AddPhotos = ({ submission, setSubmission }) => {
   const [modalShow, setModalShow] = useState(false);
   const [photoCount, setPhotoCount] = useState(0);
-  const [photosObj, setPhotosObj] = useState({
-    id: 0,
-    url: '',
-  });
+  const [photosObj, setPhotosObj] = useState('');
+  const [notValidPhoto, setNotValidPhoto] = useState(null);
 
-  const randomID = () => (
-    Math.floor(100000 + Math.random() * 900000)
-  );
   const handleChange = (eventInput) => {
-    const idResult = randomID();
-    setPhotosObj({
-      id: idResult,
-      url: eventInput.target.value,
-    });
+    console.log(eventInput.target.value);
+    setPhotosObj(eventInput.target.value);
   };
   const handleSubmit = () => {
     setSubmission({
       ...submission,
       photos: [...submission.photos, photosObj],
     });
-    setPhotosObj({
-      id: 0,
-      url: '',
-    });
+    setPhotosObj('');
     setModalShow(false);
     setPhotoCount(photoCount + 1);
   };
@@ -39,7 +28,7 @@ const AddPhotos = ({ submission, setSubmission }) => {
       return (
         <Form.Row>
           {submission.photos.map((photo) => (
-            <Image src={photo.url} key={photo.id} thumbnail />
+            <Image src={photo} key={`uploaded-${photo}`} thumbnail />
           ))}
         </Form.Row>
       );
@@ -63,10 +52,10 @@ const AddPhotos = ({ submission, setSubmission }) => {
       <Modal.Body>
         <Form>
           <Form.Row>
-            <Image src={photosObj.url} fluid />
+            <Image src={photosObj} fluid />
           </Form.Row>
           <Form.Row>
-            <Button onClick={(e) => handleSubmit(e)} variant="secondary" type="button">
+            <Button onClick={handleSubmit} variant="secondary" type="button">
               Confirm Upload
             </Button>
           </Form.Row>
@@ -77,20 +66,39 @@ const AddPhotos = ({ submission, setSubmission }) => {
       </Modal.Footer>
     </Modal>
   );
+  const handlePhotoVerify = (event) => {
+    event.preventDefault();
+    if (photosObj.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+      setModalShow(true);
+      setNotValidPhoto('');
+    } else {
+      setNotValidPhoto('The image URL is invalid or unable to be uploaded');
+    }
+  };
 
   return (
     <Form.Group>
-      <Form.Label>Upload Photos {photoCount}/5</Form.Label>
+      <Form.Label>
+        Upload Photos
+        {' '}
+        {photoCount}
+        /5
+      </Form.Label>
       { (photoCount < 5) ? (
         <InputGroup className="uploadPhotos">
           <Form.Group />
           <Form.Control
             type="url"
             placeholder="Enter photo URL"
-            value={photosObj.url}
+            value={photosObj}
             onChange={(e) => handleChange(e)}
           />
-          <Button onSubmit={(e) => { e.preventDefault(); setModalShow(true); }} variant="secondary" type="submit">Add Photos</Button>
+          <Button onClick={(e) => { handlePhotoVerify(e); }} variant="secondary" type="submit">Add Photos</Button>
+          <Col xs="1" />
+          <Form.Text className="text-danger">
+            {' '}
+            {notValidPhoto}
+          </Form.Text>
           <PreviewPhotosModal show={modalShow} onHide={() => setModalShow(false)} />
         </InputGroup>
       ) : null}

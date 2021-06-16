@@ -3,16 +3,18 @@ import {
   Modal, Button, Col, Row, Form, InputGroup, FormControl, Container,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
+import axios from 'axios';
+
 import DisplayCharNewReview from './DisplayCharNewReview';
 import ReviewBody from './ReviewBody';
 import AddPhotos from './AddPhotos';
 
 const NewReview = (props) => {
   const {
-    show, onHide, name, characteristics,
+    show, onHide, name, characteristics, id,
   } = props;
   const [submission, setSubmission] = useState({
-    product_id: 0,
+    product_id: id,
     rating: 0,
     summary: '',
     body: '',
@@ -22,6 +24,7 @@ const NewReview = (props) => {
     photos: [],
     characteristics: {},
   });
+  const [errorSubmit, setErrorSubmit] = useState('');
 
   const ratingSelectionText = () => {
     const ratingChosen = submission.rating;
@@ -146,6 +149,29 @@ const NewReview = (props) => {
     setSubmission({ ...submission, [eventInput.target.id]: eventInput.target.value });
   };
 
+  const handleSubmit = (e) => {
+    // console.log(submission);
+    e.preventDefault();
+    const errStatement = 'You must enter the following:';
+    if (submission.rating === 0) {
+      setErrorSubmit(`${errStatement} Overall Rating`);
+    }
+    if (submission.body.length < 50) {
+      setErrorSubmit(`${errStatement} Review Body with minimum 50 characters`);
+    }
+
+    return null;
+
+    //   axios.post('api/reviews2/postReview', submission)
+    //     .then(() => {
+    //       console.log('success in posting!');
+    //     })
+    //     .catch((err) => {
+    //       console.log('postReview Err', err);
+    //     });
+    // onHide();
+  };
+
   return (
     <Modal
       show={show}
@@ -166,7 +192,7 @@ const NewReview = (props) => {
           {' '}
           {name}
         </h5>
-        <Form>
+        <Form onSubmit={(event) => handleSubmit(event)}>
           <Form.Row>
             {overallRating}
           </Form.Row>
@@ -210,6 +236,9 @@ const NewReview = (props) => {
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          <Form.Text className="text-danger">
+            {errorSubmit}
+          </Form.Text>
         </Form>
       </Modal.Body>
       <Modal.Footer>
