@@ -16,8 +16,8 @@ const QuestionsAnswers = ({ currentItem }) => {
     });
   };
 
-  useEffect(() => {
-    axios.get('/api/qa/questions/')
+  useEffect(async () => {
+    await axios.get('/api/qa/questions/')
       .then((response) => {
         console.log(response.data);
         setQuestions({

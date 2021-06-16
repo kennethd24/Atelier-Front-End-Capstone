@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import regeneratorRuntime from 'regenerator-runtime';
 import AnswerEntry from './AnswerEntry';
 import NewAnswer from './NewAnswer';
 
@@ -28,8 +29,8 @@ const QuestionList = ({ question, product }) => {
       .catch((err) => console.error(err));
   };
 
-  useEffect(() => {
-    axios.get(`/api/qa/questions/${question.question_id}/answers`)
+  useEffect(async () => {
+    await axios.get(`/api/qa/questions/${question.question_id}/answers`)
       .then((response) => {
         console.log('answers', response.data);
         setAnswers({
