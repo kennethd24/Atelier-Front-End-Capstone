@@ -13,22 +13,12 @@ const YourOutfitComp = (props) => {
     selectedDefault,
   } = props;
 
-  // console.log('yourOutfit', yourOutfit);
-
-  // const [yourOutfit, setYourOutfit] = useState([]);
   const [yourOutfit, setYourOutfit] = useState(
-    // console.log(JSON.parse(localStorage.getItem('yourOutfitInLocal')));
     JSON.parse(localStorage.getItem('yourOutfitInLocal')) || [],
   );
 
   const [outfitIds, setOutfitIds] = useState([]);
-  // const [value, setValue] = React.useState(
-  //   localStorage.getItem('valueInLocal') || '',
-  // );
 
-  // React.useEffect(() => {
-  //   localStorage.setItem('valueInLocal', value);
-  // }, [value]);
   useEffect(() => {
     localStorage.setItem('yourOutfitInLocal', JSON.stringify(yourOutfit));
   }, [yourOutfit]);
@@ -42,8 +32,6 @@ const YourOutfitComp = (props) => {
       selectedItem.salePrice = selectedDefault.sale_price;
       selectedItem.origPrice = selectedDefault.original_price;
       setYourOutfit([...yourOutfit, selectedItem]);
-      // localStorage.setItem('yourOutfitInLocal', JSON.stringify(yourOutfit));
-      // console.log(JSON.parse(localStorage.getItem('yourOutfitInLocal')));
     }
   };
 
@@ -59,7 +47,6 @@ const YourOutfitComp = (props) => {
 
   return (
     <div className="your-outfit-carousel">
-      {/* <div>{value}</div> */}
       <Swiper
         slidesPerView={3.5}
         spaceBetween={25}
