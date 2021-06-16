@@ -79,6 +79,25 @@ const atelier = {
       });
   },
 
+  reportReview: (req, res) => {
+    const { id } = req.params;
+    const options = {
+      method: 'put',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/${id}/report`,
+
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+    axios(options)
+      .then(() => {
+        res.status(200).send('successful report');
+      })
+      .catch((err) => {
+        console.log('reported post: ', err);
+        res.status(400).send(err);
+      });
+  },
   postReview: (req, res) => {
     const options = {
       method: 'post',
