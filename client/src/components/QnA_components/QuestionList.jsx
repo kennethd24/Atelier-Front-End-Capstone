@@ -13,6 +13,7 @@ const QuestionList = ({ question, product }) => {
   const [qHelpful, setqHelpful] = useState(question.question_helpfulness);
   const [qClick, setqClick] = useState(false);
   const [answerModal, setAnswerModal] = useState(false);
+  const [qReported, setqReported] = useState(false);
 
   const handleMoreAnswers = () => {
     setAnswers({
@@ -26,6 +27,14 @@ const QuestionList = ({ question, product }) => {
       questionHelpfulness: help + 1,
     };
     axios.put(`/api/qa/questions/${question.question_id}/helpful`, questionHelp)
+      .catch((err) => console.error(err));
+  };
+
+  const handleQuestionReport = (id) => {
+    const report = {
+      reported: true,
+    };
+    axios.put(`/api/qa/questions/${question.question_id}/report`, report)
       .catch((err) => console.error(err));
   };
 
@@ -47,20 +56,42 @@ const QuestionList = ({ question, product }) => {
     <div>
       <div>
         <span className="questions">Q:{question.question_body}</span>
-        <span className="addAnswer">Helpful? &nbsp;
+        <span className="addAnswer userContainer">Helpful? &nbsp;
           {!qClick ?
-            <span>
-              <u onClick={() => {
-                handleQuestionHelpfulness(question.question_id, qHelpful);
-                setqHelpful(qHelpful + 1);
-                setqClick(true);
-              }}>
-                Yes
-              </u>({qHelpful})
-            </span> : <span><u>Yes</u> ({qHelpful}) </span>}
+            (
+              <span>
+                <u onClick={() => {
+                  handleQuestionHelpfulness(question.question_id, qHelpful);
+                  setqHelpful(qHelpful + 1);
+                  setqClick(true);
+                }}>
+                  Yes
+                </u>({qHelpful})
+              </span>
+            ) : (<span><u>Yes</u> ({qHelpful}) </span>)}
+          &nbsp;
+          <span className="divider" />
+          &nbsp;
+          {!qReported ? (
+            <u onClick={() => {
+              handleQuestionReport(question.question_id, qReported);
+              setqReported(true);
+            }}>
+              Report
+            </u>
+          ) : (
+            <span>Reported</span>
+          )}
+          &nbsp;
+          <span className="divider" />
           &nbsp;
           <u onClick={() => setAnswerModal(true)}>Add Answer</u>
-            <NewAnswer show={answerModal} onHide={() => setAnswerModal(false)} question={question} product={product} />
+          <NewAnswer
+            show={answerModal}
+            onHide={() => setAnswerModal(false)}
+            question={question}
+            product={product}
+          />
         </span>
       </div>
       <div className="answerListScroll">
@@ -73,6 +104,7 @@ const QuestionList = ({ question, product }) => {
         {!answers.moreAnswers.length < 1 ?
           (
             <input
+              className="moreAnswers"
               type="button"
               value="Load More Answers"
               onClick={handleMoreAnswers}

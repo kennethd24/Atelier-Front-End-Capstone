@@ -42,12 +42,23 @@ const QuestionsAnswers = ({ currentItem }) => {
       </div>
       <div className="questionList">
         {questions.results.map((question) => (
-          <QuestionList question={question} key={question.question_id} product={currentItem} />
+          <QuestionList
+            question={question}
+            key={question.question_id}
+            product={currentItem}
+          />
         ))}
       </div>
-      {!questions.moreQuestions.length < 1 ? <input type="button" value="More Answered Questions" onClick={handleMoreQuestions} /> : null}
-      <input type="button" value="Add Question +" onClick={() => setQuestionModal(true)} />
-      <NewQuestion show={questionModal} onHide={() => setQuestionModal(false)} questions={questions.product_id} product={currentItem} />
+      {!questions.moreQuestions.length < 1 ?
+        <input type="button" value="More Answered Questions" className="moreQuestions" onClick={handleMoreQuestions} />
+        : null }
+      <input type="button" value="Add Question +" className="addQuestions" onClick={() => setQuestionModal(true)} />
+      <NewQuestion
+        show={questionModal}
+        onHide={() => setQuestionModal(false)}
+        questions={questions.product_id}
+        product={currentItem}
+      />
     </div>
   );
 };
