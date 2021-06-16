@@ -91,7 +91,7 @@ const AddPhotos = ({ submission, setSubmission }) => {
             value={photosObj.url}
             onChange={(e) => handleChange(e)}
           />
-          <Button onClick={() => setModalShow(true)} variant="secondary" type="button">Add Photos</Button>
+          <Button onSubmit={(e) => { e.preventDefault(); setModalShow(true); }} variant="secondary" type="submit">Add Photos</Button>
           <PreviewPhotosModal show={modalShow} onHide={() => setModalShow(false)} />
         </InputGroup>
       ) : null}
