@@ -31,4 +31,6 @@ router.put('/qa/questions/:question_id/helpful', atelier.updateHelpfulQuestion);
 
 router.post('/qa/questions/:question_id/answers', atelier.postAnswer);
 
+router.post('/qa/questions', atelier.postQuestion);
+
 module.exports = router;
