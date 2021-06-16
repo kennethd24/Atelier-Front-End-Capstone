@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Rating from 'react-rating';
 import {
   Modal, Table,
 } from 'react-bootstrap';
@@ -8,7 +9,10 @@ const CompareModal = (props) => {
     show,
     onHide,
     selectedItem,
+    selectedDefault,
+    selectedRating,
     relatedItem,
+    relatedRating,
   } = props;
 
   // console.log('selectedItem', selectedItem);
@@ -121,20 +125,36 @@ const CompareModal = (props) => {
               <td>{relatedItem.default_price}</td>
             </tr>
             <tr>
-              <td>???</td>
+              <td>
+                <Rating
+                  initialRating={selectedRating}
+                  readonly
+                  emptySymbol="far fa-star"
+                  fullSymbol="fas fa-star"
+                  className="rating"
+                />
+              </td>
               <td>Rating</td>
-              <td>???</td>
+              <td>
+                <Rating
+                  initialRating={relatedRating}
+                  readonly
+                  emptySymbol="far fa-star"
+                  fullSymbol="fas fa-star"
+                  className="rating"
+                />
+              </td>
             </tr>
             {/* <tr>
               <td>{selectedItem.description}</td>
               <td>DESCRIPTION</td>
               <td>{relatedItem.description}</td>
             </tr> */}
-            <tr>
+            {/* <tr>
               <td>{selectedItem.slogan}</td>
               <td>SLOGAN</td>
               <td>{relatedItem.slogan}</td>
-            </tr>
+            </tr> */}
             {/* {shareFeats.map((featObj, i) => (
               <tr key={i}>
                 <td>{featObj[1][0]}</td>
