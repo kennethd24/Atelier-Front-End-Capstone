@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import 'swiper/swiper-bundle.css';
+import SwiperCore, { Navigation } from 'swiper';
+// import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/components/navigation/navigation.min.css';
+// import 'swiper/swiper-bundle.css';
 import RelatedItemEntry from './RelatedItemEntry';
 
-SwiperCore.use([Navigation, Pagination]);
-// import SwiperCore, {
-//   Pagination,
-//   Navigation,
-//   Scrollbar,
-// } from 'swiper/core';
-// import "swiper/swiper.min.css";
-// import "swiper/components/pagination/pagination.min.css";
-// import "swiper/components/navigation/navigation.min.css";
-// import "swiper/components/scrollbar/scrollbar.min.css";
-// import 'swiper/swiper.scss';
-// import 'swiper/components/navigation/navigation.scss';
-// import 'swiper/components/pagination/pagination.scss';
-// import 'swiper/components/scrollbar/scrollbar.scss';
-
-// SwiperCore.use([Navigation, Pagination, Scrollbar]);
+SwiperCore.use([Navigation]);
+// SwiperCore.use([Navigation, Pagination]);
 
 const RelatedItemsComp = (props) => {
   // console.log('relatedItemsComp fired');
@@ -74,9 +62,7 @@ const RelatedItemsComp = (props) => {
     <Swiper
       slidesPerView={3.5}
       spaceBetween={25}
-      // watchSlidesProgress
-      // watchSlidesVisibility
-      pagination={{ clickable: true }}
+      // pagination={{ clickable: true }}
       navigation
       className="related-outfit-swiper"
     >

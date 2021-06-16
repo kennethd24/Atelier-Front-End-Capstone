@@ -184,7 +184,15 @@
   align-items: center;
 }
 
-.comparison-table td {
-  background-color:rgb(236, 233, 233);
+.comparison-table td,
+.comparison-table th {
+  background-color:rgb(245, 245, 245);
   width: 300px;
+  height: 40px;
+  text-align: center;
+}
+
+.comparison-table th {
+  font-weight: bold;
+  font-size: 18px;
 }

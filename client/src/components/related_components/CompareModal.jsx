@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Rating from 'react-rating';
 import {
-  Modal, Table,
+  Modal,
 } from 'react-bootstrap';
 
 const CompareModal = (props) => {
@@ -36,58 +36,89 @@ const CompareModal = (props) => {
     }
   }, [relatedItem]);
 
-  // useEffect(() => {
-  //   checkFeatures(selectedItem.features, relatedItem.features);
-  // }, [selectedItem, relatedItem]);
+  useEffect(() => {
+    checkFeatures(selFeats, relFeats);
+  }, [selFeats, relFeats]);
 
   // take longer of the two arrays and set each feature as a key, each feature value as a value
   // then iterate through shorter of the arrays, if key(feature)
   // already exists, do something? (maybe push both to a new array)
   const checkFeatures = (selArr, relArr) => {
+    console.log('selectedItem', selectedItem);
+    // console.log('selectedDefault', selectedDefault);
+    console.log('relatedItem', relatedItem);
+    console.log('selArr', selArr);
+    console.log('relArr', relArr);
+    // console.log('selFeats', selFeats);
+    // console.log('relFeats', relFeats);
     const selObj = {};
     const relObj = {};
     const sharedObj = {};
 
-    if (selArr >= relArr) {
+    if (Array.isArray(selArr)) {
       selArr.forEach((selFeat) => {
-        selObj[selFeat.feature] = selFeat.value;
+        sharedObj[selFeat.feature] = { selVal: selFeat.value, relVal: null };
       });
+    }
+
+    console.log('sharedObj after first iter', sharedObj);
+
+    if (Array.isArray(relArr)) {
       relArr.forEach((relFeat) => {
-        if (selObj[relFeat.feature]) {
-          sharedObj[relFeat.feature] = [selObj[relFeat.feature], relFeat.value];
+        if (sharedObj[relFeat.feature]) {
+          sharedObj[relFeat.feature].relVal = relFeat.value;
         } else {
-          relObj[relFeat.feature] = relFeat.value;
-        }
-      });
-    } else {
-      relArr.forEach((relFeat) => {
-        relObj[relFeat.feature] = relFeat.value;
-      });
-      selArr.forEach((selFeat) => {
-        if (relObj[selFeat.feature]) {
-          sharedObj[selFeat.feature] = [selFeat.value, relObj[selFeat.feature]];
-        } else {
-          selObj[selFeat.feature] = selFeat.value;
+          sharedObj[relFeat.feature] = { selVal: null, relVal: relFeat.value };
         }
       });
     }
+
+    console.log('sharedObj after second iter', sharedObj);
+
+    const featuresArr = Object.entries(sharedObj);
+    console.log('features ARR', featuresArr);
+    setShareFeats([...featuresArr]);
+    // console.log('sharedObj after both iter', sharedObj);
+    // if (selArr >= relArr) {
+    //   selArr.forEach((selFeat) => {
+    //     selObj[selFeat.feature] = selFeat.value;
+    //   });
+    //   relArr.forEach((relFeat) => {
+    //     if (selObj[relFeat.feature]) {
+    //       sharedObj[relFeat.feature] = [selObj[relFeat.feature], relFeat.value];
+    //     } else {
+    //       relObj[relFeat.feature] = relFeat.value;
+    //     }
+    //   });
+    // } else {
+    //   relArr.forEach((relFeat) => {
+    //     relObj[relFeat.feature] = relFeat.value;
+    //   });
+    //   selArr.forEach((selFeat) => {
+    //     if (relObj[selFeat.feature]) {
+    //       sharedObj[selFeat.feature] = [selFeat.value, relObj[selFeat.feature]];
+    //     } else {
+    //       selObj[selFeat.feature] = selFeat.value;
+    //     }
+    //   });
+    // }
     // console.log('sel obj', selObj);
     // console.log('rel obj', relObj);
     // console.log('shared obj', sharedObj);
-    const selFncArr = Object.entries(selObj);
-    // setSelFeats([...selFncArr]);
-    const relFncArr = Object.entries(relObj);
-    // setRelFeats([...relFncArr]);
-    const sharedArr = Object.entries(sharedObj);
+    // const selFncArr = Object.entries(selObj);
+    // // setSelFeats([...selFncArr]);
+    // const relFncArr = Object.entries(relObj);
+    // // setRelFeats([...relFncArr]);
+    // const sharedArr = Object.entries(sharedObj);
     // setShareFeats([...sharedArr]);
     // console.log('selFncArr', selFncArr);
     // console.log('relFncArr', relFncArr);
     // console.log('sharedArr', sharedArr);
   };
 
-  useEffect(() => {
-    checkFeatures(selFeats, relFeats);
-  }, [selectedItem, relatedItem]);
+  // useEffect(() => {
+  //   checkFeatures(selFeats, relFeats);
+  // }, [selectedItem, relatedItem]);
 
   return (
     <Modal
@@ -145,6 +176,13 @@ const CompareModal = (props) => {
                 />
               </td>
             </tr>
+            {shareFeats.map((featObj, i) => (
+              <tr key={i}>
+                <td>{featObj[1].selVal}</td>
+                <td>{featObj[0]}</td>
+                <td>{featObj[1].relVal}</td>
+              </tr>
+            ))}
             {/* <tr>
               <td>{selectedItem.description}</td>
               <td>DESCRIPTION</td>
@@ -162,7 +200,7 @@ const CompareModal = (props) => {
                 <td>{featObj[1][1]}</td>
               </tr>
             ))} */}
-            {selFeats.map((featObj, i) => (
+            {/* {selFeats.map((featObj, i) => (
               <tr key={i}>
                 <td>{featObj.value}</td>
                 <td>
@@ -179,7 +217,7 @@ const CompareModal = (props) => {
                 </td>
                 <td>{featObj.value}</td>
               </tr>
-            ))}
+            ))} */}
           </tbody>
         </table>
       </Modal.Body>

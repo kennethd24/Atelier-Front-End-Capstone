@@ -133,7 +133,7 @@ class App extends React.Component {
   handleRelatedClick = (relatedItem) => {
     this.setState({
       currentItem: relatedItem,
-      // stateCount: 0,
+      stateCount: 0,
     });
   };
 
@@ -195,37 +195,39 @@ class App extends React.Component {
       styles,
     } = this.state;
 
+    if (stateCount <= 4) {
+      return (
+        <div>
+          Loading....
+        </div>
+      );
+    }
     return (
       <div>
-        {(stateCount > 4) &&
-          (
-          <div>
-            <Overview
-              currentItem={currentItem}
-              rating={rating}
-              reviewsCount={reviewsCount}
-              cart={cart}
-              addToCart={this.addToCart}
-              appStyles={styles}
-              defaultStyle={defaultStyle}
-            />
-            <RelatedItems
-              selectedItem={currentItem}
-              selectedRating={rating}
-              selectedDefault={defaultStyle}
-              handleClick={this.handleRelatedClick}
-              getRating={this.getMetadata}
-              getDefault={this.getStyles}
-            />
-            <QuestionsAnswers currentItem={currentItem} />
-            <RatingsReviews
-              currentItem={currentItem}
-              rating={rating}
-              reviewsCount={reviewsCount}
-              metaData={metaData}
-            />
-          </div>
-          )}
+        <Overview
+          currentItem={currentItem}
+          rating={rating}
+          reviewsCount={reviewsCount}
+          cart={cart}
+          addToCart={this.addToCart}
+          appStyles={styles}
+          defaultStyle={defaultStyle}
+        />
+        <RelatedItems
+          selectedItem={currentItem}
+          selectedRating={rating}
+          selectedDefault={defaultStyle}
+          handleClick={this.handleRelatedClick}
+          getRating={this.getMetadata}
+          getDefault={this.getStyles}
+        />
+        <QuestionsAnswers currentItem={currentItem} />
+        <RatingsReviews
+          currentItem={currentItem}
+          rating={rating}
+          reviewsCount={reviewsCount}
+          metaData={metaData}
+        />
       </div>
     );
   }

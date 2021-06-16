@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import 'swiper/swiper-bundle.css';
+import SwiperCore, { Navigation } from 'swiper';
+// import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/swiper.min.css';
+// import 'swiper/swiper-bundle.css';
+import 'swiper/components/navigation/navigation.min.css';
+// import 'swiper/components/navigation/navigation.scss';
 import YourOutfitEntry from './YourOutfitEntry';
 
-SwiperCore.use([Navigation, Pagination]);
+SwiperCore.use([Navigation]);
+// SwiperCore.use([Navigation, Pagination]);
 
 const YourOutfitComp = (props) => {
   const {
@@ -50,7 +55,7 @@ const YourOutfitComp = (props) => {
       <Swiper
         slidesPerView={3.5}
         spaceBetween={25}
-        pagination={{ clickable: true }}
+        // pagination={{ clickable: true }}
         navigation
         className="related-outfit-swiper"
       >
