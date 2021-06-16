@@ -262,6 +262,32 @@ const atelier = {
       });
   },
 
+  postQuestion: (req, res) => {
+    const { body, name, email, product_id } = req.body;
+    const options = {
+      method: 'post',
+      // eslint-disable-next-line camelcase
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/`,
+      data: {
+        body,
+        name,
+        email,
+        product_id,
+      },
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+
+    axios(options)
+      .then((response) => {
+        res.status(200).send(response.data);
+      })
+      .catch((err) => {
+        res.status(404).send(err);
+      });
+  },
+
 };
 
 module.exports = atelier;
