@@ -13,12 +13,12 @@
   /* border: 1px solid #2d2d2d; */
 }
 
-.swiper-container {
+.swiper-container.related-outfit-swiper {
   width: 100%;
   height: 100%;
 }
 
-.swiper-slide {
+.related-outfit-swiper .swiper-slide {
   text-align: center;
   font-size: 17px;
   /* background: #fff; */
@@ -81,25 +81,25 @@
   margin-top: 5px;
 }
 
-.swiper-button-disabled {
+.related-outfit-swiper .swiper-button-disabled {
   display: none !important;
 }
 
-.swiper-button-prev, .swiper-button-next {
+.related-outfit-swiper .swiper-button-prev, .swiper-button-next {
   color: black !important;
   background-color: white !important;
   height: 100% !important;
   width: 100px !important;
 }
 
-.swiper-button-next {
+.related-outfit-swiper .swiper-button-next {
   position: absolute !important;
   right: 0px !important;
   top: 1px !important;
   background: linear-gradient(to left, white, transparent 100%) !important;
 }
 
-.swiper-button-prev {
+.related-outfit-swiper .swiper-button-prev {
   position: absolute !important;
   left: 0px !important;
   top: 0px !important;

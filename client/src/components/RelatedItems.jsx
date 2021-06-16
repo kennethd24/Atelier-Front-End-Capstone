@@ -19,8 +19,8 @@ const RelatedItems = (props) => {
         <h3 className="related-items-title">Related Products</h3>
         <RelatedItemsComp
           selectedItem={selectedItem}
-          // selectedRating={selectedRating}
-          // selectedDefault={selectedDefault}
+          selectedRating={selectedRating}
+          selectedDefault={selectedDefault}
           handleClick={handleClick}
           getRating={getRating}
           getDefault={getDefault}

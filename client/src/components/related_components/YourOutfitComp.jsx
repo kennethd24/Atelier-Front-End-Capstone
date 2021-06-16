@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -13,8 +13,15 @@ const YourOutfitComp = (props) => {
     selectedDefault,
   } = props;
 
-  const [yourOutfit, setYourOutfit] = useState([]);
+  const [yourOutfit, setYourOutfit] = useState(
+    JSON.parse(localStorage.getItem('yourOutfitInLocal')) || [],
+  );
+
   const [outfitIds, setOutfitIds] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem('yourOutfitInLocal', JSON.stringify(yourOutfit));
+  }, [yourOutfit]);
 
   const handleAdd = () => {
     if (!outfitIds.includes(selectedItem.id)) {
@@ -45,6 +52,7 @@ const YourOutfitComp = (props) => {
         spaceBetween={25}
         pagination={{ clickable: true }}
         navigation
+        className="related-outfit-swiper"
       >
         <SwiperSlide>
           <button type="button" onClick={handleAdd} className="product-card" id="add-outfit">

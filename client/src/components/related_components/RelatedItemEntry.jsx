@@ -9,7 +9,9 @@ const RelatedItemEntry = (props) => {
   // console.log('relatedItemEntry fired');
   const {
     relatedItem,
+    selectedRating,
     selectedItem,
+    selectedDefault,
     handleClick,
     getRating,
     getDefault,

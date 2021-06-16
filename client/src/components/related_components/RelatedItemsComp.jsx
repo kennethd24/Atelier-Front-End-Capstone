@@ -26,8 +26,8 @@ const RelatedItemsComp = (props) => {
   // console.log('relatedItemsComp fired');
   const {
     selectedItem,
-    // selectedRating,
-    // selectedDefault,
+    selectedRating,
+    selectedDefault,
     handleClick,
     getRating,
     getDefault,
@@ -78,13 +78,15 @@ const RelatedItemsComp = (props) => {
       // watchSlidesVisibility
       pagination={{ clickable: true }}
       navigation
+      className="related-outfit-swiper"
     >
       {relatedItems.map((item, i) => (
         <SwiperSlide key={i}>
           <RelatedItemEntry
             relatedItem={item}
-            // selectedRating={selectedRating}
+            selectedRating={selectedRating}
             selectedItem={selectedItem}
+            selectedDefault={selectedDefault}
             handleClick={handleClick}
             getRating={getRating}
             getDefault={getDefault}
