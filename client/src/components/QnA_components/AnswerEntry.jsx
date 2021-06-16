@@ -26,7 +26,7 @@ const AnswerEntry = ({ answer }) => {
   return (
     <div>
       <div>
-        A:
+        <span className="bolder">A: </span>
         {answer.body}
       </div>
       <div className="userContainer">

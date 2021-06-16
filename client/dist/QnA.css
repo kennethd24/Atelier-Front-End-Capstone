@@ -1,18 +1,22 @@
 .answerListScroll {
-  max-height: 40vh;
+  max-height: 100vh;
   overflow: auto;
-  height: 15vh;
+  height: 18vh;
 }
 
-.questions {
+.bolder {
   font-weight: bold;
   font-size: 18px;
+}
+
+.question {
+  padding: 5px 10px 5px 0px;
 }
 
 .questionList {
   max-height: 100vh;
   overflow: auto;
-  height: 65.5vh;
+  height: 88vh;
 }
 
 u:hover {
@@ -53,7 +57,9 @@ u:hover {
   border: none;
   outline: none;
   font-size: 12px;
+  padding: 5px 5px 5px 24px;
   background: transparent;
+  font-weight: bold;
 }
 
 .addQuestions {
@@ -75,5 +81,10 @@ u:hover {
 }
 
 .userContainer {
+  font-size: 12px;
+  padding: 10px 10px 4px 24px;
+}
+
+.addAnswerContainer {
   font-size: 12px;
 }
