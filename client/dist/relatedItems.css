@@ -13,23 +13,6 @@
   border: 1px solid #2d2d2d;
 }
 
-/* .related-items-carousel, .your-outfit-carousel {
-  display: flex;
-  flex-direction: row;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  align-items: start;
-  border: 1px solid #2d2d2d;
-} */
-
-/* .related-items-carousel {
-  justify-content: space-between;
-}
-.related-items-carousel {
-  border: 17px solid #2d2d2d;
-} */
-
 .swiper-container {
   width: 100%;
   height: 100%;
@@ -54,18 +37,13 @@
   /* background: linear-gradient(to right, white, transparent 100%); */
 }
 
-/* .your-outfit-carousel {
-  justify-content: flex-start;
-} */
 
 .product-card {
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* min-width: 125px; */
   height: 100%;
-  /* padding: 15px; */
-  border: 1px solid #ff0000;
+  border: 1px solid black;
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -76,16 +54,11 @@
   max-height: 250px;
   height: 100%;
   width: 100%;
-  /* border: 2px solid green; */
-  /* align-items: center; */
   justify-content: center;
   background-color: rgb(187, 187, 187);
 }
 
 .product-info-wrapper {
-  /* min-height: 100px;
-  max-height: 100px; */
-  /* align-items: flex-start; */
   height: 100%;
   width: 100%;
 }
@@ -112,18 +85,19 @@
   display: none !important;
 }
 
+.swiper-button-prev, .swiper-button-next {
+  color: black !important;
+  background-color: white !important;
+}
+
 .product-name-style {
   font-size: 16px;
   font-weight: lighter;
   margin-bottom: 3px;
 }
 
-
 .product-photo {
-  /* height: 100%; */
-  /* max-height: 300px; */
   display: block;
-  /* width: 100%; */
   justify-content: center;
   align-items: center;
   height: 250px;
@@ -131,11 +105,7 @@
 }
 
 .compare-button {
-  /* flex: 1; */
-  /* justify-content: start; */
-  /* align-items: start; */
   position: absolute;
-  /* left: 10px; */
   right: 1px;
 }
 
@@ -175,4 +145,10 @@
   align-self: center;
   margin-top: 75px;
   margin-bottom: 75px;
+}
+
+.add-label {
+  margin-bottom: 76px;
+  margin-left: 50px;
+  margin-right: 50px;
 }

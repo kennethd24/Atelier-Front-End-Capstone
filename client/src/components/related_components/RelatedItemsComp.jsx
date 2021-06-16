@@ -74,6 +74,8 @@ const RelatedItemsComp = (props) => {
     <Swiper
       slidesPerView={3.5}
       spaceBetween={25}
+      // watchSlidesProgress
+      // watchSlidesVisibility
       pagination={{ clickable: true }}
       navigation
     >

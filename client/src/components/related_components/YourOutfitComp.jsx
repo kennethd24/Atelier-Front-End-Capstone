@@ -49,7 +49,7 @@ const YourOutfitComp = (props) => {
         <SwiperSlide>
           <button type="button" onClick={handleAdd} className="product-card" id="add-outfit">
             <i className="fas fa-plus" />
-            Add Selected Item to Your Outfit
+            <div className="add-label">Add Selected Item to Your Outfit</div>
           </button>
         </SwiperSlide>
         {yourOutfit.map((item, i) => (

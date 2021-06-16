@@ -144,24 +144,20 @@ const CompareModal = (props) => {
             ))} */}
             {selFeats.map((featObj, i) => (
               <tr key={i}>
-                <td>YES</td>
+                <td>{featObj.value}</td>
                 <td>
                   {featObj.feature}
-                  -
-                  {featObj.value}
                 </td>
-                <td>NO</td>
+                <td> </td>
               </tr>
             ))}
             {relFeats.map((featObj, i) => (
               <tr key={i}>
-                <td>NO</td>
+                <td> </td>
                 <td>
                   {featObj.feature}
-                  -
-                  {featObj.value}
                 </td>
-                <td>YES</td>
+                <td>{featObj.value}</td>
               </tr>
             ))}
           </tbody>
