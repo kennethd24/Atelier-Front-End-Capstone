@@ -7,10 +7,12 @@ router.get('/qa/questions', atelier.getQuestions);
 
 router.get('/products/:id/styles', atelier.getProductStyles);
 
-// router.get('/reviews2/:id', atelier.getReviews);
 router.get('/reviews2/:id/:count/:sort', atelier.getReviews);
 
 router.put('/reviews2/:id/helpful', atelier.updateHelpfulReview);
+
+router.post('/reviews2/postReview', atelier.postReview);
+// router.post('/reviews2/:id/:rating/:summary/:body/:recommend/:name/:email/:photos/:characteristics', atelier.postReview);
 
 router.get('/reviews/meta/:id', atelier.getReviewMetadata);
 
