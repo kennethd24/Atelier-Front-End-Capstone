@@ -10,7 +10,7 @@ const AddPhotos = ({ submission, setSubmission }) => {
   const [notValidPhoto, setNotValidPhoto] = useState(null);
 
   const handleChange = (eventInput) => {
-    console.log(eventInput.target.value);
+    // console.log(eventInput.target.value);
     setPhotosObj(eventInput.target.value);
   };
   const handleSubmit = () => {

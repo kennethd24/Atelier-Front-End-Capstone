@@ -155,21 +155,34 @@ const NewReview = (props) => {
     const errStatement = 'You must enter the following:';
     if (submission.rating === 0) {
       setErrorSubmit(`${errStatement} Overall Rating`);
+      e.stopPropagation();
     }
     if (submission.body.length < 50) {
       setErrorSubmit(`${errStatement} Review Body with minimum 50 characters`);
+      e.stopPropagation();
     }
-
-    return null;
-
-    //   axios.post('api/reviews2/postReview', submission)
-    //     .then(() => {
-    //       console.log('success in posting!');
-    //     })
-    //     .catch((err) => {
-    //       console.log('postReview Err', err);
-    //     });
-    // onHide();
+    if (submission.rating > 0 && submission.body.length > 49) {
+      setErrorSubmit('');
+      onHide();
+      axios.post('/api/reviews2/postReview', submission)
+        .then(() => {
+          setSubmission({
+            product_id: id,
+            rating: 0,
+            summary: '',
+            body: '',
+            recommend: null,
+            name: '',
+            email: '',
+            photos: [],
+            characteristics: {},
+          });
+          // console.log('success in posting!');
+        })
+        .catch((err) => {
+          console.log('postReview Err', err);
+        });
+    }
   };
 
   return (
