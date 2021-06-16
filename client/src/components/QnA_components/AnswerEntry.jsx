@@ -29,11 +29,13 @@ const AnswerEntry = ({ answer }) => {
         A:
         {answer.body}
       </div>
-      <div>
-        {answer.answerer_name}
+      <div className="userContainer">
+        <span className="text-muted">{answer.answerer_name}</span>
         ,
         &nbsp;
-        {new Date(answer.date).toString().slice(4, 16)}
+        <span className="text-muted">{new Date(answer.date).toString().slice(4, 16)}</span>
+        <span className="divider" />
+        &nbsp;
         {!click ? (
           <span onClick={() => {
             handleHelpfulness(answer.answer_id, helpful);
@@ -53,6 +55,8 @@ const AnswerEntry = ({ answer }) => {
             &nbsp;
           </span>
         )}
+        <span className="divider" />
+        &nbsp;
         {!reported ? (
         <u onClick={() => {
           handleAnswerReport(answer.answer_id, reported);
