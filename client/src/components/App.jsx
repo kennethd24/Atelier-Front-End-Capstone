@@ -206,6 +206,8 @@ class App extends React.Component {
               reviewsCount={reviewsCount}
               cart={cart}
               addToCart={this.addToCart}
+              appStyles={styles}
+              defaultStyle={defaultStyle}
             />
             <RelatedItems
               selectedItem={currentItem}
