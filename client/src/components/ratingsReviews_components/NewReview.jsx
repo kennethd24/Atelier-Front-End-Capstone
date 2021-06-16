@@ -28,6 +28,7 @@ const NewReview = (props) => {
     if (ratingChosen === 5) {
       return (
         <span>
+          {' '}
           5 stars - “Great”
         </span>
       );
@@ -35,6 +36,7 @@ const NewReview = (props) => {
     if (ratingChosen === 4) {
       return (
         <span>
+          {' '}
           4 stars - “Good”
         </span>
       );
@@ -42,6 +44,7 @@ const NewReview = (props) => {
     if (ratingChosen === 3) {
       return (
         <span>
+          {' '}
           3 stars - “Average”
         </span>
       );
@@ -49,6 +52,7 @@ const NewReview = (props) => {
     if (ratingChosen === 2) {
       return (
         <span>
+          {' '}
           2 stars - “Fair”
         </span>
       );
@@ -56,6 +60,7 @@ const NewReview = (props) => {
     if (ratingChosen === 1) {
       return (
         <span>
+          {' '}
           1 star - “Poor”
         </span>
       );
