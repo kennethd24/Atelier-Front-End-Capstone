@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import ProductInfo from './overview_components/ProductInfo';
+import PhotoGallery from './overview_components/PhotoGallery';
 
 const Overview = (props) => {
   const {
@@ -77,31 +81,35 @@ const Overview = (props) => {
   };
 
   return (
-    <div className="overview-container">
-      <div className="top">
-        <div className="gallery-overlay">photo gallery</div>
-        {currentStyle &&
-          (
-          <ProductInfo
-            currentProduct={currentItem}
-            styles={styles}
-            currentStyle={currentStyle}
-            setCurrentStyle={setCurrentStyle}
-            rating={rating}
-            reviewsCount={reviewsCount}
-            price={price}
-            size={size}
-            setSize={setSize}
-            quantity={quantity}
-            setQuantity={setQuantity}
-            addToCart={addToCart}
-          />
-          )}
-      </div>
-      <div className="bottom">
+    <Container fluid className="d-flex flex-column container-border main-container">
+      {currentStyle &&
+        (
+          <Row>
+            <Col xs={7} className="container-border p-0">
+              <PhotoGallery currentStyle={currentStyle} />
+            </Col>
+            <Col className="container-border">
+              <ProductInfo
+                currentProduct={currentItem}
+                styles={styles}
+                currentStyle={currentStyle}
+                setCurrentStyle={setCurrentStyle}
+                rating={rating}
+                reviewsCount={reviewsCount}
+                price={price}
+                size={size}
+                setSize={setSize}
+                quantity={quantity}
+                setQuantity={setQuantity}
+                addToCart={addToCart}
+              />
+            </Col>
+          </Row>
+        )}
+      <Row>
         <div>product details</div>
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 };
 
