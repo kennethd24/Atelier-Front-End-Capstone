@@ -17,26 +17,22 @@ const RelatedItems = (props) => {
     <div className="related-outfit-wrapper">
       <div className="related-items-wrapper">
         <h3 className="related-items-title">Related Products</h3>
-        <div className="related-items-carousel-wrapper">
-          <RelatedItemsComp
-            selectedItem={selectedItem}
-            // selectedRating={selectedRating}
-            // selectedDefault={selectedDefault}
-            handleClick={handleClick}
-            getRating={getRating}
-            getDefault={getDefault}
-          />
-        </div>
+        <RelatedItemsComp
+          selectedItem={selectedItem}
+          selectedRating={selectedRating}
+          selectedDefault={selectedDefault}
+          handleClick={handleClick}
+          getRating={getRating}
+          getDefault={getDefault}
+        />
       </div>
       <div className="your-outfit-wrapper">
         <h3 className="your-outfit-title">Your Outfit</h3>
-        <div className="your-outfit-carousel-wrapper">
-          <YourOutfitComp
-            selectedItem={selectedItem}
-            selectedRating={selectedRating}
-            selectedDefault={selectedDefault}
-          />
-        </div>
+        <YourOutfitComp
+          selectedItem={selectedItem}
+          selectedRating={selectedRating}
+          selectedDefault={selectedDefault}
+        />
       </div>
     </div>
   );

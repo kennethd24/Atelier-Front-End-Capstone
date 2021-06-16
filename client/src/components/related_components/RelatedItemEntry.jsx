@@ -3,12 +3,15 @@ import Rating from 'react-rating';
 import Image from './Image';
 import Price from './Price';
 import ProductInfo from './ProductInfo';
+import CompareModal from './CompareModal';
 
 const RelatedItemEntry = (props) => {
   // console.log('relatedItemEntry fired');
   const {
     relatedItem,
-    // selectedItem,
+    selectedRating,
+    selectedItem,
+    selectedDefault,
     handleClick,
     getRating,
     getDefault,
@@ -16,15 +19,15 @@ const RelatedItemEntry = (props) => {
 
   const [defaultStyle, setDefaultStyle] = useState({});
   const [rating, setRating] = useState(0);
+  const [showCompModal, setShowCompModal] = useState(false);
   const itemId = relatedItem.id;
 
-  const handleCompare = (e) => {
-    e.preventDefault();
-    // console.log('selectedChars', selectedChars);
-    // console.log('relatedChars', relatedChars);
-    // console.log('rating in RE', rating);
-    // console.log('typeofrating in RE', typeof rating);
-  };
+  // const handleCompare = (e) => {
+  //   e.preventDefault();
+  //   // console.log('selectedChars', selectedChars);
+  //   // console.log('relatedChars', relatedChars);
+  //   setShowCompModal
+  // };
 
   useEffect(() => {
     getDefault(itemId, ((results) => {
@@ -35,9 +38,24 @@ const RelatedItemEntry = (props) => {
     }));
   }, [relatedItem]);
 
+  // if (Object.keys(defaultStyle) < 1) {
+  //   return (
+  //     <div>Product Loading</div>
+  //   );
+  // }
   return (
-    <div className="product-card" onClick={() => handleClick(relatedItem)} role="button" tabIndex="0" onKeyPress={() => handleClick(relatedItem)}>
-      <Image photos={defaultStyle.photos} />
+    <div className="product-card">
+      <CompareModal
+        show={showCompModal}
+        onHide={() => setShowCompModal(false)}
+        selectedItem={selectedItem}
+        relatedItem={relatedItem}
+      />
+      <Image
+        photos={defaultStyle.photos}
+        item={relatedItem}
+        handleClick={handleClick}
+      />
       <ProductInfo
         category={relatedItem.category}
         mainName={relatedItem.name}
@@ -52,8 +70,9 @@ const RelatedItemEntry = (props) => {
         readonly
         emptySymbol="far fa-star"
         fullSymbol="fas fa-star"
+        className="rating"
       />
-      <button className="compare-button" type="button" onClick={handleCompare}>Compare</button>
+      <button className="compare-button" type="button" onClick={() => setShowCompModal(true)} label="compare"><i className="far fa-star" /></button>
     </div>
   );
 };
