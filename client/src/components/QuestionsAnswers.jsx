@@ -6,6 +6,7 @@ import NewQuestion from './QnA_components/NewQuestion';
 
 const QuestionsAnswers = ({ currentItem }) => {
   const [questionModal, setQuestionModal] = useState(false);
+  const [search, setSearch] = useState('');
   const [questions, setQuestions] = useState({
     results: [],
     moreQuestions: [],
@@ -19,10 +20,18 @@ const QuestionsAnswers = ({ currentItem }) => {
     });
   };
 
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filterQuestions = questions.results.filter((question) => {
+    return question.question_body.toLowerCase().includes(search.toLowerCase())
+  });
+
   useEffect(() => {
     axios.get('/api/qa/questions/')
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setQuestions({
           results: response.data.results.slice(0, 4),
           moreQuestions: response.data.results.slice(4),
@@ -38,10 +47,10 @@ const QuestionsAnswers = ({ currentItem }) => {
     <div>
       <h3>Questions & Answers</h3>
       <div className="Search">
-        <Search />
+        <Search handleChange={handleChange} />
       </div>
       <div className="questionList">
-        {questions.results.map((question) => (
+        {filterQuestions.map((question) => (
           <QuestionList
             question={question}
             key={question.question_id}
