@@ -101,35 +101,35 @@ const CompareModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <table>
+        <table className="comparison-table">
           <thead>
             <tr>
-              <th>{selectedItem.name}</th>
+              <th className="compare-item-name">{selectedItem.name}</th>
               <th> </th>
-              <th>{relatedItem.name}</th>
+              <th className="compare-item-name">{relatedItem.name}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>{selectedItem.category}</td>
-              <td>CATEGORY</td>
+              <td>Category</td>
               <td>{relatedItem.category}</td>
             </tr>
             <tr>
               <td>{selectedItem.default_price}</td>
-              <td>PRICE</td>
+              <td>Price</td>
               <td>{relatedItem.default_price}</td>
             </tr>
             <tr>
               <td>???</td>
-              <td>RATING</td>
+              <td>Rating</td>
               <td>???</td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>{selectedItem.description}</td>
               <td>DESCRIPTION</td>
               <td>{relatedItem.description}</td>
-            </tr>
+            </tr> */}
             <tr>
               <td>{selectedItem.slogan}</td>
               <td>SLOGAN</td>

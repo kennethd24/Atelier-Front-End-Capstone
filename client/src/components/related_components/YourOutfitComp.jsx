@@ -52,6 +52,7 @@ const YourOutfitComp = (props) => {
         spaceBetween={25}
         pagination={{ clickable: true }}
         navigation
+        className="related-outfit-swiper"
       >
         <SwiperSlide>
           <button type="button" onClick={handleAdd} className="product-card" id="add-outfit">
