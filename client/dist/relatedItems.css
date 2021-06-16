@@ -85,7 +85,8 @@
   display: none !important;
 }
 
-.related-outfit-swiper .swiper-button-prev, .swiper-button-next {
+.related-outfit-swiper .swiper-button-prev,
+.related-outfit-swiper .swiper-button-next {
   color: black !important;
   background-color: white !important;
   height: 100% !important;
