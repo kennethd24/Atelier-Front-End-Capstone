@@ -1,6 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/swiper-bundle.css';
 import RelatedItemEntry from './RelatedItemEntry';
+
+SwiperCore.use([Navigation, Pagination]);
+// import SwiperCore, {
+//   Pagination,
+//   Navigation,
+//   Scrollbar,
+// } from 'swiper/core';
+// import "swiper/swiper.min.css";
+// import "swiper/components/pagination/pagination.min.css";
+// import "swiper/components/navigation/navigation.min.css";
+// import "swiper/components/scrollbar/scrollbar.min.css";
+// import 'swiper/swiper.scss';
+// import 'swiper/components/navigation/navigation.scss';
+// import 'swiper/components/pagination/pagination.scss';
+// import 'swiper/components/scrollbar/scrollbar.scss';
+
+// SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
 const RelatedItemsComp = (props) => {
   // console.log('relatedItemsComp fired');
@@ -51,19 +71,28 @@ const RelatedItemsComp = (props) => {
   }, [selectedItem]);
 
   return (
-    <div className="related-items-carousel">
-      {relatedItems.map((item) => (
-        <RelatedItemEntry
-          relatedItem={item}
-          // selectedRating={selectedRating}
-          selectedItem={selectedItem}
-          handleClick={handleClick}
-          getRating={getRating}
-          getDefault={getDefault}
-          key={item.id}
-        />
+    <Swiper
+      slidesPerView={3.5}
+      spaceBetween={25}
+      // watchSlidesProgress
+      // watchSlidesVisibility
+      pagination={{ clickable: true }}
+      navigation
+    >
+      {relatedItems.map((item, i) => (
+        <SwiperSlide key={i}>
+          <RelatedItemEntry
+            relatedItem={item}
+            // selectedRating={selectedRating}
+            selectedItem={selectedItem}
+            handleClick={handleClick}
+            getRating={getRating}
+            getDefault={getDefault}
+            key={item.id}
+          />
+        </SwiperSlide>
       ))}
-    </div>
+    </Swiper>
   );
 };
 

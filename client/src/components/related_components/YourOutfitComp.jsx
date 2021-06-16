@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/swiper-bundle.css';
 import YourOutfitEntry from './YourOutfitEntry';
+
+SwiperCore.use([Navigation, Pagination]);
 
 const YourOutfitComp = (props) => {
   const {
@@ -35,14 +40,28 @@ const YourOutfitComp = (props) => {
 
   return (
     <div className="your-outfit-carousel">
-      <button type="button" onClick={handleAdd}>Add Selected Item to Your Outfit</button>
-      {yourOutfit.map((item) => (
-        <YourOutfitEntry
-          item={item}
-          handleRemove={handleRemove}
-          key={item.id}
-        />
-      ))}
+      <Swiper
+        slidesPerView={3.5}
+        spaceBetween={25}
+        pagination={{ clickable: true }}
+        navigation
+      >
+        <SwiperSlide>
+          <button type="button" onClick={handleAdd} className="product-card" id="add-outfit">
+            <i className="fas fa-plus" />
+            <div className="add-label">Add Selected Item to Your Outfit</div>
+          </button>
+        </SwiperSlide>
+        {yourOutfit.map((item, i) => (
+          <SwiperSlide key={i}>
+            <YourOutfitEntry
+              item={item}
+              handleRemove={handleRemove}
+              key={item.id}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };

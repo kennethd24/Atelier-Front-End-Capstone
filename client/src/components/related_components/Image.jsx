@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Image = (props) => {
-  const { photos } = props;
-
+  const { photos, handleClick, item } = props;
   const [imgUrl, setImgUrl] = useState('no-photo.png');
 
   useEffect(() => {
@@ -13,9 +12,19 @@ const Image = (props) => {
     }
   }, [photos]);
 
+  let input;
+  if (handleClick) {
+    input = (
+      <input type="image" className="product-photo" src={imgUrl} alt="product default style" onClick={() => handleClick(item)} />
+    );
+  } else {
+    input = (
+      <input type="image" className="product-photo" src={imgUrl} alt="product default style" />
+    );
+  }
   return (
     <div className="product-photo-wrapper">
-      <img className="product-photo" src={imgUrl} alt="product" />
+      {input}
     </div>
   );
 };

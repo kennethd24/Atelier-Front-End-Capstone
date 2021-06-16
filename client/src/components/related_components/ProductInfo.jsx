@@ -9,11 +9,10 @@ const ProductInfo = (props) => {
 
   return (
     <div className="product-info-wrapper">
-      <div>{category}</div>
-      <div>
-        {mainName}
-        -
-        {styleName}
+      <div className="product-info-category">{category}</div>
+      <div className="product-info-name">
+        <div className="product-name-main">{mainName}</div>
+        <div className="product-name-style">{styleName}</div>
       </div>
     </div>
   );
