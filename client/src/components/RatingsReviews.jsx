@@ -89,6 +89,7 @@ const RatingsReviews = (props) => {
                     onHide={() => setModalNewReview(false)}
                     name={name}
                     characteristics={metaData.characteristics}
+                    id={id}
                   />
                 </div>
               </span>

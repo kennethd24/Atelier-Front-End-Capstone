@@ -3,16 +3,18 @@ import {
   Modal, Button, Col, Row, Form, InputGroup, FormControl, Container,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
+import axios from 'axios';
+
 import DisplayCharNewReview from './DisplayCharNewReview';
 import ReviewBody from './ReviewBody';
 import AddPhotos from './AddPhotos';
 
 const NewReview = (props) => {
   const {
-    show, onHide, name, characteristics,
+    show, onHide, name, characteristics, id,
   } = props;
   const [submission, setSubmission] = useState({
-    product_id: 0,
+    product_id: id,
     rating: 0,
     summary: '',
     body: '',
@@ -22,12 +24,14 @@ const NewReview = (props) => {
     photos: [],
     characteristics: {},
   });
+  const [errorSubmit, setErrorSubmit] = useState('');
 
   const ratingSelectionText = () => {
     const ratingChosen = submission.rating;
     if (ratingChosen === 5) {
       return (
         <span>
+          {' '}
           5 stars - “Great”
         </span>
       );
@@ -35,6 +39,7 @@ const NewReview = (props) => {
     if (ratingChosen === 4) {
       return (
         <span>
+          {' '}
           4 stars - “Good”
         </span>
       );
@@ -42,6 +47,7 @@ const NewReview = (props) => {
     if (ratingChosen === 3) {
       return (
         <span>
+          {' '}
           3 stars - “Average”
         </span>
       );
@@ -49,6 +55,7 @@ const NewReview = (props) => {
     if (ratingChosen === 2) {
       return (
         <span>
+          {' '}
           2 stars - “Fair”
         </span>
       );
@@ -56,6 +63,7 @@ const NewReview = (props) => {
     if (ratingChosen === 1) {
       return (
         <span>
+          {' '}
           1 star - “Poor”
         </span>
       );
@@ -123,10 +131,11 @@ const NewReview = (props) => {
   const findCharacteristics = () => {
     if (Object.keys(characteristics).length > 0) {
       return (
-        Object.keys(characteristics).map((characteristic) => (
+        Object.entries(characteristics).map((characteristicArr) => (
           <DisplayCharNewReview
-            characteristic={characteristic}
-            key={characteristics[characteristic].id}
+            characteristic={characteristicArr[0]}
+            characteristicObj={characteristicArr[1]}
+            key={characteristicArr[1].id}
             submission={submission}
             setSubmission={setSubmission}
           />
@@ -138,6 +147,42 @@ const NewReview = (props) => {
 
   const handleChange = (eventInput) => {
     setSubmission({ ...submission, [eventInput.target.id]: eventInput.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    // console.log(submission);
+    e.preventDefault();
+    const errStatement = 'You must enter the following:';
+    if (submission.rating === 0) {
+      setErrorSubmit(`${errStatement} Overall Rating`);
+      e.stopPropagation();
+    }
+    if (submission.body.length < 50) {
+      setErrorSubmit(`${errStatement} Review Body with minimum 50 characters`);
+      e.stopPropagation();
+    }
+    if (submission.rating > 0 && submission.body.length > 49) {
+      setErrorSubmit('');
+      onHide();
+      axios.post('/api/reviews2/postReview', submission)
+        .then(() => {
+          setSubmission({
+            product_id: id,
+            rating: 0,
+            summary: '',
+            body: '',
+            recommend: null,
+            name: '',
+            email: '',
+            photos: [],
+            characteristics: {},
+          });
+          // console.log('success in posting!');
+        })
+        .catch((err) => {
+          console.log('postReview Err', err);
+        });
+    }
   };
 
   return (
@@ -160,7 +205,7 @@ const NewReview = (props) => {
           {' '}
           {name}
         </h5>
-        <Form>
+        <Form onSubmit={(event) => handleSubmit(event)}>
           <Form.Row>
             {overallRating}
           </Form.Row>
@@ -204,6 +249,9 @@ const NewReview = (props) => {
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          <Form.Text className="text-danger">
+            {errorSubmit}
+          </Form.Text>
         </Form>
       </Modal.Body>
       <Modal.Footer>

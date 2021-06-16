@@ -44,17 +44,25 @@ const ReviewList = (props) => {
       </div>
     ) : null);
   const addHelpful = () => {
-    // console.log(helpfulClicked);
-    // if (helpfulClicked === false) {
     axios.put(`/api/reviews2/${review_id}/helpful`)
       .then(() => {
         props.getCountReviews();
-        // setHelpfulClicked(true);
       })
       .catch((err) => {
         console.log('addHelpful: ', err);
       });
     // }
+  };
+  const reportReview = () => {
+    axios.put(`/api/reviews2/${review_id}/report`)
+    // axios.put(`/api/reviews2/reportReview/${review_id}`)
+      .then(() => {
+        // console.log('reportReview working');
+        props.getCountReviews();
+      })
+      .catch((err) => {
+        console.log('reportReview', err);
+      });
   };
   const showPhotos = () => {
     if (photos.length > 0) {
@@ -102,6 +110,9 @@ const ReviewList = (props) => {
         Was this review helpful?
         <button className="buttonLink" type="button" onClick={() => { addHelpful(); }}> Yes</button>
         {`(${helpfulness})`}
+        <button className="buttonLink" type="button" onClick={() => {reportReview()}}>
+          Report
+        </button>
       </div>
     </div>
   );

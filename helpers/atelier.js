@@ -79,6 +79,44 @@ const atelier = {
       });
   },
 
+  reportReview: (req, res) => {
+    const { id } = req.params;
+    const options = {
+      method: 'put',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/${id}/report`,
+
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+    axios(options)
+      .then(() => {
+        res.status(200).send('successful report');
+      })
+      .catch((err) => {
+        console.log('reported post: ', err);
+        res.status(400).send(err);
+      });
+  },
+  postReview: (req, res) => {
+    const options = {
+      method: 'post',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews',
+      data: req.body,
+      headers: {
+        Authorization: `${config.TOKEN}`,
+      },
+    };
+    axios(options)
+      .then(() => {
+        res.status(200).send('Successful post!!!');
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).send(err);
+      });
+  },
+
   getReviewMetadata: (req, res) => {
     const options = {
       method: 'get',
@@ -237,7 +275,9 @@ const atelier = {
 
   postAnswer: (req, res) => {
     const { question_id } = req.params;
-    const { body, name, email, photos } = req.body;
+    const {
+      body, name, email, photos,
+    } = req.body;
     const options = {
       method: 'post',
       // eslint-disable-next-line camelcase
