@@ -71,15 +71,11 @@ const NewAnswer = ({ show, onHide, question, product }) => {
             </InputGroup>
           </Form.Group>
 
-          <Form.Row>
-            <Col>
-              <Form.Label>Upload your photos</Form.Label>
-              <Form.File />
-            </Col>
-            <Col>
-              <Button type="submit" className="float-right">Submit</Button>
-            </Col>
-          </Form.Row>
+          <Form.Group>
+            <Form.Label>Upload your photos</Form.Label>
+            <Form.File />
+            <Button type="submit" className="float-right">Submit</Button>
+          </Form.Group>
 
         </Form>
       </Modal.Body>
