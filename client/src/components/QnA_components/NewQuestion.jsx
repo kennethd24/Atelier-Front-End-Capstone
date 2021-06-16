@@ -4,46 +4,46 @@ import {
   Modal, Button, Form, InputGroup,
 } from 'react-bootstrap';
 
-const NewAnswer = ({ show, onHide, question, product }) => {
-  const [modalAnswer, setModalAnswer] = useState({
+const NewQuestion = ({ show, onHide, product }) => {
+  const [modalQuestion, setModalQuestion] = useState({
     body: '',
     name: '',
     email: '',
-    photos: [],
+    product_id: 16060,
   });
 
-  const submitAnswer = (e) => {
-    const inputAnswer = {
-      body: modalAnswer.body,
-      name: modalAnswer.name,
-      email: modalAnswer.email,
-      photos: modalAnswer.photos,
+  const submitQuestion = (e) => {
+    const inputQuestion = {
+      body: modalQuestion.body,
+      name: modalQuestion.name,
+      email: modalQuestion.email,
+      product_id: modalQuestion.product_id,
     };
-    axios.post(`/api/qa/questions/${question.question_id}/answers`, inputAnswer)
+    axios.post('/api/qa/questions', inputQuestion)
       .catch((err) => console.error(err));
   };
 
   const handleChange = (e) => {
-    setModalAnswer({ ...modalAnswer, [e.target.name]: e.target.value }, console.log(modalAnswer));
+    setModalQuestion({ ...modalQuestion, [e.target.name]: e.target.value }, console.log(modalQuestion));
   };
 
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>
-          Submit You Answer
-          <Modal.Title>[{product.name}] [{question.question_body}]</Modal.Title>
+          Ask Your Question
+          <Modal.Title>About [{product.name}]</Modal.Title>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={submitAnswer}>
+        <Form onSubmit={submitQuestion}>
 
           <Form.Group>
             <InputGroup hasValidation>
               <InputGroup.Prepend>
-                <InputGroup.Text>Your Answer*</InputGroup.Text>
+                <InputGroup.Text>Your Question*</InputGroup.Text>
               </InputGroup.Prepend>
-              {modalAnswer.body.length < 1 ? <Form.Control as="textarea" rows={7} name="body" onChange={(e) => handleChange(e)} maxLength={1000} required isInvalid />
+              {modalQuestion.body.length < 1 ? <Form.Control as="textarea" rows={7} name="body" onChange={(e) => handleChange(e)} maxLength={1000} required isInvalid />
                 :
               <Form.Control as="textarea" rows={7} name="body" onChange={(e) => handleChange(e)} maxLength={1000} />}
             </InputGroup>
@@ -54,9 +54,9 @@ const NewAnswer = ({ show, onHide, question, product }) => {
               <InputGroup.Prepend>
                 <InputGroup.Text>What is your nickname?*</InputGroup.Text>
               </InputGroup.Prepend>
-              {modalAnswer.name < 1 ? <Form.Control as="input" placeholder="Example: jack543!" name="name" onChange={(e) => handleChange(e)} maxLength={60} required isInvalid />
+              {modalQuestion.name < 1 ? <Form.Control as="input" placeholder="Example: jack543!" name="name" onChange={(e) => handleChange(e)} maxLength={60} required isInvalid />
                 :
-              <Form.Control as="input" placeholder="Example: jack543!" name="name" onChange={(e) => handleChange(e)} maxLength={60} />}
+              <Form.Control as="input" placeholder="Example: jackson11!" name="name" onChange={(e) => handleChange(e)} maxLength={60} />}
               <Form.Text>For privacy reasons, do not use your full name or email address</Form.Text>
             </InputGroup>
           </Form.Group>
@@ -66,7 +66,7 @@ const NewAnswer = ({ show, onHide, question, product }) => {
               <InputGroup.Prepend>
                 <InputGroup.Text>Your email*</InputGroup.Text>
               </InputGroup.Prepend>
-              {modalAnswer.email < 1 ? <Form.Control type="text" placeholder="Example: jack@email.com" name="email" onChange={(e) => handleChange(e)} maxLength={60} required isInvalid />
+              {modalQuestion.email < 1 ? <Form.Control type="text" placeholder="Why did you like the product or not?" name="email" onChange={(e) => handleChange(e)} maxLength={60} required isInvalid />
                 :
               <Form.Control type="text" placeholder="Example: jack@email.com" name="email" onChange={(e) => handleChange(e)} maxLength={60} />}
             </InputGroup>
@@ -74,8 +74,6 @@ const NewAnswer = ({ show, onHide, question, product }) => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Upload your photos</Form.Label>
-            <Form.File />
             <Button type="submit" className="float-right">Submit</Button>
           </Form.Group>
 
@@ -85,4 +83,4 @@ const NewAnswer = ({ show, onHide, question, product }) => {
   );
 };
 
-export default NewAnswer;
+export default NewQuestion;
