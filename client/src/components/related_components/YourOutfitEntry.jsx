@@ -26,6 +26,7 @@ const YourOutfitEntry = (props) => {
       <Rating
         initialRating={rating}
         readonly
+        className="rating"
         emptySymbol="far fa-star"
         fullSymbol="fas fa-star"
       />
@@ -45,7 +46,7 @@ const YourOutfitEntry = (props) => {
         original={origPrice}
       />
       {ratingComp}
-      <button className="remove-button" type="button" onClick={() => handleRemove(item.id)}>Remove Item</button>
+      <button className="remove-button" type="button" onClick={() => handleRemove(item.id)} label="remove"><i className="fas fa-times-circle" /></button>
     </div>
   );
 };
