@@ -70,7 +70,7 @@ const RelatedItemEntry = (props) => {
         fullSymbol="fas fa-star"
         className="rating"
       />
-      <button className="compare-button" type="button" onClick={() => setShowCompModal(true)}>Compare</button>
+      <button className="compare-button" type="button" onClick={() => setShowCompModal(true)} label="compare"><i className="far fa-star" /></button>
     </div>
   );
 };

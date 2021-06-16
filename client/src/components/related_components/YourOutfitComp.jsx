@@ -40,15 +40,20 @@ const YourOutfitComp = (props) => {
 
   return (
     <div className="your-outfit-carousel">
-      <button type="button" onClick={handleAdd} className="your-outfit-add">Add Selected Item to Your Outfit</button>
       <Swiper
         slidesPerView={3.5}
         spaceBetween={25}
         pagination={{ clickable: true }}
         navigation
       >
-        {yourOutfit.map((item) => (
-          <SwiperSlide>
+        <SwiperSlide>
+          <button type="button" onClick={handleAdd} className="product-card" id="add-outfit">
+            <i className="fas fa-plus" />
+            Add Selected Item to Your Outfit
+          </button>
+        </SwiperSlide>
+        {yourOutfit.map((item, i) => (
+          <SwiperSlide key={i}>
             <YourOutfitEntry
               item={item}
               handleRemove={handleRemove}

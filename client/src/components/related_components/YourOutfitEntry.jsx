@@ -45,7 +45,8 @@ const YourOutfitEntry = (props) => {
         original={origPrice}
       />
       {ratingComp}
-      <button className="remove-button" type="button" onClick={() => handleRemove(item.id)}>Remove Item</button>
+
+      <button className="remove-button" type="button" onClick={() => handleRemove(item.id)} label="remove"><i className="fas fa-times-circle" /></button>
     </div>
   );
 };
