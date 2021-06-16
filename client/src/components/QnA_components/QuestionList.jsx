@@ -32,7 +32,7 @@ const QuestionList = ({ question, product }) => {
   useEffect(async () => {
     await axios.get(`/api/qa/questions/${question.question_id}/answers`)
       .then((response) => {
-        console.log('answers', response.data);
+        // console.log('answers', response.data);
         setAnswers({
           results: response.data.results.slice(0, 2),
           moreAnswers: response.data.results.slice(2),

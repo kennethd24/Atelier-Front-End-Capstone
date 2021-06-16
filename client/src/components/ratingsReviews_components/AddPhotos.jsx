@@ -20,3 +20,5 @@ const AddPhotos = ({ submission, setSubmission })=> {
 }
 
 export default AddPhotos;
+
+// photos= [{id: 1234, url: 'somelink.com'}];
