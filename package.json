@@ -43,6 +43,7 @@
     "react-items-carousel": "^2.8.0",
     "react-rating": "^2.0.5",
     "react-select": "^4.3.1",
+    "regenerator-runtime": "^0.13.7",
     "swiper": "^6.7.0",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"

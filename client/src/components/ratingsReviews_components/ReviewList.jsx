@@ -1,9 +1,11 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { useState } from 'react';
 import Rating from 'react-rating';
 import axios from 'axios';
+import Photos from './Photos';
 
 const ReviewList = (props) => {
+  const { review } = props;
   const {
     response,
     date,
@@ -14,7 +16,10 @@ const ReviewList = (props) => {
     recommend,
     reviewer_name,
     helpfulness,
-  } = props.review;
+    photos,
+  } = review;
+
+  const { helpfulClicked, setHelpfulClicked } = useState(false);
 
   const showResponse = () => {
     if (response !== null && response !== '') {
@@ -39,14 +44,26 @@ const ReviewList = (props) => {
       </div>
     ) : null);
   const addHelpful = () => {
-    // /reviews/:review_id/helpful
+    // console.log(helpfulClicked);
+    // if (helpfulClicked === false) {
     axios.put(`/api/reviews2/${review_id}/helpful`)
       .then(() => {
         props.getCountReviews();
+        // setHelpfulClicked(true);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('addHelpful: ', err);
       });
+    // }
+  };
+  const showPhotos = () => {
+    if (photos.length > 0) {
+      return (
+        photos.map((photo) => (
+          <Photos photo={photo} key={photo.id} url={photo.url} />
+        ))
+      );
+    }
   };
 
   return (
@@ -74,16 +91,15 @@ const ReviewList = (props) => {
         <div>
           {reviewer_name}
           {' '}
-          ✓Verfied Purchaser(need to check email?)
+          {/* ✓Verfied Purchaser(need to check email?) */}
         </div>
       </div>
       {showResponse()}
-      <div>Need to Add Photos(bootstrap?)</div>
+      <div className="reviews-photo-container">
+        {showPhotos()}
+      </div>
       <div className="reviewListEntry-footer">
         Was this review helpful?
-        {/* Yes(
-          {helpfulness}
-          ) */}
         <button className="buttonLink" type="button" onClick={() => { addHelpful(); }}> Yes</button>
         {`(${helpfulness})`}
       </div>

@@ -44,7 +44,7 @@ class App extends React.Component {
     axios.get('/api/products')
       .then((res) => {
         this.setState({
-          currentItem: res.data[0],
+          currentItem: res.data[4],
           // currentItem: res.data[0] changed for better dummy review data
         });
       })
@@ -133,7 +133,7 @@ class App extends React.Component {
   handleRelatedClick = (relatedItem) => {
     this.setState({
       currentItem: relatedItem,
-      stateCount: 0,
+      // stateCount: 0,
     });
   };
 
@@ -197,7 +197,7 @@ class App extends React.Component {
 
     return (
       <div>
-        {(Object.keys(defaultStyle).length > 0) &&
+        {(stateCount > 4) &&
           (
           <div>
             <Overview

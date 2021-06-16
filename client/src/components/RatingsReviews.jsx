@@ -4,6 +4,7 @@ import axios from 'axios';
 import SortBy from './ratingsReviews_components/SortBy';
 import ReviewList from './ratingsReviews_components/ReviewList';
 import Ratings from './ratingsReviews_components/Ratings';
+import NewReview from './ratingsReviews_components/NewReview';
 
 const RatingsReviews = (props) => {
   const {
@@ -13,6 +14,7 @@ const RatingsReviews = (props) => {
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
   const [sortState, setSortState] = useState('relevant');
+  const [modalNewReview, setModalNewReview] = useState(false);
 
   const getCountReviews = () => {
     if (Object.keys(currentItem).length > 0) {
@@ -29,7 +31,13 @@ const RatingsReviews = (props) => {
 
   useEffect(() => {
     getCountReviews();
-  }, [id, count, sortState, setSortState]);
+  }, [count, sortState, setSortState]);
+
+  useEffect(() => {
+    setReviews([]);
+    setCount(2);
+    getCountReviews();
+  }, [id]);
 
   return (
     <div className="ratingsReview-container">
@@ -53,7 +61,7 @@ const RatingsReviews = (props) => {
           )
           <br />
           {(reviewsCount < 1) ?
-            <button type="submit">Submit a new review!</button>
+            <button type="button" onClick={() => setModalNewReview(true)}>Submit a new review!</button>
             : (
               <span>
                 <div className="sortBy-container">
@@ -74,7 +82,14 @@ const RatingsReviews = (props) => {
                     <button type="button" onClick={() => setCount(count + 2)}>More Reviews</button>
                     :
                     null}
-                  <button type="button">Add Review</button>
+                  <button type="button" onClick={() => setModalNewReview(true)}>Add Review</button>
+
+                  <NewReview
+                    show={modalNewReview}
+                    onHide={() => setModalNewReview(false)}
+                    name={name}
+                    characteristics={metaData.characteristics}
+                  />
                 </div>
               </span>
             )}

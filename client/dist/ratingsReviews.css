@@ -3,7 +3,6 @@
   flex-direction: column;
   width: 100%;
   border: 1px solid #2d2d2d;
-  margin: 10px;
 }
 .ratingsReviewList-container {
   display: flex;
@@ -24,6 +23,7 @@
 .reviews-container {
   border: 1px solid #2d2d2d;
   height: 650px;
+  /* height: 90vh; */
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -46,8 +46,9 @@
 .reviewListEntry-recommendation {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  border: 1px solid #2d2d2d;
+  justify-content: left;
+  /* margin-left: 5px;
+  border: 1px solid #2d2d2d; */
 }
 .reviewListEntry-footer {
   display: flex;
@@ -69,6 +70,17 @@
 .reviewListEntry-response {
   border: 1px solid #2d2d2d;
   background-color: rgba(0, 0, 255, .2);
+}
+.reviews-photo-container {
+  display: flex;
+  flex-direction: row;
+}
+.reviews-photo-single {
+  object-fit: cover;
+  height: 8vh;
+  width: 10vh;
+  padding: 1vh;
+  cursor: pointer;
 }
 .sortBy-header {
   display: flex;
@@ -98,15 +110,16 @@
 }
 .characteristic-entry {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .characteristic-left {
   float: left;
   width: 20%;
 }
 .characteristic-right {
-  float: left;
-  width: 70%;
+  float: right;
+  width: 90%;
+  padding-inline-start: 1vh;
 }
 
 @media (max-width: 1000px) {
