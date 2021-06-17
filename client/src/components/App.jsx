@@ -11,7 +11,6 @@ class App extends React.Component {
     super();
 
     this.state = {
-      // currentItem: JSON.parse(localStorage.getItem('currentItem')) || {},
       currentItem: {},
       rating: 0,
       reviewsCount: 0,
