@@ -117,7 +117,7 @@
   height: 520px;
 }
 
-.thumb-active {
+.swiper-slide-thumb-active {
   padding-bottom: 3px;
   border-bottom: 4px solid #2d2d2d;
 }
@@ -134,16 +134,16 @@
   color: #2d2d2d;
 }
 
-.info-swiper .swiper-button-prev:after, .info-swiper .swiper-button-next:after {
+.info-swiper .swiper-button-prev:after,
+.info-swiper .swiper-button-next:after {
   font-size: 30px !important;
   color: #2d2d2d;
 }
 
 .info-swiper .swiper-button-prev.swiper-button-disabled,
-.info-swiper .swiper-button-next.swiper-button-disabled {
+.info-swiper .swiper-button-next.swiper-button-disabled,
+.up-btn.swiper-button-disabled,
+.down-btn.swiper-button-disabled
+{
   opacity: 0 !important;
-}
-
-.hide-btn {
-  opacity: 0;
 }

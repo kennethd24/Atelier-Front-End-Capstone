@@ -32,7 +32,7 @@ class App extends React.Component {
     const prevLength = Object.keys(prevState.currentItem).length;
 
     if ((prevLength === 0 && currentLength > 0)
-      || (prevState.currentItem.id !== currentItem.id)) {
+    || (prevState.currentItem.id !== currentItem.id)) {
       this.getMetadata();
       this.getTotalReviews();
       this.getStyles();
@@ -41,16 +41,23 @@ class App extends React.Component {
   }
 
   getFirstItem = () => {
-    axios.get('/api/products')
-      .then((res) => {
-        this.setState({
-          currentItem: res.data[4],
-          // currentItem: res.data[0] changed for better dummy review data
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+    const stored = JSON.parse(localStorage.getItem('currentItem'));
+    if (stored) {
+      this.setState({
+        currentItem: stored,
       });
+    } else {
+      axios.get('/api/products')
+        .then((res) => {
+          this.setState({
+            currentItem: res.data[4],
+            // currentItem: res.data[0] changed for better dummy review data
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   calcAvgRating = (ratingsObj, cb) => {
@@ -133,8 +140,10 @@ class App extends React.Component {
   handleRelatedClick = (relatedItem) => {
     this.setState({
       currentItem: relatedItem,
-      // stateCount: 0,
+      stateCount: 0,
     });
+
+    localStorage.setItem('currentItem', JSON.stringify(relatedItem));
   };
 
   getStyles = (id, cb) => {
@@ -195,37 +204,39 @@ class App extends React.Component {
       styles,
     } = this.state;
 
+    if (stateCount <= 4) {
+      return (
+        <div>
+          Loading....
+        </div>
+      );
+    }
     return (
       <div>
-        {(stateCount > 4) &&
-          (
-          <div>
-            <Overview
-              currentItem={currentItem}
-              rating={rating}
-              reviewsCount={reviewsCount}
-              cart={cart}
-              addToCart={this.addToCart}
-              appStyles={styles}
-              defaultStyle={defaultStyle}
-            />
-            <RelatedItems
-              selectedItem={currentItem}
-              selectedRating={rating}
-              selectedDefault={defaultStyle}
-              handleClick={this.handleRelatedClick}
-              getRating={this.getMetadata}
-              getDefault={this.getStyles}
-            />
-            <QuestionsAnswers currentItem={currentItem} />
-            <RatingsReviews
-              currentItem={currentItem}
-              rating={rating}
-              reviewsCount={reviewsCount}
-              metaData={metaData}
-            />
-          </div>
-          )}
+        <Overview
+          currentItem={currentItem}
+          rating={rating}
+          reviewsCount={reviewsCount}
+          cart={cart}
+          addToCart={this.addToCart}
+          appStyles={styles}
+          defaultStyle={defaultStyle}
+        />
+        <RelatedItems
+          selectedItem={currentItem}
+          selectedRating={rating}
+          selectedDefault={defaultStyle}
+          handleClick={this.handleRelatedClick}
+          getRating={this.getMetadata}
+          getDefault={this.getStyles}
+        />
+        <QuestionsAnswers currentItem={currentItem} />
+        <RatingsReviews
+          currentItem={currentItem}
+          rating={rating}
+          reviewsCount={reviewsCount}
+          metaData={metaData}
+        />
       </div>
     );
   }
