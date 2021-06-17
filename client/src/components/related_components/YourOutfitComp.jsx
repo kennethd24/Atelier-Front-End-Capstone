@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import 'swiper/swiper-bundle.css';
+import SwiperCore, { Navigation } from 'swiper';
+// import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/swiper.min.css';
+// import 'swiper/swiper-bundle.css';
+import 'swiper/components/navigation/navigation.min.css';
+// import 'swiper/components/navigation/navigation.scss';
 import YourOutfitEntry from './YourOutfitEntry';
 
-SwiperCore.use([Navigation, Pagination]);
+SwiperCore.use([Navigation]);
+// SwiperCore.use([Navigation, Pagination]);
 
 const YourOutfitComp = (props) => {
   const {
@@ -46,31 +51,29 @@ const YourOutfitComp = (props) => {
   };
 
   return (
-    <div className="your-outfit-carousel">
-      <Swiper
-        slidesPerView={3.5}
-        spaceBetween={25}
-        pagination={{ clickable: true }}
-        navigation
-        className="related-outfit-swiper"
-      >
-        <SwiperSlide>
-          <button type="button" onClick={handleAdd} className="product-card" id="add-outfit">
-            <i className="fas fa-plus" />
-            <div className="add-label">Add Selected Item to Your Outfit</div>
-          </button>
+    <Swiper
+      slidesPerView={3.5}
+      spaceBetween={25}
+      // pagination={{ clickable: true }}
+      navigation
+      className="related-outfit-swiper"
+    >
+      <SwiperSlide>
+        <button type="button" onClick={handleAdd} className="product-card" id="add-outfit">
+          <i className="fas fa-plus" />
+          <div className="add-label">Add Selected Item to Your Outfit</div>
+        </button>
+      </SwiperSlide>
+      {yourOutfit.map((item, i) => (
+        <SwiperSlide key={i}>
+          <YourOutfitEntry
+            item={item}
+            handleRemove={handleRemove}
+            key={item.id}
+          />
         </SwiperSlide>
-        {yourOutfit.map((item, i) => (
-          <SwiperSlide key={i}>
-            <YourOutfitEntry
-              item={item}
-              handleRemove={handleRemove}
-              key={item.id}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+      ))}
+    </Swiper>
   );
 };
 
