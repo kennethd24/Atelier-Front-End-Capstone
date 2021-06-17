@@ -19,6 +19,7 @@ class App extends React.Component {
       cart: [],
       styles: [],
       stateCount: 0,
+      allReviews: [],
     };
   }
 
@@ -117,13 +118,17 @@ class App extends React.Component {
     }
   };
 
- getTotalReviews = () => {
+ getTotalReviews = (sortOption) => {
    const { currentItem } = this.state;
+   const getSort = sortOption || 'relevant';
+   console.log('inside getTotalReview, sortOption: ', sortOption);
    if (Object.keys(currentItem).length > 0) {
-     axios.get(`/api/reviews2/${currentItem.id}/10000/relevant`)
+     axios.get(`/api/reviews2/${currentItem.id}/1000/${getSort}}`)
        .then((results) => {
+         const reviewsArr = results.data.results;
          this.setState({
-           reviewsCount: results.data.results.length,
+           reviewsCount: reviewsArr.length,
+           allReviews: reviewsArr,
          });
        })
        .then(() => {
@@ -202,6 +207,7 @@ class App extends React.Component {
       cart,
       stateCount,
       styles,
+      allReviews,
     } = this.state;
 
     if (stateCount <= 4) {
@@ -236,6 +242,8 @@ class App extends React.Component {
           rating={rating}
           reviewsCount={reviewsCount}
           metaData={metaData}
+          allReviews={allReviews}
+          getTotalReviews={this.getTotalReviews}
         />
       </div>
     );
