@@ -11,6 +11,7 @@ class App extends React.Component {
     super();
 
     this.state = {
+      // currentItem: JSON.parse(localStorage.getItem('currentItem')) || {},
       currentItem: {},
       rating: 0,
       reviewsCount: 0,
@@ -22,8 +23,17 @@ class App extends React.Component {
     };
   }
 
+  // const [yourOutfit, setYourOutfit] = useState(
+  //   JSON.parse(localStorage.getItem('yourOutfitInLocal')) || [],
+  // );
+
+  // useEffect(() => {
+  //   localStorage.setItem('yourOutfitInLocal', JSON.stringify(yourOutfit));
+  // }, [yourOutfit]);
+
   componentDidMount() {
     this.getFirstItem();
+    // this.checkLocal();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -32,7 +42,7 @@ class App extends React.Component {
     const prevLength = Object.keys(prevState.currentItem).length;
 
     if ((prevLength === 0 && currentLength > 0)
-      || (prevState.currentItem.id !== currentItem.id)) {
+    || (prevState.currentItem.id !== currentItem.id)) {
       this.getMetadata();
       this.getTotalReviews();
       this.getStyles();
@@ -40,17 +50,27 @@ class App extends React.Component {
     }
   }
 
+  // checkLocal = () => {
+  // }
+
   getFirstItem = () => {
-    axios.get('/api/products')
-      .then((res) => {
-        this.setState({
-          currentItem: res.data[4],
-          // currentItem: res.data[0] changed for better dummy review data
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+    const stored = JSON.parse(localStorage.getItem('currentItem'));
+    if (stored) {
+      this.setState({
+        currentItem: stored,
       });
+    } else {
+      axios.get('/api/products')
+        .then((res) => {
+          this.setState({
+            currentItem: res.data[4],
+            // currentItem: res.data[0] changed for better dummy review data
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   calcAvgRating = (ratingsObj, cb) => {
@@ -135,6 +155,8 @@ class App extends React.Component {
       currentItem: relatedItem,
       stateCount: 0,
     });
+
+    localStorage.setItem('currentItem', JSON.stringify(relatedItem));
   };
 
   getStyles = (id, cb) => {
