@@ -37,19 +37,28 @@ const CompareModal = (props) => {
 
   const checkFeatures = (selArr, relArr) => {
     const sharedObj = {};
+    const checkIcon = <i className="fas fa-check" />;
 
     if (Array.isArray(selArr)) {
       selArr.forEach((selFeat) => {
-        sharedObj[selFeat.feature] = { selVal: selFeat.value, relVal: null };
+        let val = selFeat.value;
+        if (val === true) {
+          val = checkIcon;
+        }
+        sharedObj[selFeat.feature] = { selVal: val, relVal: null };
       });
     }
 
     if (Array.isArray(relArr)) {
       relArr.forEach((relFeat) => {
+        let val = relFeat.value;
+        if (val === true) {
+          val = checkIcon;
+        }
         if (sharedObj[relFeat.feature]) {
-          sharedObj[relFeat.feature].relVal = relFeat.value;
+          sharedObj[relFeat.feature].relVal = val;
         } else {
-          sharedObj[relFeat.feature] = { selVal: null, relVal: relFeat.value };
+          sharedObj[relFeat.feature] = { selVal: null, relVal: val };
         }
       });
     }
