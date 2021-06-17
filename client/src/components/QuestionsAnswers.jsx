@@ -53,7 +53,7 @@ const QuestionsAnswers = ({ currentItem }) => {
   }, [currentItem.id]);
 
   return (
-    <Container>
+    <Container fluid className="main-container">
       <h3>Questions & Answers</h3>
       <div className="Search">
         <Search handleChange={handleChange} />

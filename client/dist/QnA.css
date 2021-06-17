@@ -1,7 +1,7 @@
 .answerListScroll {
-  max-height: 100vh;
+  max-height: 25vh;
   overflow: auto;
-  height: 18vh;
+  /* height: 18vh; */
 }
 
 .bolder {
@@ -14,9 +14,9 @@
 }
 
 .questionList {
-  max-height: 100vh;
+  max-height: 50vh;
   overflow: auto;
-  height: 88vh;
+  /* height: 88vh; */
 }
 
 u:hover {
