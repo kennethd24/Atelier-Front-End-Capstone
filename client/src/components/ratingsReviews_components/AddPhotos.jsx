@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Modal, Button, Col, Row, Form, Image, InputGroup, FormControl, Container,
+  Modal, Button, Col, Form, Image, InputGroup,
 } from 'react-bootstrap';
 
 const AddPhotos = ({ submission, setSubmission }) => {

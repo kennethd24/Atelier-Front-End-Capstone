@@ -32,6 +32,7 @@
   min-height: 47%;
   padding: 5px;
   border: 1px solid #2d2d2d;
+  overflow: auto;
 
 }
 .reviewListEntry-header {
@@ -58,14 +59,14 @@
     background: none!important;
     border: none;
     padding: 0!important;
-    /*optional*/
     font-family: arial, sans-serif;
-    /*input has OS specific font-family*/
-    color: #069;
     text-decoration: underline;
-    cursor: pointer;
     margin-left: 10px;
     margin-right: 2px;
+}
+.buttonLink:hover {
+  color: #069;
+  cursor: pointer;
 }
 .reviewListEntry-response {
   border: 1px solid #2d2d2d;
