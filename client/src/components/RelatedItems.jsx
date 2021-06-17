@@ -17,7 +17,7 @@ const RelatedItems = (props) => {
   } = props;
 
   return (
-    <Container fluid className="d-flex flex-column container-border main-container">
+    <Container fluid className="d-flex flex-column main-container">
       <div className="related-outfit-wrapper">
         <div className="related-items-wrapper">
           <Row>
