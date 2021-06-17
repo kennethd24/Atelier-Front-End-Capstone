@@ -215,7 +215,7 @@ class App extends React.Component {
     }
     return (
       <div>
-        <Container>
+        <Container className="main-container">
           <Row>
             <div className="app-header">Project Catwalk</div>
           </Row>
