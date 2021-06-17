@@ -23,17 +23,8 @@ class App extends React.Component {
     };
   }
 
-  // const [yourOutfit, setYourOutfit] = useState(
-  //   JSON.parse(localStorage.getItem('yourOutfitInLocal')) || [],
-  // );
-
-  // useEffect(() => {
-  //   localStorage.setItem('yourOutfitInLocal', JSON.stringify(yourOutfit));
-  // }, [yourOutfit]);
-
   componentDidMount() {
     this.getFirstItem();
-    // this.checkLocal();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -49,9 +40,6 @@ class App extends React.Component {
       this.getMetadataCurrentItem();
     }
   }
-
-  // checkLocal = () => {
-  // }
 
   getFirstItem = () => {
     const stored = JSON.parse(localStorage.getItem('currentItem'));

@@ -95,7 +95,7 @@
   color: black !important;
   background-color: white !important;
   height: 100% !important;
-  width: 100px !important;
+  width: 75px !important;
 }
 
 .related-outfit-swiper .swiper-button-next {
@@ -109,7 +109,7 @@
   position: absolute !important;
   left: 0px !important;
   top: 0px !important;
-  background: linear-gradient(to right, white, transparent 50%) !important;
+  background: linear-gradient(to right, white, transparent 100%) !important;
 }
 
 .product-name-style {
