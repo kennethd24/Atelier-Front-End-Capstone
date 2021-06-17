@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
 import Search from './QnA_components/Search';
 import QuestionList from './QnA_components/QuestionList';
 import NewQuestion from './QnA_components/NewQuestion';
+import config from '../../../config';
+
+const AUTH = {
+  headers: {
+    Authorization: config.TOKEN,
+  },
+};
+const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions';
 
 const QuestionsAnswers = ({ currentItem }) => {
   const [questionModal, setQuestionModal] = useState(false);
@@ -29,7 +38,7 @@ const QuestionsAnswers = ({ currentItem }) => {
   });
 
   useEffect(() => {
-    axios.get('/api/qa/questions/')
+    axios.get(`${URL}/?product_id=${currentItem.id}&count=100`, AUTH)
       .then((response) => {
         // console.log(response.data);
         setQuestions({
@@ -41,10 +50,10 @@ const QuestionsAnswers = ({ currentItem }) => {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [currentItem.id]);
 
   return (
-    <div>
+    <Container>
       <h3>Questions & Answers</h3>
       <div className="Search">
         <Search handleChange={handleChange} />
@@ -68,7 +77,7 @@ const QuestionsAnswers = ({ currentItem }) => {
         questions={questions.product_id}
         product={currentItem}
       />
-    </div>
+    </Container>
   );
 };
 
