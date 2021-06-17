@@ -4,7 +4,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Characteristics from './Characteristics';
 
 const Ratings = (props) => {
-  const { rating, metaData } = props;
+  const { rating, metaData, reviews, setReviews } = props;
   const [totalRatings, setTotalRatings] = useState(0);
 
   const percentRecommend = () => {
@@ -54,6 +54,14 @@ const Ratings = (props) => {
       }
     }
   };
+  const ratingSort = (numStar) => {
+    console.log('hi', numStar);
+    console.log(reviews);
+    const resultSort = reviews.filter(review => review.rating === numStar);
+    console.log(resultSort);
+
+
+  };
   const progressbars = (star) => {
     if (metaData.ratings && totalRatings > 0) {
       const now = (metaData.ratings[star] / totalRatings) * 100;
@@ -62,7 +70,7 @@ const Ratings = (props) => {
       const progressInstance = <ProgressBar variant="success" now={now} />;
       return (
         <>
-          <div className="ratingbreakdown-side">
+          <div className="ratingbreakdown-side" onClick={() => ratingSort(star)} aria-hidden="true" role="button">
             {star}
             {' '}
             Star

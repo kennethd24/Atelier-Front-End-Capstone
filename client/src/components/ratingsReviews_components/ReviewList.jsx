@@ -72,6 +72,7 @@ const ReviewList = (props) => {
         ))
       );
     }
+    return null;
   };
 
   return (

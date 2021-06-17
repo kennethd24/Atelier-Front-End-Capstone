@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Container } from 'react-bootstrap';
 
 import SortBy from './ratingsReviews_components/SortBy';
 import ReviewList from './ratingsReviews_components/ReviewList';
@@ -40,6 +41,7 @@ const RatingsReviews = (props) => {
   }, [id]);
 
   return (
+    <Container>
     <div className="ratingsReview-container">
       <div className="ratingsReview-title">
         Ratings & Reviews
@@ -51,7 +53,7 @@ const RatingsReviews = (props) => {
           (ID is equal to &nbsp;
           {id}
           )
-          <Ratings rating={rating} metaData={metaData} />
+          <Ratings rating={rating} metaData={metaData} reviews={reviews} setReviews={setReviews} />
         </div>
         <div className="reviewList">
           Review List
@@ -97,6 +99,7 @@ const RatingsReviews = (props) => {
         </div>
       </div>
     </div>
+    </Container>
   );
 };
 
