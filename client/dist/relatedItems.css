@@ -1,7 +1,8 @@
 .related-outfit-wrapper {
   display: flex;
   flex-direction: column;
-  width: 1000px;
+  max-width: 1250px;
+  /* box-sizing: border-box; */
   /* border: 1px solid #2d2d2d; */
 }
 
@@ -10,12 +11,16 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+  /* justify-content: center;
+  align-items: center; */
   /* border: 1px solid #2d2d2d; */
 }
 
 .swiper-container.related-outfit-swiper {
   width: 100%;
   height: 100%;
+  /* justify-content: center;
+  align-items: center; */
 }
 
 .related-outfit-swiper .swiper-slide {
@@ -90,7 +95,7 @@
   color: black !important;
   background-color: white !important;
   height: 100% !important;
-  width: 100px !important;
+  width: 75px !important;
 }
 
 .related-outfit-swiper .swiper-button-next {
@@ -104,7 +109,7 @@
   position: absolute !important;
   left: 0px !important;
   top: 0px !important;
-  background: linear-gradient(to right, white, transparent 50%) !important;
+  background: linear-gradient(to right, white, transparent 100%) !important;
 }
 
 .product-name-style {
@@ -172,4 +177,22 @@
   margin-bottom: 76px;
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.modal-content {
+  justify-content: center;
+  align-items: center;
+}
+
+.comparison-table td,
+.comparison-table th {
+  background-color:rgb(245, 245, 245);
+  width: 300px;
+  height: 40px;
+  text-align: center;
+}
+
+.comparison-table th {
+  font-weight: bold;
+  font-size: 18px;
 }

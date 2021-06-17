@@ -49,7 +49,10 @@ const RelatedItemEntry = (props) => {
         show={showCompModal}
         onHide={() => setShowCompModal(false)}
         selectedItem={selectedItem}
+        selectedDefault={selectedDefault}
+        selectedRating={selectedRating}
         relatedItem={relatedItem}
+        relatedRating={rating}
       />
       <Image
         photos={defaultStyle.photos}
