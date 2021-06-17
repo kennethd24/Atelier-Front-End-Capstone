@@ -230,7 +230,9 @@ class App extends React.Component {
           getRating={this.getMetadata}
           getDefault={this.getStyles}
         />
-        <QuestionsAnswers currentItem={currentItem} />
+        <QuestionsAnswers
+          currentItem={currentItem}
+        />
         <RatingsReviews
           currentItem={currentItem}
           rating={rating}
