@@ -7,10 +7,13 @@ router.get('/qa/questions', atelier.getQuestions);
 
 router.get('/products/:id/styles', atelier.getProductStyles);
 
-// router.get('/reviews2/:id', atelier.getReviews);
 router.get('/reviews2/:id/:count/:sort', atelier.getReviews);
 
 router.put('/reviews2/:id/helpful', atelier.updateHelpfulReview);
+
+router.put('/reviews2/:id/report', atelier.reportReview);
+
+router.post('/reviews2/postReview', atelier.postReview);
 
 router.get('/reviews/meta/:id', atelier.getReviewMetadata);
 
@@ -29,5 +32,7 @@ router.put('/qa/questions/:question_id/helpful', atelier.updateHelpfulQuestion);
 router.post('/qa/questions/:question_id/answers', atelier.postAnswer);
 
 router.post('/qa/questions', atelier.postQuestion);
+
+router.put('/qa/questions/:question_id/report', atelier.reportQuestion);
 
 module.exports = router;
