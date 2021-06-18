@@ -12,14 +12,12 @@ const RatingsReviews = (props) => {
     currentItem, reviewsCount, rating, metaData, relevantReviews,
   } = props;
   const { id, name } = currentItem;
-  // const [dbReviews, setDbReviews] = useState[[]];
   const [sortedReviews, setSortedReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
   const [sortState, setSortState] = useState('relevant');
   const [modalNewReview, setModalNewReview] = useState(false);
   const [oldSortState, setOldSortState] = useState('relevant');
-  const [filterRatings, setFilterRatings] = useState([]);
 
   const handleSortReviews = async () => {
     const sortedReviewsResults = await axios.get(`/api/reviews2/${id}/100/${sortState}`);
