@@ -3,9 +3,11 @@ import Rating from 'react-rating';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Characteristics from './Characteristics';
 
+
 const Ratings = (props) => {
-  const { rating, metaData, reviews, setReviews } = props;
+  const { rating, metaData, setReviews, sortedReviews, count } = props;
   const [totalRatings, setTotalRatings] = useState(0);
+  const [starFilters, setStarFilters] = useState([]);
 
   const percentRecommend = () => {
     if (Object.keys(metaData).length > 0) {
@@ -18,6 +20,7 @@ const Ratings = (props) => {
         `${(recommend / (recommend + notRecommend)).toFixed(2) * 100}%`
       );
     }
+    return null;
   };
 
   const mapCharacteristics = () => {
@@ -54,14 +57,20 @@ const Ratings = (props) => {
       }
     }
   };
+
+  // // works but 1 click behind due to async
   const ratingSort = (numStar) => {
-    console.log('hi', numStar);
-    console.log(reviews);
-    const resultSort = reviews.filter(review => review.rating === numStar);
-    console.log(resultSort);
-
-
+    if (starFilters.includes(numStar)) {
+      setStarFilters(starFilters.filter((star) => star !== numStar));
+      const resultSort = sortedReviews.filter((review) => starFilters.includes(review.rating));
+      setReviews(resultSort.slice(0, count));
+    } else {
+      setStarFilters([...starFilters, numStar]);
+      const resultSort = sortedReviews.filter((review) => starFilters.includes(review.rating));
+      setReviews(resultSort.slice(0, count));
+    }
   };
+
   const progressbars = (star) => {
     if (metaData.ratings && totalRatings > 0) {
       const now = (metaData.ratings[star] / totalRatings) * 100;
@@ -84,6 +93,7 @@ const Ratings = (props) => {
         </>
       );
     }
+    return null;
   };
 
   // refactor later~~~

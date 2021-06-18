@@ -22,6 +22,10 @@
   height: 100%;
 }
 
+.your-outfit-wrapper {
+  margin-top: 18px;
+}
+
 .related-items-title, .your-outfit-title {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -184,7 +188,7 @@
 }
 
 .add-label {
-  margin-bottom: 69px;
+  margin-bottom: 70px;
   margin-left: 50px;
   margin-right: 50px;
 }
