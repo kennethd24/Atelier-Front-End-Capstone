@@ -9,73 +9,42 @@ import NewReview from './ratingsReviews_components/NewReview';
 
 const RatingsReviews = (props) => {
   const {
-    currentItem, reviewsCount, rating, metaData, allReviews, getTotalReviews,
+    currentItem, reviewsCount, rating, metaData, relevantReviews,
   } = props;
   const { id, name } = currentItem;
+  // const [dbReviews, setDbReviews] = useState[[]];
   const [sortedReviews, setSortedReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
   const [sortState, setSortState] = useState('relevant');
   const [modalNewReview, setModalNewReview] = useState(false);
-  const [previousStates, setPreviousStates] = useState({
-    id,
-    sortState,
-  });
+  const [oldSortState, setOldSortState] = useState('relevant');
+  const [filterRatings, setFilterRatings] = useState([]);
+
+  const handleSortReviews = async () => {
+    const sortedReviewsResults = await axios.get(`/api/reviews2/${id}/100/${sortState}`);
+    const allNewSortReviews = sortedReviewsResults.data.results;
+    setSortedReviews(allNewSortReviews);
+    setReviews(allNewSortReviews.slice(0, count));
+  };
 
   const getCountReviews = () => {
-    setReviews(allReviews.slice(0, count));
-    // if (sortState !== previousStates.sortState) {
-    //   axios.get(`/api/reviews2/${id}/1000/${sortState}`)
-    //     .then((results) => {
-    //       setSortedReviews(results.data.results);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     })
-    //     .then(() => {
-    //       setReviews(reviews.slice(0, count));
-    //     });
-    // } else {
-    // setReviews(allReviews.slice(0, count));
-    // }
-    // console.log('Outside getCountReviews', Object.keys(currentItem).length);
-    if (Object.keys(currentItem).length > 0) {
-    console.log('hi from inside getCountReviews');
-    axios.get(`/api/reviews2/${id}/${count}/${sortState}`)
-      .then((results) => {
-        const countReviews = results.data.results;
-        setReviews(countReviews);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (sortState !== oldSortState) {
+      handleSortReviews();
+      setOldSortState(sortState);
+    }
+    if (sortState === 'relevant') {
+      setSortedReviews(relevantReviews);
+      setReviews(relevantReviews.slice(0, count));
+    }
+    if (sortState === oldSortState && sortedReviews.length > 0) {
+      setReviews(sortedReviews.slice(0, count));
     }
   };
 
   useEffect(() => {
-    if (id !== previousStates.id) {
-      setCount(2);
-      setPreviousStates({
-        id,
-        sortState,
-      });
-    }
-    if (sortState !== previousStates.sortState) {
-      console.log('inside sortState useEffect');
-      setPreviousStates({
-        id,
-        sortState,
-      });
-      getTotalReviews('newest');
-    }
     getCountReviews();
   }, [id, count, sortState, setSortState]);
-
-  // useEffect(() => {
-  //   setReviews([]);
-  //   setCount(2);
-  //   getCountReviews();
-  // }, [id]);
 
   return (
     <Container>
@@ -95,6 +64,8 @@ const RatingsReviews = (props) => {
               metaData={metaData}
               reviews={reviews}
               setReviews={setReviews}
+              sortedReviews={sortedReviews}
+              count={count}
             />
           </div>
           <div className="reviewList">

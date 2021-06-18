@@ -118,12 +118,10 @@ class App extends React.Component {
     }
   };
 
- getTotalReviews = (sortOption) => {
+ getTotalReviews = () => {
    const { currentItem } = this.state;
-   const getSort = sortOption || 'relevant';
-   console.log('inside getTotalReview, sortOption: ', sortOption);
    if (Object.keys(currentItem).length > 0) {
-     axios.get(`/api/reviews2/${currentItem.id}/1000/${getSort}}`)
+     axios.get(`/api/reviews2/${currentItem.id}/100/'relevant'`)
        .then((results) => {
          const reviewsArr = results.data.results;
          this.setState({
@@ -242,7 +240,7 @@ class App extends React.Component {
           rating={rating}
           reviewsCount={reviewsCount}
           metaData={metaData}
-          allReviews={allReviews}
+          relevantReviews={allReviews}
           getTotalReviews={this.getTotalReviews}
         />
       </div>
