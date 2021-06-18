@@ -61,6 +61,7 @@ class App extends React.Component {
         .then((res) => {
           this.setState({
             currentItem: res.data,
+            homeItem: res.data,
           });
         })
         .then(() => {
