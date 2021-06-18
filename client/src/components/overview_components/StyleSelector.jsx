@@ -26,7 +26,6 @@ const StyleSelector = (props) => {
       transformedArr.push(rowArr);
     }
 
-    // console.log(transformedArr);
     setStyleList(transformedArr);
   };
 
@@ -37,9 +36,9 @@ const StyleSelector = (props) => {
   return (
     <div className="style-selector">
       <div>
-        <span>STYLE</span>
-        <span> &gt; </span>
-        <span>{currentStyle.name}</span>
+        <span className="style-text">STYLE</span>
+        <span className="style-text"> &gt; </span>
+        <span className="category-text">{currentStyle.name}</span>
       </div>
       {
         styleList.length > 0 && styleList.map((row, index) => (

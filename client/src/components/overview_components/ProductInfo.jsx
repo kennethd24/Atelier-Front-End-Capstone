@@ -8,6 +8,7 @@ import Price from './Price';
 import StyleSelector from './StyleSelector';
 import SizeDropdown from './SizeDropdown';
 import QuantityDropdown from './QuantityDropdown';
+import ShareButtons from './ShareButtons';
 
 const ProductInfo = (props) => {
   const {
@@ -58,27 +59,27 @@ const ProductInfo = (props) => {
 
   return (
     <div className="product-info">
-      <Row>
+      <Row className="my-1">
         <Col>
           <Reviews rating={rating} reviewsCount={reviewsCount} />
         </Col>
       </Row>
       <Row>
         <Col>
-          <span>{currentProduct.category}</span>
+          <span className="category-text">{currentProduct.category.toUpperCase()}</span>
         </Col>
       </Row>
       <Row>
         <Col>
-          <span>{currentProduct.name}</span>
+          <span className="product-name">{currentProduct.name}</span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-2">
         <Col>
           <Price price={price} currentStyle={currentStyle} />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Col>
           <StyleSelector
             styles={styles}
@@ -89,7 +90,7 @@ const ProductInfo = (props) => {
       </Row>
       <Row>
         <Col xs={7}>
-          <Alert variant="danger" show={showAlert} className="py-1 text-center">
+          <Alert variant="danger" show={showAlert} className="py-1 mb-1 text-center">
             <span className="alert-text">Please select size</span>
           </Alert>
         </Col>
@@ -123,6 +124,7 @@ const ProductInfo = (props) => {
           </Row>
         )
       }
+      <ShareButtons currentProduct={currentProduct} currentStyle={currentStyle} />
     </div>
   );
 };
