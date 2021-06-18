@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Modal, Button, Col, Row, Form, InputGroup, FormControl, Container,
+  Col, Row, Form, Container,
 } from 'react-bootstrap';
 
 const DisplayCharNewReview = ({ characteristic, characteristicObj, submission, setSubmission }) => {

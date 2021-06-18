@@ -22,6 +22,7 @@ class App extends React.Component {
       styles: [],
       homeItem: {},
       stateCount: 0,
+      allReviews: [],
     };
   }
 
@@ -133,10 +134,12 @@ class App extends React.Component {
  getTotalReviews = () => {
    const { currentItem } = this.state;
    if (Object.keys(currentItem).length > 0) {
-     axios.get(`/api/reviews2/${currentItem.id}/10000/relevant`)
+     axios.get(`/api/reviews2/${currentItem.id}/100/'relevant'`)
        .then((results) => {
+         const reviewsArr = results.data.results;
          this.setState({
-           reviewsCount: results.data.results.length,
+           reviewsCount: reviewsArr.length,
+           allReviews: reviewsArr,
          });
        })
        .then(() => {
@@ -218,6 +221,7 @@ class App extends React.Component {
       cart,
       stateCount,
       styles,
+      allReviews,
       homeItem,
     } = this.state;
 
@@ -262,6 +266,8 @@ class App extends React.Component {
           rating={rating}
           reviewsCount={reviewsCount}
           metaData={metaData}
+          relevantReviews={allReviews}
+          getTotalReviews={this.getTotalReviews}
         />
       </div>
     );
