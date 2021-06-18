@@ -22,11 +22,19 @@ const Image = (props) => {
       <input type="image" className="product-photo" src={imgUrl} alt="product default style" />
     );
   }
-  return (
-    <div className="product-photo-wrapper">
-      {input}
-    </div>
-  );
+
+  let photoEl;
+  if (!photos) {
+    photoEl = null;
+  } else {
+    photoEl = (
+      <div className="product-photo-wrapper">
+        {input}
+      </div>
+    );
+  }
+
+  return photoEl;
 };
 
 export default Image;
