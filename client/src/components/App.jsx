@@ -46,7 +46,6 @@ class App extends React.Component {
   getFirstItem = () => {
     const stored = JSON.parse(sessionStorage.getItem('currentItem'));
     const home = JSON.parse(sessionStorage.getItem('homeItem'));
-    const { currentItem } = this.state;
     if (home) {
       this.setState({
         homeItem: home,
@@ -65,6 +64,7 @@ class App extends React.Component {
           });
         })
         .then(() => {
+          const { currentItem } = this.state;
           sessionStorage.setItem('homeItem', JSON.stringify(currentItem));
         })
         .catch((err) => {
