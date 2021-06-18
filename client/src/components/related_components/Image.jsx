@@ -12,16 +12,16 @@ const Image = (props) => {
     }
   }, [photos]);
 
-  let input;
-  if (handleClick) {
-    input = (
-      <input type="image" className="product-photo" src={imgUrl} alt="product default style" onClick={() => handleClick(item)} />
-    );
-  } else {
-    input = (
-      <input type="image" className="product-photo" src={imgUrl} alt="product default style" />
-    );
-  }
+  // let input;
+  // if (handleClick) {
+  //   input = (
+  //     <input type="image" className="product-photo" src={imgUrl} alt="product default style" onClick={() => handleClick(item)} />
+  //   );
+  // }
+  //   input = (
+  //     <input type="image" className="product-photo" src={imgUrl} alt="product default style" />
+  //   );
+  // }
 
   let photoEl;
   if (!photos) {
@@ -29,7 +29,8 @@ const Image = (props) => {
   } else {
     photoEl = (
       <div className="product-photo-wrapper">
-        {input}
+        {/* {input} */}
+        <input type="image" className="product-photo" src={imgUrl} alt="product default style" onClick={() => handleClick(item)} />
       </div>
     );
   }
