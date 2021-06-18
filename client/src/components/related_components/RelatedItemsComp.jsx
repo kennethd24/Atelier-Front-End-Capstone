@@ -38,16 +38,16 @@ const RelatedItemsComp = (props) => {
   };
 
   const getRelatedIds = (id) => {
-    if (Object.keys(selectedItem).length > 0) {
-      axios.get(`/api/related/${id}`)
-        .then((results) => {
-          const uniq = [...new Set(results.data)];
-          getRelatedItems(uniq);
-        })
-        .catch((err) => {
-          console.log('error in getRelatedIds', err);
-        });
-    }
+    // if (Object.keys(selectedItem).length > 0) {
+    axios.get(`/api/related/${id}`)
+      .then((results) => {
+        const uniq = [...new Set(results.data)];
+        getRelatedItems(uniq);
+      })
+      .catch((err) => {
+        console.log('error in getRelatedIds', err);
+      });
+    // }
   };
 
   useEffect(() => {
