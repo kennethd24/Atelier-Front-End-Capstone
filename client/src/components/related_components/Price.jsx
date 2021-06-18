@@ -11,7 +11,7 @@ const Price = (props) => {
     if (sale) {
       displayPrice =
       (
-        <div className="price-container">
+        <div className="price-container related-price">
           <span className="sale-price">
             {formatPrice(Number(sale))}
           </span>
@@ -24,7 +24,7 @@ const Price = (props) => {
     } else {
       displayPrice =
       (
-        <div className="price-container">
+        <div className="price-container related-price">
           <span className="reg-price">{formatPrice(Number(original))}</span>
         </div>
       );

@@ -46,7 +46,7 @@ const RatingsReviews = (props) => {
 
   return (
     <Container fluid className="main-container">
-      <div className="ratingsReview-container">
+      <div className="ratingsReview-container" id="ratingsReview-container">
         <div className="ratingsReview-title">
           Ratings & Reviews
         </div>

@@ -6,7 +6,6 @@ import ProductInfo from './ProductInfo';
 import CompareModal from './CompareModal';
 
 const RelatedItemEntry = (props) => {
-  // console.log('relatedItemEntry fired');
   const {
     relatedItem,
     selectedRating,
@@ -22,13 +21,6 @@ const RelatedItemEntry = (props) => {
   const [showCompModal, setShowCompModal] = useState(false);
   const itemId = relatedItem.id;
 
-  // const handleCompare = (e) => {
-  //   e.preventDefault();
-  //   // console.log('selectedChars', selectedChars);
-  //   // console.log('relatedChars', relatedChars);
-  //   setShowCompModal
-  // };
-
   useEffect(() => {
     getDefault(itemId, ((results) => {
       setDefaultStyle(results);
@@ -38,11 +30,6 @@ const RelatedItemEntry = (props) => {
     }));
   }, [relatedItem]);
 
-  // if (Object.keys(defaultStyle) < 1) {
-  //   return (
-  //     <div>Product Loading</div>
-  //   );
-  // }
   return (
     <div className="product-card">
       <CompareModal

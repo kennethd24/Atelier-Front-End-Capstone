@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
-// import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/components/navigation/navigation.min.css';
-// import 'swiper/swiper-bundle.css';
 import RelatedItemEntry from './RelatedItemEntry';
 
 SwiperCore.use([Navigation]);
-// SwiperCore.use([Navigation, Pagination]);
 
 const RelatedItemsComp = (props) => {
-  // console.log('relatedItemsComp fired');
   const {
     selectedItem,
     selectedRating,
@@ -42,16 +38,16 @@ const RelatedItemsComp = (props) => {
   };
 
   const getRelatedIds = (id) => {
-    if (Object.keys(selectedItem).length > 0) {
-      axios.get(`/api/related/${id}`)
-        .then((results) => {
-          const uniq = [...new Set(results.data)];
-          getRelatedItems(uniq);
-        })
-        .catch((err) => {
-          console.log('error in getRelatedIds', err);
-        });
-    }
+    // if (Object.keys(selectedItem).length > 0) {
+    axios.get(`/api/related/${id}`)
+      .then((results) => {
+        const uniq = [...new Set(results.data)];
+        getRelatedItems(uniq);
+      })
+      .catch((err) => {
+        console.log('error in getRelatedIds', err);
+      });
+    // }
   };
 
   useEffect(() => {
@@ -62,7 +58,6 @@ const RelatedItemsComp = (props) => {
     <Swiper
       slidesPerView={3.5}
       spaceBetween={25}
-      // pagination={{ clickable: true }}
       navigation
       className="related-outfit-swiper"
     >

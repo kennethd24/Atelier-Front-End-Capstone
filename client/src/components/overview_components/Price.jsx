@@ -10,7 +10,7 @@ const Price = (props) => {
   if (currentStyle.sale_price) {
     displayPrice =
     (
-      <div className="price-container">
+      <div className="prices-container category-text">
         <span className="sale-price">
           {formatPrice(price)}
         </span>
@@ -23,7 +23,7 @@ const Price = (props) => {
   } else {
     displayPrice =
     (
-      <div className="price-container">
+      <div className="prices-container category-text">
         <span className="reg-price">{formatPrice(price)}</span>
       </div>
     );
