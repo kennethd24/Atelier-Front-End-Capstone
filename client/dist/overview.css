@@ -103,14 +103,33 @@
   /* height: 600px; */
   height: 650px;
   width: 500px;
-  position: relative;
-  left: 63px;
 }
 
 .slider-pic:hover {
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
+}
+
+.slider-no-img {
+  display: flex;
+  align-items: center;
+}
+
+.slide-btn {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: default !important;
+  position: relative;
+  left: 63px;
+}
+
+.slide-btn-disabled {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: default !important;
 }
 
 .thumb-swiper {
