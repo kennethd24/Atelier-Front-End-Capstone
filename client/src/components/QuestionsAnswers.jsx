@@ -53,7 +53,7 @@ const QuestionsAnswers = ({ currentItem }) => {
   }, [currentItem.id]);
 
   return (
-    <Container fluid className="main-container">
+    <Container fluid className="main-container qna-wrapper">
       <h3>Questions & Answers</h3>
       <div className="Search">
         <Search handleChange={handleChange} />

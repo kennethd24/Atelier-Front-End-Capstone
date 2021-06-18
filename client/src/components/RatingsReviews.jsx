@@ -47,16 +47,16 @@ const RatingsReviews = (props) => {
   return (
     <Container fluid className="main-container">
       <div className="ratingsReview-container" id="ratingsReview-container">
-        <div className="ratingsReview-title">
+        <h3 className="ratingsReview-title">
           Ratings & Reviews
-        </div>
+        </h3>
         <div className="ratingsReviewList-container">
           <div className="ratings">
             Ratings
             <br />
-            (ID is equal to &nbsp;
+            {/* (ID is equal to &nbsp;
             {id}
-            )
+            ) */}
             <Ratings
               rating={rating}
               metaData={metaData}
@@ -67,12 +67,12 @@ const RatingsReviews = (props) => {
             />
           </div>
           <div className="reviewList">
-            Review List
-            <br />
-            (Product name is &nbsp;
+            {/* Review List
+            <br /> */}
+            {/* (Product name is &nbsp;
             {name}
-            )
-            <br />
+            ) */}
+            {/* <br /> */}
             {(reviewsCount < 1) ?
               <button type="button" onClick={() => setModalNewReview(true)}>Submit a new review!</button>
               : (
@@ -92,10 +92,10 @@ const RatingsReviews = (props) => {
                   </div>
                   <div className="buttons-container">
                     {(count > 1 && count < reviewsCount) ?
-                      <button type="button" onClick={() => setCount(count + 2)}>More Reviews</button>
+                      <button type="button" className="more-reviews" onClick={() => setCount(count + 2)}>More Reviews</button>
                       :
                       null}
-                    <button type="button" onClick={() => setModalNewReview(true)}>Add Review</button>
+                    <button type="button" className="add-review" onClick={() => setModalNewReview(true)}>Add Review</button>
 
                     <NewReview
                       show={modalNewReview}
