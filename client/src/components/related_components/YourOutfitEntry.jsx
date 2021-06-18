@@ -18,9 +18,7 @@ const YourOutfitEntry = (props) => {
 
   let ratingComp;
   if (rating === 0) {
-    ratingComp = (
-      <div />
-    );
+    ratingComp = null;
   } else {
     ratingComp = (
       <Rating
