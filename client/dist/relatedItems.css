@@ -164,7 +164,7 @@
   margin-bottom: 10px;
 }
 
-.price-container {
+.price-container.related-price {
   text-align: left;
   margin-left: 15px;
   font-size: 15px;
