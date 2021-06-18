@@ -132,7 +132,8 @@
 }
 
 .swiper-container-thumbs {
-  height: 520px;
+  /* height: 520px; */
+  height: 525px;
 }
 
 .swiper-slide-thumb-active {
@@ -168,10 +169,6 @@
 
 .expanded-img {
   width: 100%;
-}
-
-.modal-sizing {
-
 }
 
 .expanded-swiper .swiper-wrapper{

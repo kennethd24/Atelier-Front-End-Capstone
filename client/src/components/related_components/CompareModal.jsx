@@ -71,6 +71,7 @@ const CompareModal = (props) => {
       size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      contentClassName="compare-modal"
     >
 
       <Modal.Header closeButton>
