@@ -106,7 +106,7 @@ const CompareModal = (props) => {
                   readonly
                   emptySymbol="far fa-star"
                   fullSymbol="fas fa-star"
-                  className="rating"
+                  className="rating-compare"
                 />
               </td>
               <td>Rating</td>
