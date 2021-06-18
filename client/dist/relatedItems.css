@@ -173,6 +173,7 @@
 #add-outfit {
   height: 100%;
   background-color: rgb(243, 243, 243);
+  /* background-color: white; */
 }
 
 .fa-plus {
@@ -183,7 +184,7 @@
 }
 
 .add-label {
-  margin-bottom: 70px;
+  margin-bottom: 69px;
   margin-left: 50px;
   margin-right: 50px;
 }
