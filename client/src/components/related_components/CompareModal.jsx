@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Rating from 'react-rating';
-import {
-  Modal,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const CompareModal = (props) => {
   const {
     show,
     onHide,
     selectedItem,
-    // selectedDefault,
     selectedRating,
     relatedItem,
     relatedRating,
@@ -71,7 +68,6 @@ const CompareModal = (props) => {
     <Modal
       show={show}
       onHide={onHide}
-      // name={name}
       size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered

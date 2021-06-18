@@ -1,12 +1,10 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import RelatedItemsComp from './related_components/RelatedItemsComp';
 import YourOutfitComp from './related_components/YourOutfitComp';
 
 const RelatedItems = (props) => {
-  // console.log('relatedItems fired');
   const {
     selectedItem,
     selectedRating,
