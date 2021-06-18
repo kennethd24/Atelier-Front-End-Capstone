@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Overview from './Overview';
 import QuestionsAnswers from './QuestionsAnswers';
 import RatingsReviews from './RatingsReviews';
@@ -48,11 +51,10 @@ class App extends React.Component {
         currentItem: stored,
       });
     } else {
-      axios.get('/api/products')
+      axios.get('/api/products/16060')
         .then((res) => {
           this.setState({
-            currentItem: res.data[4],
-            // currentItem: res.data[0] changed for better dummy review data
+            currentItem: res.data,
           });
         })
         .catch((err) => {
@@ -217,6 +219,11 @@ class App extends React.Component {
     }
     return (
       <div>
+        <Container fluid className="main-container">
+          <Row>
+            <div className="app-header">Project Catwalk</div>
+          </Row>
+        </Container>
         <Overview
           currentItem={currentItem}
           rating={rating}
@@ -234,7 +241,9 @@ class App extends React.Component {
           getRating={this.getMetadata}
           getDefault={this.getStyles}
         />
-        <QuestionsAnswers currentItem={currentItem} />
+        <QuestionsAnswers
+          currentItem={currentItem}
+        />
         <RatingsReviews
           currentItem={currentItem}
           rating={rating}

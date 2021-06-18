@@ -54,9 +54,9 @@ const QuestionList = ({ question, product }) => {
 
   return (
     <div>
-      <div>
-        <span className="questions">Q:{question.question_body}</span>
-        <span className="addAnswer userContainer">Helpful? &nbsp;
+      <div className="question">
+        <span className="bolder">Q: {question.question_body}</span>
+        <span className="addAnswer addAnswerContainer">Helpful? &nbsp;
           {!qClick ?
             (
               <span>
@@ -112,7 +112,7 @@ const QuestionList = ({ question, product }) => {
           ) :
           (null)}
       </div>
-      <hr />
+      {/* <hr /> */}
     </div>
   );
 };

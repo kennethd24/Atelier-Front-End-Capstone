@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const AnswerEntry = ({ answer }) => {
@@ -26,7 +26,7 @@ const AnswerEntry = ({ answer }) => {
   return (
     <div>
       <div>
-        A:
+        <span className="bolder">A: </span>
         {answer.body}
       </div>
       <div className="userContainer">

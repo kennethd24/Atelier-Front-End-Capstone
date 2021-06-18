@@ -45,10 +45,19 @@ const RatingsReviews = (props) => {
   }, [id, count, sortState, setSortState]);
 
   return (
-    <Container>
-      <div className="ratingsReview-container">
-        <div className="ratingsReview-title">
-          Ratings & Reviews
+    <Container fluid className="main-container">
+    <div className="ratingsReview-container">
+      <div className="ratingsReview-title">
+        Ratings & Reviews
+      </div>
+      <div className="ratingsReviewList-container">
+        <div className="ratings">
+          Ratings
+          <br />
+          (ID is equal to &nbsp;
+          {id}
+          )
+          <Ratings rating={rating} metaData={metaData} reviews={reviews} setReviews={setReviews} />
         </div>
         <div className="ratingsReviewList-container">
           <div className="ratings">
