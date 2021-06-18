@@ -14,7 +14,7 @@ const ShareButtons = (props) => {
   const { currentProduct, currentStyle } = props;
 
   return (
-    <Row>
+    <Row className="mt-auto">
       <Col className="d-flex justify-content-center">
         <FacebookShareButton
           quote={currentProduct.name}
