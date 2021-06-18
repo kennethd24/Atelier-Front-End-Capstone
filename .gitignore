@@ -2,5 +2,6 @@ node_modules
 bundle.js
 .DS_Store
 config.js
+config.js
 package-lock.json
 FECKey.pem
