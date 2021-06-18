@@ -3,7 +3,6 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Overview from './Overview';
 import QuestionsAnswers from './QuestionsAnswers';
 import RatingsReviews from './RatingsReviews';
@@ -21,6 +20,7 @@ class App extends React.Component {
       defaultStyle: {},
       cart: [],
       styles: [],
+      homeItem: {},
       stateCount: 0,
     };
   }
@@ -44,7 +44,14 @@ class App extends React.Component {
   }
 
   getFirstItem = () => {
-    const stored = JSON.parse(localStorage.getItem('currentItem'));
+    const stored = JSON.parse(sessionStorage.getItem('currentItem'));
+    const home = JSON.parse(sessionStorage.getItem('homeItem'));
+    const { currentItem } = this.state;
+    if (home) {
+      this.setState({
+        homeItem: home,
+      });
+    }
     if (stored) {
       this.setState({
         currentItem: stored,
@@ -55,6 +62,9 @@ class App extends React.Component {
           this.setState({
             currentItem: res.data,
           });
+        })
+        .then(() => {
+          sessionStorage.setItem('homeItem', JSON.stringify(currentItem));
         })
         .catch((err) => {
           console.log(err);
@@ -140,12 +150,15 @@ class App extends React.Component {
  };
 
   handleRelatedClick = (relatedItem) => {
-    this.setState({
-      currentItem: relatedItem,
-      stateCount: 0,
-    });
+    const { currentItem } = this.state;
+    if (currentItem.id !== relatedItem.id) {
+      this.setState({
+        currentItem: relatedItem,
+        stateCount: 0,
+      });
+    }
 
-    localStorage.setItem('currentItem', JSON.stringify(relatedItem));
+    sessionStorage.setItem('currentItem', JSON.stringify(relatedItem));
   };
 
   getStyles = (id, cb) => {
@@ -204,6 +217,7 @@ class App extends React.Component {
       cart,
       stateCount,
       styles,
+      homeItem,
     } = this.state;
 
     if (stateCount <= 4) {
@@ -217,7 +231,9 @@ class App extends React.Component {
       <div>
         <Container fluid className="main-container">
           <Row>
-            <div className="app-header">Project Catwalk</div>
+            <button type="button" className="header-button" onClick={() => this.handleRelatedClick(homeItem)}>
+              <div className="app-header">Project Catwalk</div>
+            </button>
           </Row>
         </Container>
         <Overview
