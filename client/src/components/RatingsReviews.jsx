@@ -42,63 +42,63 @@ const RatingsReviews = (props) => {
 
   return (
     <Container fluid className="main-container">
-    <div className="ratingsReview-container">
-      <div className="ratingsReview-title">
-        Ratings & Reviews
-      </div>
-      <div className="ratingsReviewList-container">
-        <div className="ratings">
-          Ratings
-          <br />
-          (ID is equal to &nbsp;
-          {id}
-          )
-          <Ratings rating={rating} metaData={metaData} reviews={reviews} setReviews={setReviews} />
+      <div className="ratingsReview-container" id="ratingsReview-container">
+        <div className="ratingsReview-title">
+          Ratings & Reviews
         </div>
-        <div className="reviewList">
-          Review List
-          <br />
-          (Product name is &nbsp;
-          {name}
-          )
-          <br />
-          {(reviewsCount < 1) ?
-            <button type="button" onClick={() => setModalNewReview(true)}>Submit a new review!</button>
-            : (
-              <span>
-                <div className="sortBy-container">
-                  <SortBy totalReviews={reviewsCount} setSortState={setSortState} />
-                </div>
-                <div className="reviews-container">
-                  {reviews.map((review) => (
-                    <ReviewList
-                      rating={rating}
-                      review={review}
-                      key={review.review_id}
-                      getCountReviews={getCountReviews}
-                    />
-                  ))}
-                </div>
-                <div className="buttons-container">
-                  {(count > 1 && count < reviewsCount) ?
-                    <button type="button" onClick={() => setCount(count + 2)}>More Reviews</button>
-                    :
-                    null}
-                  <button type="button" onClick={() => setModalNewReview(true)}>Add Review</button>
+        <div className="ratingsReviewList-container">
+          <div className="ratings">
+            Ratings
+            <br />
+            (ID is equal to &nbsp;
+            {id}
+            )
+            <Ratings rating={rating} metaData={metaData} reviews={reviews} setReviews={setReviews} />
+          </div>
+          <div className="reviewList">
+            Review List
+            <br />
+            (Product name is &nbsp;
+            {name}
+            )
+            <br />
+            {(reviewsCount < 1) ?
+              <button type="button" onClick={() => setModalNewReview(true)}>Submit a new review!</button>
+              : (
+                <span>
+                  <div className="sortBy-container">
+                    <SortBy totalReviews={reviewsCount} setSortState={setSortState} />
+                  </div>
+                  <div className="reviews-container">
+                    {reviews.map((review) => (
+                      <ReviewList
+                        rating={rating}
+                        review={review}
+                        key={review.review_id}
+                        getCountReviews={getCountReviews}
+                      />
+                    ))}
+                  </div>
+                  <div className="buttons-container">
+                    {(count > 1 && count < reviewsCount) ?
+                      <button type="button" onClick={() => setCount(count + 2)}>More Reviews</button>
+                      :
+                      null}
+                    <button type="button" onClick={() => setModalNewReview(true)}>Add Review</button>
 
-                  <NewReview
-                    show={modalNewReview}
-                    onHide={() => setModalNewReview(false)}
-                    name={name}
-                    characteristics={metaData.characteristics}
-                    id={id}
-                  />
-                </div>
-              </span>
-            )}
+                    <NewReview
+                      show={modalNewReview}
+                      onHide={() => setModalNewReview(false)}
+                      name={name}
+                      characteristics={metaData.characteristics}
+                      id={id}
+                    />
+                  </div>
+                </span>
+              )}
+          </div>
         </div>
       </div>
-    </div>
     </Container>
   );
 };
