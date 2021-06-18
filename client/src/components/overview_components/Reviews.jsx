@@ -13,8 +13,13 @@ const Reviews = (props) => {
         fullSymbol="fas fa-star"
       />
       {reviewsCount > 0 &&
-        <a href="#" className="reviews-link">Read all {reviewsCount} reviews</a>
-      }
+        (
+        <a href="#ratingsReview-container" className="reviews-link">
+          Read all
+          {` ${reviewsCount} `}
+          reviews
+        </a>
+        )}
     </div>
   );
 };

@@ -51,14 +51,14 @@ const Overview = (props) => {
   };
 
   return (
-    <Container fluid className="d-flex flex-column container-border main-container">
+    <Container fluid className="d-flex flex-column main-container">
       {currentStyle &&
         (
           <Row>
-            <Col xs={7} className="container-border p-0">
+            <Col xs={12} lg={7} className="p-0">
               <PhotoGallery currentStyle={currentStyle} />
             </Col>
-            <Col className="container-border">
+            <Col xs={12} sm={8} md={6} lg={4} className="ml-3">
               <ProductInfo
                 currentProduct={currentItem}
                 styles={styles}
@@ -76,8 +76,22 @@ const Overview = (props) => {
             </Col>
           </Row>
         )}
-      <Row>
-        <div>product details</div>
+      <Row className="mt-4">
+        <Col xs={6} lg={7} className="px-5">
+          <p className="h4">
+            {currentItem.slogan}
+          </p>
+          <p>
+            {currentItem.description}
+          </p>
+        </Col>
+        <Col className="border-left pl-4">
+          {currentItem.features && currentItem.features.map((featureObj, index) => (
+            <p key={index}>
+              {`${featureObj.feature}: ${featureObj.value}`}
+            </p>
+          ))}
+        </Col>
       </Row>
     </Container>
   );
