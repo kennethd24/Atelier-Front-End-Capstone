@@ -4,6 +4,10 @@
   /* height: 18vh; */
 }
 
+.qna-wrapper {
+  margin-top: 20px;
+}
+
 .bolder {
   font-weight: bold;
   font-size: 18px;

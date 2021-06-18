@@ -22,6 +22,10 @@
   height: 100%;
 }
 
+.your-outfit-wrapper {
+  margin-top: 18px;
+}
+
 .related-items-title, .your-outfit-title {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -173,6 +177,7 @@
 #add-outfit {
   height: 100%;
   background-color: rgb(243, 243, 243);
+  /* background-color: white; */
 }
 
 .fa-plus {
