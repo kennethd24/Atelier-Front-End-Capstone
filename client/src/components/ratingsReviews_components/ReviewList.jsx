@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState } from 'react';
+import React from 'react';
 import Rating from 'react-rating';
 import axios from 'axios';
 import Photos from './Photos';
@@ -18,8 +18,6 @@ const ReviewList = (props) => {
     helpfulness,
     photos,
   } = review;
-
-  const { helpfulClicked, setHelpfulClicked } = useState(false);
 
   const showResponse = () => {
     if (response !== null && response !== '') {
@@ -55,9 +53,7 @@ const ReviewList = (props) => {
   };
   const reportReview = () => {
     axios.put(`/api/reviews2/${review_id}/report`)
-    // axios.put(`/api/reviews2/reportReview/${review_id}`)
       .then(() => {
-        // console.log('reportReview working');
         props.getCountReviews();
       })
       .catch((err) => {
@@ -111,7 +107,7 @@ const ReviewList = (props) => {
         Was this review helpful?
         <button className="buttonLink" type="button" onClick={() => { addHelpful(); }}> Yes</button>
         {`(${helpfulness})`}
-        <button className="buttonLink" type="button" onClick={() => {reportReview()}}>
+        <button className="buttonLink" type="button" onClick={() => { reportReview(); }}>
           Report
         </button>
       </div>

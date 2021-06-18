@@ -9,36 +9,40 @@ import NewReview from './ratingsReviews_components/NewReview';
 
 const RatingsReviews = (props) => {
   const {
-    currentItem, reviewsCount, rating, metaData,
+    currentItem, reviewsCount, rating, metaData, relevantReviews,
   } = props;
   const { id, name } = currentItem;
+  const [sortedReviews, setSortedReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
   const [sortState, setSortState] = useState('relevant');
   const [modalNewReview, setModalNewReview] = useState(false);
+  const [oldSortState, setOldSortState] = useState('relevant');
+
+  const handleSortReviews = async () => {
+    const sortedReviewsResults = await axios.get(`/api/reviews2/${id}/100/${sortState}`);
+    const allNewSortReviews = sortedReviewsResults.data.results;
+    setSortedReviews(allNewSortReviews);
+    setReviews(allNewSortReviews.slice(0, count));
+  };
 
   const getCountReviews = () => {
-    if (Object.keys(currentItem).length > 0) {
-      axios.get(`/api/reviews2/${id}/${count}/${sortState}`)
-        .then((results) => {
-          const countReviews = results.data.results;
-          setReviews(countReviews);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if (sortState !== oldSortState) {
+      handleSortReviews();
+      setOldSortState(sortState);
+    }
+    if (sortState === 'relevant') {
+      setSortedReviews(relevantReviews);
+      setReviews(relevantReviews.slice(0, count));
+    }
+    if (sortState === oldSortState && sortedReviews.length > 0) {
+      setReviews(sortedReviews.slice(0, count));
     }
   };
 
   useEffect(() => {
     getCountReviews();
-  }, [count, sortState, setSortState]);
-
-  useEffect(() => {
-    setReviews([]);
-    setCount(2);
-    getCountReviews();
-  }, [id]);
+  }, [id, count, sortState, setSortState]);
 
   return (
     <Container fluid className="main-container">
@@ -53,7 +57,14 @@ const RatingsReviews = (props) => {
             (ID is equal to &nbsp;
             {id}
             )
-            <Ratings rating={rating} metaData={metaData} reviews={reviews} setReviews={setReviews} />
+            <Ratings
+              rating={rating}
+              metaData={metaData}
+              reviews={reviews}
+              setReviews={setReviews}
+              sortedReviews={sortedReviews}
+              count={count}
+            />
           </div>
           <div className="reviewList">
             Review List
