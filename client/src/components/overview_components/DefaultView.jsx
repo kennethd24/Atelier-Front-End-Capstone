@@ -15,6 +15,12 @@ const DefaultView = (props) => {
 
   SwiperCore.use([Navigation, Thumbs]);
 
+  const handleImgClick = (photoUrl) => {
+    if (photoUrl) {
+      setShowModal(true);
+    }
+  };
+
   return (
     <div className="gallery-overlay">
       <div className="thumb-swiper">
@@ -35,7 +41,7 @@ const DefaultView = (props) => {
         >
           {currentStyle.photos.map((photoObj, index) => (
             <SwiperSlide key={index} className="thumbnail-slide">
-              <img className="thumbnail-pic" src={photoObj.thumbnail_url} alt={`Slide ${index}`} />
+              <img className="thumbnail-pic" src={photoObj.thumbnail_url || 'no-photo.png'} alt={`Slide ${index}`} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -54,8 +60,10 @@ const DefaultView = (props) => {
           navigation
         >
           {currentStyle.photos.map((photoObj, index) => (
-            <SwiperSlide key={index}>
-              <img className="slider-pic" src={photoObj.url} alt={`Slide ${index}`} onClick={() => setShowModal(true)}/>
+            <SwiperSlide key={index} className={photoObj.url ? '' : 'slider-no-img'}>
+              <button type="button" className={photoObj.url ? 'slide-btn' : 'slide-btn-disabled'} onClick={() => handleImgClick(photoObj.url)}>
+                <img className={photoObj.url ? 'slider-pic' : ''} src={photoObj.url || 'no-photo.png'} alt={`Slide ${index}`} />
+              </button>
             </SwiperSlide>
           ))}
         </Swiper>
