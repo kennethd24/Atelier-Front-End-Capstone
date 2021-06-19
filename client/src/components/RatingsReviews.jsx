@@ -54,9 +54,6 @@ const RatingsReviews = (props) => {
           <div className="ratings">
             Ratings
             <br />
-            {/* (ID is equal to &nbsp;
-            {id}
-            ) */}
             <Ratings
               rating={rating}
               metaData={metaData}
@@ -67,12 +64,6 @@ const RatingsReviews = (props) => {
             />
           </div>
           <div className="reviewList">
-            {/* Review List
-            <br /> */}
-            {/* (Product name is &nbsp;
-            {name}
-            ) */}
-            {/* <br /> */}
             {(reviewsCount < 1) ?
               <button type="button" onClick={() => setModalNewReview(true)}>Submit a new review!</button>
               : (

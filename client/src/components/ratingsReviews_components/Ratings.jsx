@@ -16,6 +16,9 @@ const Ratings = (props) => {
       if (recommend === 0 || recommend === null) {
         return ('0%');
       }
+      if (notRecommend === 0 || Number.isNaN(notRecommend)) {
+        return ('100%');
+      }
       return (
         `${(recommend / (recommend + notRecommend)).toFixed(2) * 100}%`
       );
