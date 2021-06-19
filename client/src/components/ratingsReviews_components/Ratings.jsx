@@ -4,9 +4,8 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Characteristics from './Characteristics';
 
 const Ratings = (props) => {
-  const { rating, metaData, setReviews, sortedReviews, count, handleStarFilter } = props;
+  const { rating, metaData, handleStarFilter } = props;
   const [totalRatings, setTotalRatings] = useState(0);
-  const [starFilters, setStarFilters] = useState([]);
 
   const percentRecommend = () => {
     if (Object.keys(metaData).length > 0) {
@@ -46,7 +45,6 @@ const Ratings = (props) => {
 
   const findTotalRatings = () => {
     if (metaData.ratings) {
-      // const arrRatings = Object.values(metaData.ratings);
       let sumRatings = null;
       // eslint-disable-next-line no-restricted-syntax
       for (const key in metaData.ratings) {
@@ -60,28 +58,14 @@ const Ratings = (props) => {
     }
   };
 
-  // // // works but 1 click behind due to async
-  // const ratingSort = (numStar) => {
-  //   if (starFilters.includes(numStar)) {
-  //     setStarFilters(starFilters.filter((star) => star !== numStar));
-  //     const resultSort = sortedReviews.filter((review) => starFilters.includes(review.rating));
-  //     setReviews(resultSort.slice(0, count));
-  //   } else {
-  //     setStarFilters([...starFilters, numStar]);
-  //     const resultSort = sortedReviews.filter((review) => starFilters.includes(review.rating));
-  //     setReviews(resultSort.slice(0, count));
-  //   }
-  // };
-
   const progressbars = (star) => {
     if (metaData.ratings && totalRatings > 0) {
       const now = (metaData.ratings[star] / totalRatings) * 100;
       const checkZeroReviews = Number.isNaN(now);
       const zeroBar = <ProgressBar variant="success" now={0} />;
       const progressInstance = <ProgressBar variant="success" now={now} />;
-      // <button onClick={() => handleStarFilter(5)} type="button">Click to filter 5 stars</button>
       return (
-        <>
+        <div className="ratingbreakdown-side-container">
           <div className="ratingbreakdown-side" onClick={() => handleStarFilter(star)} aria-hidden="true" role="button">
             {star}
             {' '}
@@ -93,7 +77,7 @@ const Ratings = (props) => {
           <div className="ratingbreakdown-right">
             {metaData.ratings[star] || '0'}
           </div>
-        </>
+        </div>
       );
     }
     return null;

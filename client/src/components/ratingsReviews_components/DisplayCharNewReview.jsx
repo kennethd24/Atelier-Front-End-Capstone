@@ -3,7 +3,9 @@ import {
   Col, Row, Form, Container,
 } from 'react-bootstrap';
 
-const DisplayCharNewReview = ({ characteristic, characteristicObj, submission, setSubmission }) => {
+const DisplayCharNewReview = ({
+  characteristic, characteristicObj, submission, setSubmission,
+}) => {
   const selected = { characteristic };
   const nameSelected = Object.values(selected)[0];
   const charId = characteristicObj.id;
@@ -42,57 +44,57 @@ const DisplayCharNewReview = ({ characteristic, characteristicObj, submission, s
     });
   };
 
-    return (
-      <Form.Group>
-        {['radio'].map((type) => (
-          <div key={`inline-${type}`} className="CharacteristicsNewReview">
-            <Container>
-              <Row>
-                <Col>
-                  <div>
-                    {characteristic}
-                    {showSelected()}
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Check required inline label="1" value="1" name={`${characteristic}`} type={type} id={`inline-${type}-1-${characteristic}`} onClick={(event) => selectChar(event)} />
-                </Col>
-                <Col>
-                  <Form.Check required inline label="2" value="2" name={`${characteristic}`} type={type} id={`inline-${type}-2-${characteristic}`} onClick={(event) => selectChar(event)} />
-                </Col>
-                <Col>
-                  <Form.Check required inline label="3" value="3" name={`${characteristic}`} type={type} id={`inline-${type}-3-${characteristic}`} onClick={(event) => selectChar(event)} />
-                </Col>
-                <Col>
-                  <Form.Check required inline label="4" value="4" name={`${characteristic}`} type={type} id={`inline-${type}-4-${characteristic}`} onClick={(event) => selectChar(event)} />
-                </Col>
-                <Col>
-                  <Form.Check required inline label="5" value="5" name={`${characteristic}`} type={type} id={`inline-${type}-5-${characteristic}`} onClick={(event) => selectChar(event)} />
-                </Col>
-                <Col />
+  return (
+    <Form.Group>
+      {['radio'].map((type) => (
+        <div key={`inline-${type}`} className="CharacteristicsNewReview">
+          <Container>
+            <Row>
+              <Col>
+                <div>
+                  {characteristic}
+                  {showSelected()}
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Form.Check required inline label="1" value="1" name={`${characteristic}`} type={type} id={`inline-${type}-1-${characteristic}`} onClick={(event) => selectChar(event)} />
+              </Col>
+              <Col>
+                <Form.Check required inline label="2" value="2" name={`${characteristic}`} type={type} id={`inline-${type}-2-${characteristic}`} onClick={(event) => selectChar(event)} />
+              </Col>
+              <Col>
+                <Form.Check required inline label="3" value="3" name={`${characteristic}`} type={type} id={`inline-${type}-3-${characteristic}`} onClick={(event) => selectChar(event)} />
+              </Col>
+              <Col>
+                <Form.Check required inline label="4" value="4" name={`${characteristic}`} type={type} id={`inline-${type}-4-${characteristic}`} onClick={(event) => selectChar(event)} />
+              </Col>
+              <Col>
+                <Form.Check required inline label="5" value="5" name={`${characteristic}`} type={type} id={`inline-${type}-5-${characteristic}`} onClick={(event) => selectChar(event)} />
+              </Col>
+              <Col />
 
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Text className="text-muted">
-                    {charSelections[nameSelected][0]}
-                  </Form.Text>
-                </Col>
-                <Col xs={4}> </Col>
-                <Col>
-                  <Form.Text className="text-muted">
-                    {charSelections[nameSelected][4]}
-                  </Form.Text>
-                </Col>
-              </Row>
-            </Container>
+            </Row>
+            <Row>
+              <Col>
+                <Form.Text className="text-muted">
+                  {charSelections[nameSelected][0]}
+                </Form.Text>
+              </Col>
+              <Col xs={4}> </Col>
+              <Col>
+                <Form.Text className="text-muted">
+                  {charSelections[nameSelected][4]}
+                </Form.Text>
+              </Col>
+            </Row>
+          </Container>
 
-          </div>
-        ))}
-      </Form.Group>
-    );
+        </div>
+      ))}
+    </Form.Group>
+  );
 };
 
 export default DisplayCharNewReview;

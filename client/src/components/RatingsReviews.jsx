@@ -15,11 +15,14 @@ const RatingsReviews = (props) => {
   const [sortedReviews, setSortedReviews] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
-  const [sortState, setSortState] = useState('relevant');
   const [modalNewReview, setModalNewReview] = useState(false);
-  const [oldSortState, setOldSortState] = useState('relevant');
+  const [sortState, setSortState] = useState('relevant');
   const [starFilters, setStarFilters] = useState([]);
-  const [oldStarFilters, setOldStarFilters] = useState([]);
+  const [oldState, setOldState] = useState({
+    oldCount: count,
+    oldStarFilters: starFilters,
+    oldSortState: sortState,
+  });
 
   const handleSortReviews = async () => {
     const sortedReviewsResults = await axios.get(`/api/reviews2/${id}/100/${sortState}`);
@@ -36,42 +39,36 @@ const RatingsReviews = (props) => {
   };
 
   const getCountReviews = () => {
-    if (starFilters !== oldStarFilters) {
-      handleSortReviews();
-      setOldStarFilters(starFilters);
+    if (count !== oldState.oldCount) {
+      setReviews(sortedReviews.slice(0, count));
+      setOldState({
+        ...oldState,
+        oldCount: count,
+      });
     }
-    if (sortState !== oldSortState) {
+    if (starFilters !== oldState.oldStarFilters) {
       handleSortReviews();
-      setOldSortState(sortState);
+      setOldState({
+        ...oldState,
+        oldStarFilters: starFilters,
+      });
+    }
+    if (sortState !== oldState.oldSortState) {
+      handleSortReviews();
+      setOldState({
+        ...oldState,
+        oldSortState: sortState,
+      });
     }
     if (sortState === 'relevant') {
       setSortedReviews(relevantReviews);
       setReviews(relevantReviews.slice(0, count));
     }
-    if (sortState === oldSortState && sortedReviews.length > 0) {
+    if (sortState === oldState.oldSortState && sortedReviews.length > 0) {
       setReviews(sortedReviews.slice(0, count));
     }
   };
-  // const handleStarFilter = (numStar) => {
-  //   setStarFilters([numStar]);
-  //   console.log('starFilters: ', starFilters);
-  //   getCountReviews(numStar);
-  // };
 
-  // const handleStarFilter = (numStar) => {
-  //   if (starFilters.includes(numStar)) {
-  //     setStarFilters(starFilters.filter((star) => star !== numStar));
-  //     const starArr = sortedReviews.filter((review) => starFilters.includes(review.rating));
-  //     setReviews(starArr.slice(0, count));
-  //   } else {
-  //     setStarFilters([...starFilters, numStar]);
-  //     console.log('starFilters: ', starFilters);
-  //     getCountReviews(num)
-  //     const starArr = sortedReviews.filter((review) => starFilters.includes(review.rating));
-  //     console.log('starArr: ', starArr);
-  //     setReviews(starArr.slice(0, count));
-  //   }
-  // };
   const handleStarFilter = (starInput) => {
     if (!starFilters.includes(starInput)) {
       setStarFilters([...starFilters, starInput]);
@@ -82,13 +79,10 @@ const RatingsReviews = (props) => {
 
   useEffect(() => {
     getCountReviews();
-    console.log('useEffect runs', starFilters);
   }, [id, count, sortState, starFilters]);
 
   return (
     <Container fluid className="main-container">
-      <button onClick={() => handleStarFilter(5)} type="button">Click to filter 5 stars</button>
-
       <div className="ratingsReview-container" id="ratingsReview-container">
         <h3 className="ratingsReview-title">
           Ratings & Reviews

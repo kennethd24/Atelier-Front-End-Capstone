@@ -148,3 +148,10 @@
   padding: 15px 25px 15px 25px;
   background: transparent;
 }
+.ratingbreakdown-side-container:hover {
+  /* background-color: rgba(145, 92, 182, .4); */
+  background-color: rgba(144, 207, 239, 0.3);
+  border-radius: 8px;
+  /* box-shadow: 0 5px 15px rgba(145, 92, 182, .4); */
+  box-shadow: 0 5px 15px rgba(144, 207, 239);
+}
