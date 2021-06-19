@@ -3,7 +3,6 @@ import Rating from 'react-rating';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Characteristics from './Characteristics';
 
-
 const Ratings = (props) => {
   const { rating, metaData, setReviews, sortedReviews, count } = props;
   const [totalRatings, setTotalRatings] = useState(0);
