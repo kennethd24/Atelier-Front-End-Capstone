@@ -37,13 +37,8 @@ const YourOutfitComp = (props) => {
   };
 
   const handleRemove = (id) => {
-    if (outfitIds.length === 1) {
-      setOutfitIds([]);
-      setYourOutfit([]);
-    } else {
-      setOutfitIds(outfitIds.filter((outfitId) => outfitId !== id));
-      setYourOutfit(yourOutfit.filter((outfitItem) => outfitItem.id !== id));
-    }
+    setOutfitIds(outfitIds.filter((outfitId) => outfitId !== id));
+    setYourOutfit(yourOutfit.filter((outfitItem) => outfitItem.id !== id));
   };
 
   return (

@@ -12,24 +12,12 @@ const Image = (props) => {
     }
   }, [photos]);
 
-  // let input;
-  // if (handleClick) {
-  //   input = (
-  //     <input type="image" className="product-photo" src={imgUrl} alt="product default style" onClick={() => handleClick(item)} />
-  //   );
-  // }
-  //   input = (
-  //     <input type="image" className="product-photo" src={imgUrl} alt="product default style" />
-  //   );
-  // }
-
   let photoEl;
   if (!photos) {
     photoEl = null;
   } else {
     photoEl = (
       <div className="product-photo-wrapper">
-        {/* {input} */}
         <input type="image" className="product-photo" src={imgUrl} alt="product default style" onClick={() => handleClick(item)} />
       </div>
     );
