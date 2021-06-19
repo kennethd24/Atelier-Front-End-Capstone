@@ -34,12 +34,6 @@ const RatingsReviews = (props) => {
       setSortedReviews(allNewSortReviews);
     }
   };
-  // const handleSortReviews = async (numStar) => {
-  //   const sortedReviewsResults = await axios.get(`/api/reviews2/${id}/100/${sortState}`);
-  //   const allNewSortReviews = sortedReviewsResults.data.results;
-  //   setSortedReviews(allNewSortReviews);
-  //   setReviews(allNewSortReviews.slice(0, count));
-  // };
 
   const getCountReviews = () => {
     if (starFilters !== oldStarFilters) {
@@ -110,6 +104,7 @@ const RatingsReviews = (props) => {
               setReviews={setReviews}
               sortedReviews={sortedReviews}
               count={count}
+              handleStarFilter={handleStarFilter}
             />
           </div>
           <div className="reviewList">
