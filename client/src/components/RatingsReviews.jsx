@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import SortBy from './ratingsReviews_components/SortBy';
 import ReviewList from './ratingsReviews_components/ReviewList';
@@ -76,6 +76,38 @@ const RatingsReviews = (props) => {
       setStarFilters(starFilters.filter((star) => star !== starInput));
     }
   };
+  const handleClear = () => {
+    setStarFilters([]);
+    setOldState({
+      ...oldState,
+      oldStarFilters: [],
+    });
+  };
+
+  const showStarFilters = () => {
+    if (starFilters.length > 0) {
+      return (
+        <div>
+          <div>
+            <Row>
+              <Col xs="1" />
+              Filters applied:
+              {starFilters.map((singleRating) => (
+                <Col key={singleRating}>
+                  {singleRating}
+                </Col>
+              ))}
+              <Col xs="6" />
+            </Row>
+          </div>
+          <button type="button" className="clear-star-ratings" onClick={() => { handleClear(); }}>
+            Clear all Results
+          </button>
+        </div>
+      );
+    }
+    return null;
+  };
 
   useEffect(() => {
     getCountReviews();
@@ -90,6 +122,7 @@ const RatingsReviews = (props) => {
         <div className="ratingsReviewList-container">
           <div className="ratings">
             Ratings
+            {showStarFilters()}
             <br />
             <Ratings
               rating={rating}
