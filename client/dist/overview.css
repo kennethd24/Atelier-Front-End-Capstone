@@ -194,3 +194,26 @@
 .expanded-swiper .swiper-wrapper{
   align-items: center;
 }
+
+.img-zoom-container {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.crosshair {
+  cursor: url('add.png') 8 8, auto;
+}
+
+.zoomed-cursor {
+  cursor: url('minus.png') 8 8, auto;
+}
+
+.hide-arrows {
+  visibility: hidden;
+}
