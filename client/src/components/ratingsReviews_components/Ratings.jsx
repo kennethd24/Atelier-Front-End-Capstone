@@ -3,18 +3,19 @@ import Rating from 'react-rating';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Characteristics from './Characteristics';
 
-
 const Ratings = (props) => {
-  const { rating, metaData, setReviews, sortedReviews, count } = props;
+  const { rating, metaData, handleStarFilter } = props;
   const [totalRatings, setTotalRatings] = useState(0);
-  const [starFilters, setStarFilters] = useState([]);
 
   const percentRecommend = () => {
     if (Object.keys(metaData).length > 0) {
       const recommend = Number(metaData.recommended.true);
       const notRecommend = Number(metaData.recommended.false);
-      if (recommend === 0 || recommend === null) {
+      if (recommend === 0 || Number.isNaN(recommend)) {
         return ('0%');
+      }
+      if (notRecommend === 0 || Number.isNaN(notRecommend)) {
+        return ('100%');
       }
       return (
         `${(recommend / (recommend + notRecommend)).toFixed(2) * 100}%`
@@ -44,7 +45,6 @@ const Ratings = (props) => {
 
   const findTotalRatings = () => {
     if (metaData.ratings) {
-      // const arrRatings = Object.values(metaData.ratings);
       let sumRatings = null;
       // eslint-disable-next-line no-restricted-syntax
       for (const key in metaData.ratings) {
@@ -58,19 +58,6 @@ const Ratings = (props) => {
     }
   };
 
-  // // works but 1 click behind due to async
-  const ratingSort = (numStar) => {
-    if (starFilters.includes(numStar)) {
-      setStarFilters(starFilters.filter((star) => star !== numStar));
-      const resultSort = sortedReviews.filter((review) => starFilters.includes(review.rating));
-      setReviews(resultSort.slice(0, count));
-    } else {
-      setStarFilters([...starFilters, numStar]);
-      const resultSort = sortedReviews.filter((review) => starFilters.includes(review.rating));
-      setReviews(resultSort.slice(0, count));
-    }
-  };
-
   const progressbars = (star) => {
     if (metaData.ratings && totalRatings > 0) {
       const now = (metaData.ratings[star] / totalRatings) * 100;
@@ -78,8 +65,8 @@ const Ratings = (props) => {
       const zeroBar = <ProgressBar variant="success" now={0} />;
       const progressInstance = <ProgressBar variant="success" now={now} />;
       return (
-        <>
-          <div className="ratingbreakdown-side" onClick={() => ratingSort(star)} aria-hidden="true" role="button">
+        <div className="ratingbreakdown-side-container">
+          <div className="ratingbreakdown-side" onClick={() => handleStarFilter(star)} aria-hidden="true" role="button">
             {star}
             {' '}
             Star
@@ -90,7 +77,7 @@ const Ratings = (props) => {
           <div className="ratingbreakdown-right">
             {metaData.ratings[star] || '0'}
           </div>
-        </>
+        </div>
       );
     }
     return null;

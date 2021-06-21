@@ -30,36 +30,36 @@ const NewReview = (props) => {
     const ratingChosen = submission.rating;
     if (ratingChosen === 5) {
       return (
-        <span>
-          5 stars - “Great”
+        <span className="overallRating-Stars">
+          5 stars - Great
         </span>
       );
     }
     if (ratingChosen === 4) {
       return (
-        <span>
-          4 stars - “Good”
+        <span className="overallRating-Stars">
+          4 stars - Good
         </span>
       );
     }
     if (ratingChosen === 3) {
       return (
-        <span>
-          3 stars - “Average”
+        <span className="overallRating-Stars">
+          3 stars - Average
         </span>
       );
     }
     if (ratingChosen === 2) {
       return (
-        <span>
-          2 stars - “Fair”
+        <span className="overallRating-Stars">
+          2 stars - Fair
         </span>
       );
     }
     if (ratingChosen === 1) {
       return (
-        <span>
-          1 star - “Poor”
+        <span className="overallRating-Stars">
+          1 star - Poor
         </span>
       );
     }
@@ -81,7 +81,9 @@ const NewReview = (props) => {
           emptySymbol="far fa-star"
           fullSymbol="fas fa-star"
         />
-        {ratingSelectionText()}
+        <span className="overallRating-Stars">
+          {ratingSelectionText()}
+        </span>
       </Form.Row>
     </Form.Group>
   );
