@@ -7,7 +7,9 @@
 
 ## General info
 Atelier is an eCommerce product page developed by 4 software engineers following the client's business requirements document. This project was divided in 4 widgets: Overview, Related Products, Questions & Answers, and Ratings & Reviews. My contribution was the Ratings & Reviews section.
-![Ratings & Reviews](https://user-images.githubusercontent.com/78133003/127215371-fdbcfa3d-1c88-4689-8d84-af3112914782.jpg)
+
+![fasterFEC](https://user-images.githubusercontent.com/78133003/127249660-7168e8a9-df33-4235-909b-c4b3fea99eba.gif)
+
 	
 ## Technologies
 Project is created with:
